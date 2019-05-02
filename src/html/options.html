@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Git Kanban Options</title>
+</head>
+
+<body>
+  <div>
+    <h3>Custom Git Platform:</h3>
+    <ul>
+      <li>git.coolaj86.com : gitea <button>Remove</button> </li>
+    </ul>
+  </div>
+  <p></p>
+  <div>
+    <h3>Add a custom git platform:</h3>
+    <label>Url: </label>
+    <input id="gitHost" placeholder="github.example.com"></input>
+    <br>
+    <label>Git Host Type: </label>
+    <select id="gitType">
+      <option value="github.com">github.com (Not Yet Supported)</option>
+      <option value="bitbucket.com">bitbucket.com (Not Yet Supported)</option>
+      <option value="gitlab.com">gitlab.com (Not Yet Supported)</option>
+      <option value="gitea.com">gitlea.com gitlab.com</option>
+    </select>
+  </div>
+
+  <div id="status"></div>
+  <button id="save">Add</button>
+
+  <script src="options.js"></script>
+</body>
+
+</html>
