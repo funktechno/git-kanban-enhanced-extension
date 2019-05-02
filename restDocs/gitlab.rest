@@ -1,0 +1,7 @@
+@repo=gitlab-org
+
+# https://docs.gitlab.com/ee/api/issues.html
+### get issues
+GET https://gitlab.com/api/v4/groups/{{repo}}/issues?scope=all HTTP/1.1
+
+###

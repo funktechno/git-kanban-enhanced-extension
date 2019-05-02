@@ -1,0 +1,8 @@
+@repo=coolaj86/greenlock.js
+@url=git.coolaj86.com
+
+# https://docs.gitea.io/en-us/api-usage/
+### get issues
+GET https://{{url}}/api/v1/repos/{{repo}}/issues HTTP/1.1
+
+###

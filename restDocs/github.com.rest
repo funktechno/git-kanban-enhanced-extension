@@ -1,0 +1,7 @@
+@repo=firefly-iii/firefly-iii
+
+# https://developer.github.com/v3/
+### get issues
+GET https://api.github.com/repos/{{repo}}/issues HTTP/1.1
+
+###

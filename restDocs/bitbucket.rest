@@ -1,0 +1,7 @@
+@repo=atlassian/rest-api-browser
+
+# https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues
+### get issues
+GET https://bitbucket.org/api/2.0/repositories/{{repo}}/issues HTTP/1.1
+
+###
