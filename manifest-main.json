@@ -1,0 +1,35 @@
+{
+    "name": "Git Kanban",
+    "version": "1.0",
+    "description": "Kanban extensions for github, gitlab, and bitbucket",
+    "manifest_version": 2,
+    "author": "http://github.com/lastlink",
+    "background": {
+        "scripts": [
+            "src/js/bg.js"
+        ],
+        "persistent": true
+    },
+    "homepage_url": "http://github.com/lastlink",
+    "permissions": [
+        "storage"
+    ],
+    "options_ui": {
+      "page": "src/html/options.html",
+      "open_in_tab": true
+    },
+    "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*","https://gitlab.com/*","https://bitbucket.com/*"
+      ],
+      "js": [
+        "src/js/injected.js"
+      ],
+      "css": [
+        "src/css/main.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

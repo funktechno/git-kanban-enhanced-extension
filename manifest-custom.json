@@ -1,7 +1,7 @@
 {
-    "name": "Git Kanban",
+    "name": "Git Kanban Self Hosted",
     "version": "1.0",
-    "description": "Kanban extensions for github, gitlab, and bitbucket",
+    "description": "Kanban extensions for self hosted github, gitlab, bitbucket, and gitea",
     "manifest_version": 2,
     "author": "http://github.com/lastlink",
     "background": {
@@ -21,7 +21,7 @@
     "content_scripts": [
     {
       "matches": [
-        "https://github.com/*","https://gitlab.com/*","https://bitbucket.com/*","<all_urls>"
+        "<all_urls>"
       ],
       "js": [
         "src/js/injected.js"
