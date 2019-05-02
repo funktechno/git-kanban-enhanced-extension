@@ -1,0 +1,6 @@
+{
+    "name": "Git Kanban",
+    "version": "1.0",
+    "description": "Kanban extensions for github, gitlab, and bitbucket",
+    "manifest_version": 2
+  }
