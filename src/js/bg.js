@@ -26,7 +26,12 @@
     chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         console.log(request)
         if(request["getIssues"]){
-            console.log(window.location)
+            var issueRequest = JSON.parse(request["getIssues"])
+            console.log(issueRequest)
+            if(issueRequest.location.host=="github.com"){
+                console.log("get github issues")
+            }
+            // console.log(window.location)
             // get issues check url
         }
 

@@ -14,7 +14,10 @@
             metaStatus = "na";
             return;
         }
-        chrome.runtime.sendMessage({"getIssues" : data}, function (htmlResponse) {
+
+        var issueRequest = JSON.stringify({data,location:window.location})
+
+        chrome.runtime.sendMessage({"getIssues" : issueRequest}, function (htmlResponse) {
             console.log(data)
             console.log(htmlResponse)
             repoMetaHtml = htmlResponse;
