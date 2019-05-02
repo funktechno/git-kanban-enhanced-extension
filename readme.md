@@ -2,6 +2,7 @@
 
 * Kanban extensions for github, gitlab, and bitbucket
 * should support weights, multi projects, epics, blockers
+* 2 plugins, one supports custom urls, one has predefined
 
 ## getting started
 
