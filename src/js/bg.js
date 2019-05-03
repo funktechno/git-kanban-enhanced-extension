@@ -4,6 +4,10 @@
     var isMetaReady = false;
     var STORAGE = chrome.storage.sync;
 
+    chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
+        chrome.tabs.executeScript(null,{file:"src/js/injected.js"});
+    });
+
     var bakeHtml = function (metaCreationTimestamp, metaUpdatedTimestamp) {
 
         var created_on = new Date(metaCreationTimestamp),

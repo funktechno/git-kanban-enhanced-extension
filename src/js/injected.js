@@ -45,9 +45,11 @@
             user = url[1],
             repo = url[2],
             data = user + "/" + repo;
-        if (!repo) {
+        if (!repo || metaStatus == "waiting") {
             metaStatus = "na";
             return;
+        } else {
+            metaStatus = "waiting"
         }
 
         var issueRequest = JSON.stringify({ data, location: window.location })
@@ -129,7 +131,7 @@
     window.onload = function () {
         inject();
     };
-
-    // getKanbanDetails()
+    
+    getKanbanDetails()
     // getRepoMetaHtml();
 })();

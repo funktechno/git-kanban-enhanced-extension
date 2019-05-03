@@ -50,7 +50,7 @@ var github = {
         github_variables.menuExpanded = !github_variables.menuExpanded || github_variables.menuExpanded == false;
         if (github_variables.menuExpanded) {
             var activeItem = document.querySelector(`.js-selected-navigation-item.selected`)
-            if(activeItem)
+            if (activeItem)
                 activeItem.classList.remove('selected');
             document.getElementById(github_variables.menuBtnId).querySelector(`a`).className += " selected"
         } else {
@@ -62,8 +62,13 @@ var github = {
         console.log("rendering github kanban")
 
         var menuLabels = document.querySelectorAll(`nav.js-sidenav-container-pjax > span`)
-        console.log(menuLabels)
         if (menuLabels && menuLabels.length) {
+            // avoid double render
+            for (let i = 0; i < menuLabels.length; i++) {
+                if (menuLabels[i].querySelector(`span[itemprop="name"]`).innerText.indexOf("Kanban") != -1) {
+                    return
+                }
+            }
             // only add kanban if issues enabled
             if (menuLabels[1].querySelector(`span[itemprop="name"]`).innerText.indexOf("Issues") != -1) {
                 this.addMenu(menuLabels[1])
