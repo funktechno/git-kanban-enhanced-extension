@@ -2,18 +2,61 @@
 function save_options() {
     console.log("saving options")
     var type = document.getElementById('gitType').value;
-    var url = document.getElementById('gitHost').checked;
+    var url = document.getElementById('gitHost').value;
+
+    if (!type || !url) {
+        console.warn("missing url or type")
+        return
+    }
+
+    if (!currentOptions || !currentOptions.length)
+        currentOptions = []
+
+    currentOptions.push({ type, url })
+
+    console.log(currentOptions)
+
+
     chrome.storage.sync.set({
-        favoriteColor: color,
-        likesColor: likesColor
+        [optionsKey]: currentOptions
     }, function () {
         // Update status to let user know options were saved.
-        var status = document.getElementById('status');
-        status.textContent = 'Options saved.';
-        setTimeout(function () {
-            status.textContent = '';
-        }, 750);
+        // var urlsHtml = ``
+        // for (let i = 0; i < currentOptions.length; i++) {
+        //     console.log(currentOptions[i])
+        //     // create bullet points
+        //     urlsHtml += `<li>` + currentOptions[i].url + ` : ` + currentOptions[i].type + ` <button id="url-` + i + `">Remove</button> </li>`
+        // }
+        updateLiOptions()
+        // setTimeout(function () {
+        //     document.getElementById('git-hosts').innerHTML = urlsHtml
+        // }, 750);
     });
+}
+
+var optionsKey = "git-kanban"
+
+var currentOptions = null
+
+function deleteOption(e) {
+    console.log(e)
+    console.log(e.id)
+
+}
+
+function updateLiOptions() {
+    var urlsHtml = ``
+    for (let i = 0; i < currentOptions.length; i++) {
+        console.log(currentOptions[i])
+        // create bullet points
+        urlsHtml += `<li>` + currentOptions[i].url + ` : ` + currentOptions[i].type + ` <button class="deleteOption" id="url-` + i + `" onclick="deleteOption()">Remove</button> </li>`
+    }
+    document.getElementById('git-hosts').innerHTML = urlsHtml
+    var deleteBtns = document.querySelectorAll(`.deleteOption`)
+    if (deleteBtns && deleteBtns.length)
+        for (let i = 0; i < deleteBtns.length; i++) {
+            deleteBtns[i].onclick = deleteOption
+        }
 }
 
 function retrieveManifest() {
@@ -35,6 +78,19 @@ function retrieveManifest() {
                 for (i; i < l; i++) {
                     myClasses[i].style.display = '';
                 }
+
+                // restore urls
+                chrome.storage.sync.get([optionsKey], function (result) {
+
+                    if (result && result[optionsKey] && result[optionsKey].length) {
+                        currentOptions = result[optionsKey];
+                        updateLiOptions()
+                    } else {
+                        currentOptions = []
+                    }
+                    // document.getElementById('color').value = items.favoriteColor;
+                    // document.getElementById('like').checked = items.likesColor;
+                });
             }
         }
     });
