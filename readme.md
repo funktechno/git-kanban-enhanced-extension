@@ -1,4 +1,4 @@
-# git-kanban
+# git-kanban (in progress)
 
 * Kanban extensions for github, gitlab, and bitbucket
 * should support weights, multi projects, epics, blockers
