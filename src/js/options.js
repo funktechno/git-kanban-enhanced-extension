@@ -79,7 +79,7 @@ function retrieveManifest() {
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
             response = JSON.parse(this.responseText)
-            if (response.name == "Git Kanban Self Hosted") {
+            if (response.name.indexOf("Self Hosted") != -1) {
                 // unhide urls
                 var myClasses = document.querySelectorAll('.custom-options'),
                     i = 0,
