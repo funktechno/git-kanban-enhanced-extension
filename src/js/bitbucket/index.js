@@ -17,12 +17,14 @@ var bitbucket = {
         // style display:block; transform: translate3d(220px, 150px, 0px);
         // add selected to class
         var kanbanBtn = `<a id="` + bitbucket_variables.menuBtnId + `" class="` + bitbucket_variables.menuBtn.aClass + `" aria-disabled="false" href="#git-kanban?board">
-            <span class="`+ bitbucket_variables.menuBtn.spanOuterClass + `"><div class="NavigationItemIcon-sc-1mxkiut-0 eqoAfN">
-                <span class="`+ bitbucket_variables.menuBtn.spanInnerClass + `" aria-label="Kanban"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" role="presentation">
-                <g fill="currentColor" fill-rule="evenodd">
-                <path d="M5 12.991c0 .007 14.005.009 14.005.009C18.999 13 19 5.009 19 5.009 19 5.002 4.995 5 4.995 5 5.001 5 5 12.991 5 12.991zM3 5.01C3 3.899 3.893 3 4.995 3h14.01C20.107 3 21 3.902 21 5.009v7.982c0 1.11-.893 2.009-1.995 2.009H4.995A2.004 2.004 0 0 1 3 12.991V5.01zM19 19c-.005 1.105-.9 2-2.006 2H7.006A2.009 2.009 0 0 1 5 19h14zm1-3a2.002 2.002 0 0 1-1.994 2H5.994A2.003 2.003 0 0 1 4 16h16z" fill-rule="nonzero"></path>
-                <path d="M10.674 11.331c.36.36.941.36 1.3 0l2.758-2.763a.92.92 0 0 0-1.301-1.298l-2.108 2.11-.755-.754a.92.92 0 0 0-1.3 1.3l1.406 1.405z"></path></g></svg></span></div></span><span class="ItemParts__ContentWrapper-sc-14xek3m-4 eDgbRC"><span class="ItemParts__Content-sc-14xek3m-5 jRBaLt">Kanban
+        <span class="ItemParts__Before-sc-14xek3m-2 kLhAJo ItemParts__BeforeAfterBase-sc-14xek3m-1 hCmnxL">
+            <div class="NavigationItemIcon-sc-1mxkiut-0 eqoAfN">
+                <span class="aui-icon aui-icon-large aui-iconfont-macro-status css-otp1j3">
                 </span>
+            </div>
+        </span>
+            <span class="ItemParts__ContentWrapper-sc-14xek3m-4 eDgbRC">
+            <span class="ItemParts__Content-sc-14xek3m-5 jRBaLt">Kanban</span>
             </span>
         </a>`
 
