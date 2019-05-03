@@ -14,4 +14,12 @@
 
 ## todo icon
 
-* need 16, 48, 128
+* need 16, 48, 128 icons
+* gitlab (in-progress)
+    * kanban menu btn visible
+* github (in-progress)
+    * kanban menu btn visible
+* bitbucket (in-progress)
+    * kanban menu btn visible (for now, bitbucket css classes are dynamic)
+* gitea (in-progress)
+    * kanban menu btn visible
