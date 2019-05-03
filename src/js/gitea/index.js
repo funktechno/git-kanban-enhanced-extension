@@ -80,7 +80,7 @@ var gitea = {
     },
     render: function () {
         // check if project or overview
-        console.log("rendering gitlab kanban")
+        console.log("rendering gitea kanban")
 
         var menuLabels = document.querySelectorAll(`ul.sidebar-top-level-items > li`)
         if (menuLabels && menuLabels.length) {

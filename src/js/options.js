@@ -34,7 +34,7 @@ function save_options() {
     });
 }
 
-var optionsKey = "git-kanban"
+const optionsKey = "git-kanban"
 
 var currentOptions = null
 

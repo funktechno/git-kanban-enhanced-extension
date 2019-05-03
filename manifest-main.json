@@ -24,7 +24,7 @@
         "https://github.com/*","https://gitlab.com/*","https://bitbucket.com/*"
       ],
       "js": [
-        "src/js/gitlab/index.js", "src/js/injected.js"
+        "src/js/gitlab/index.js", "src/js/gitea/index.js", "src/js/injected.js"
       ],
       "css": [
         "src/css/main.css"

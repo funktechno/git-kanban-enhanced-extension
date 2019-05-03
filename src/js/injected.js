@@ -36,6 +36,9 @@
             }
         });
     };
+    const optionsKey = "git-kanban"
+
+    var currentOptions;
 
     function getKanbanDetails() {
         var url = window.location.pathname.split("/"),
@@ -49,22 +52,50 @@
 
         var issueRequest = JSON.stringify({ data, location: window.location })
 
-        // add kanban on left if in a group or repo view
-        switch (window.location.host) {
-            case "github.com":
+        chrome.storage.sync.get([optionsKey], function (result) {
 
-                break;
-            case "bitbucket.org":
+            if (result && result[optionsKey] && result[optionsKey].length) {
+                currentOptions = result[optionsKey];
+            }
 
-                break;
-            case "gitlab.com":
-                gitlab.render();
-                break;
+            var host = window.location.host
 
-            default:
-                // get project type from options
-                break;
-        }
+            if(currentOptions && currentOptions.length){
+                for (let i = 0; i < currentOptions.length; i++) {
+                    // if host = option url then set host to type
+                    if(currentOptions[i].url == host){
+                        host = currentOptions[i].type
+                    }                    
+                }
+            }
+            console.log(host)
+
+            
+            // add kanban on left if in a group or repo view
+            switch (host) {
+                case "github.com":
+
+                    break;
+                case "bitbucket.org":
+
+                    break;
+                case "gitlab.com":
+                    gitlab.render();
+                    break;
+                case "gitea.com":
+                    gitea.render();
+                    break;
+
+                default:
+                    console.warn("custom url is not added in the options page")
+                    // get project type from options
+                    break;
+            }
+
+            // document.getElementById('color').value = items.favoriteColor;
+            // document.getElementById('like').checked = items.likesColor;
+        });
+
 
         // chrome.runtime.sendMessage({"getIssues" : issueRequest}, function (htmlResponse) {
         //     console.log(data)
