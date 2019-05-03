@@ -68,8 +68,6 @@
                     }                    
                 }
             }
-            console.log(host)
-
             
             // add kanban on left if in a group or repo view
             switch (host) {
