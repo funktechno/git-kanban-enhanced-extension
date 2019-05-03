@@ -82,7 +82,7 @@
                 case "gitlab.com":
                     gitlab.render();
                     break;
-                case "gitea.com":
+                case "gitea.io":
                     gitea.render();
                     break;
 
