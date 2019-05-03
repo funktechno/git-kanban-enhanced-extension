@@ -4,8 +4,18 @@
     var isMetaReady = false;
     var STORAGE = chrome.storage.sync;
 
-    chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
-        chrome.tabs.executeScript(null,{file:"src/js/injected.js"});
+    chrome.webNavigation.onHistoryStateUpdated.addListener(function (details) {
+        chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs) {
+            var url = tabs[0].url;
+            if (url.indexOf("github.com") != -1 || url.indexOf("bitbucket.org") != -1) {
+                chrome.tabs.executeScript(null, { file: "src/js/injected.js" });
+
+            }
+
+        });
+        // if(chrome.runtime.lastError) {
+        //     console.error("Script injection failed: " + chrome.runtime.lastError.message);
+        //   }
     });
 
     var bakeHtml = function (metaCreationTimestamp, metaUpdatedTimestamp) {
@@ -29,10 +39,10 @@
 
     chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         console.log(request)
-        if(request["getIssues"]){
+        if (request["getIssues"]) {
             var issueRequest = JSON.parse(request["getIssues"])
             console.log(issueRequest)
-            if(issueRequest.location.host=="github.com"){
+            if (issueRequest.location.host == "github.com") {
                 console.log("get github issues")
             }
             // console.log(window.location)

@@ -26,6 +26,9 @@
       "matches": [
         "<all_urls>"
       ],
+      "exclude_matches": [
+        "*://extensions/*"
+      ],
       "js": [
         "src/js/gitlab/index.js",
         "src/js/bitbucket/index.js",

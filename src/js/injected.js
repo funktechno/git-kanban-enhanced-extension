@@ -87,7 +87,8 @@
                     break;
 
                 default:
-                    console.warn("custom url is not added in the options page")
+
+                    console.log(host + ":custom url is not added in the options page")
                     // get project type from options
                     break;
             }
@@ -131,7 +132,7 @@
     window.onload = function () {
         inject();
     };
-    
+
     getKanbanDetails()
     // getRepoMetaHtml();
 })();

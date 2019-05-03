@@ -29,6 +29,9 @@
         "https://gitlab.com/*",
         "https://bitbucket.org/*"
       ],
+      "exclude_matches": [
+        "*://extensions/*"
+      ],
       "js": [
         "src/js/gitlab/index.js",
         "src/js/bitbucket/index.js",
