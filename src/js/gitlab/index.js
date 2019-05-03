@@ -6,9 +6,7 @@ var gitlab_variables = {
  * default page setup
  */
 var gitlab = {
-    projectBtnCss: ``,
     addMenu: function (preMenuBtn) {
-        var id = this.menuBtnId;
         // is-over is-showing-fly-out
         // style display:block; transform: translate3d(220px, 150px, 0px);
         var kanbanBtn = `<li id="` + gitlab_variables.menuBtnId + `" class=""><a class="shortcuts-issues qa-issues-item" href="#git-kanban?board"><div class="nav-icon-container">
@@ -43,24 +41,28 @@ var gitlab = {
         </ul>
         </li>`
         preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn);
-        console.log(gitlab_variables.menuBtnId)
         document.getElementById(gitlab_variables.menuBtnId).onclick = this.expandMenu;
 
         if (!gitlab_variables.menuExpanded) {
             document.getElementById(gitlab_variables.menuBtnId).onmouseover = function () { mouseOver() };
             document.getElementById(gitlab_variables.menuBtnId).onmouseout = function () { mouseOut() };
+            function clearHoverMenu(){
+                var hoverMenu = document.querySelector(`.is-over.is-showing-fly-out`)
+                if(hoverMenu){
+                    hoverMenu.className = ""
+                    hoverMenu.querySelector(`ul`).style = ""
+                }
+            }
 
             function mouseOver() {
-                console.log('mouse over')
-                console.log(this)
+                clearHoverMenu()
                 document.getElementById(gitlab_variables.menuBtnId).className = "is-over is-showing-fly-out"
-                document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = "display:block; transform: translate3d(220px, 150px, 0px);"
+                document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = "display:block; transform: translate3d(220px, 105px, 0px);"
                 // .setAttribute("style", "display:block; transform: translate3d(220px, 150px, 0px);");
             }
 
             function mouseOut() {
-                console.log('mouse out')
-                console.log(this)
+                clearHoverMenu()
                 document.getElementById(gitlab_variables.menuBtnId).className = ""
                 document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = ""
             }
@@ -75,11 +77,10 @@ var gitlab = {
         } else {
             document.getElementById(gitlab_variables.menuBtnId).className = ""
         }
-        console.log("expanding menu:" + gitlab_variables.menuExpanded)
     },
     render: function () {
         // check if project or overview
-        console.log("rendering gitlab")
+        console.log("rendering gitlab kanban")
 
         var menuLabels = document.querySelectorAll(`ul.sidebar-top-level-items > li`)
         if (menuLabels && menuLabels.length) {
