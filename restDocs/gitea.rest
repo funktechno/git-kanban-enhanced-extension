@@ -1,7 +1,7 @@
 @repo=coolaj86/greenlock.js
 @url=git.coolaj86.com
 
-# icons https://octicons.github.com/
+# icons https://octicons.github.com/ https://github.com/go-gitea/gitea/blob/master/public/vendor/plugins/semantic/themes/github/assets/fonts/octicons.svg?short_path=d3116a6
 # https://docs.gitea.io/en-us/api-usage/
 ### get issues
 GET https://{{url}}/api/v1/repos/{{repo}}/issues HTTP/1.1
