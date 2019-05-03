@@ -60,22 +60,22 @@
 
             var host = window.location.host
 
-            if(currentOptions && currentOptions.length){
+            if (currentOptions && currentOptions.length) {
                 for (let i = 0; i < currentOptions.length; i++) {
                     // if host = option url then set host to type
-                    if(currentOptions[i].url == host){
+                    if (currentOptions[i].url == host) {
                         host = currentOptions[i].type
-                    }                    
+                    }
                 }
             }
-            
+
             // add kanban on left if in a group or repo view
             switch (host) {
                 case "github.com":
-
+                    github.render();
                     break;
                 case "bitbucket.org":
-
+                    bitbucket.render();
                     break;
                 case "gitlab.com":
                     gitlab.render();

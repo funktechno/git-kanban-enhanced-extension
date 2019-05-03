@@ -10,16 +10,16 @@ var gitea = {
         // is-over is-showing-fly-out
         // style display:block; transform: translate3d(220px, 150px, 0px);
         // octicon-project, not in the list eye or inbox might be fine though
-        var kanbanBtn = `<a class="item" id="` + gitlab_variables.menuBtnId + `" href="#git-kanban?board">
+        var kanbanBtn = `<a class="item" id="` + gitea_variables.menuBtnId + `" href="#git-kanban?board">
             <i class="octicon octicon-eye"></i> Kanban 
         </a>`
         preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn);
-        document.getElementById(gitlab_variables.menuBtnId).onclick = this.expandMenu;
+        document.getElementById(gitea_variables.menuBtnId).onclick = this.expandMenu;
 
-        if (!gitlab_variables.menuExpanded) {
+        if (!gitea_variables.menuExpanded) {
             //no mouseover
-            // document.getElementById(gitlab_variables.menuBtnId).onmouseover = function () { mouseOver() };
-            // document.getElementById(gitlab_variables.menuBtnId).onmouseout = function () { mouseOut() };
+            // document.getElementById(gitea_variables.menuBtnId).onmouseover = function () { mouseOver() };
+            // document.getElementById(gitea_variables.menuBtnId).onmouseout = function () { mouseOut() };
             // function clearHoverMenu() {
             //     var hoverMenu = document.querySelector(`.is-over.is-showing-fly-out`)
             //     if (hoverMenu) {
@@ -30,27 +30,29 @@ var gitea = {
 
             // function mouseOver() {
             //     clearHoverMenu()
-            //     document.getElementById(gitlab_variables.menuBtnId).className = "is-over is-showing-fly-out"
-            //     document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = "display:block; transform: translate3d(220px, 105px, 0px);"
+            //     document.getElementById(gitea_variables.menuBtnId).className = "is-over is-showing-fly-out"
+            //     document.querySelector(`#` + gitea_variables.menuBtnId + ` > ul`).style = "display:block; transform: translate3d(220px, 105px, 0px);"
             //     // .setAttribute("style", "display:block; transform: translate3d(220px, 150px, 0px);");
             // }
 
             // function mouseOut() {
             //     clearHoverMenu()
-            //     document.getElementById(gitlab_variables.menuBtnId).className = ""
-            //     document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = ""
+            //     document.getElementById(gitea_variables.menuBtnId).className = ""
+            //     document.querySelector(`#` + gitea_variables.menuBtnId + ` > ul`).style = ""
             // }
         }
     },
     expandMenu: function (e) {
         e.preventDefault();
-        gitlab_variables.menuExpanded = !gitlab_variables.menuExpanded || gitlab_variables.menuExpanded == false;
-        if (gitlab_variables.menuExpanded) {
-            document.querySelector(`.item.active`).className = "item"
-            document.getElementById(gitlab_variables.menuBtnId).className = "active item"
-            // document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = ""
+        gitea_variables.menuExpanded = !gitea_variables.menuExpanded || gitea_variables.menuExpanded == false;
+        if (gitea_variables.menuExpanded) {
+            var activeItem = document.querySelector(`.item.active`)
+            if(activeItem)
+                activeItem.className = "item"
+            document.getElementById(gitea_variables.menuBtnId).className = "active item"
+            // document.querySelector(`#` + gitea_variables.menuBtnId + ` > ul`).style = ""
         } else {
-            document.getElementById(gitlab_variables.menuBtnId).className = "item"
+            document.getElementById(gitea_variables.menuBtnId).className = "item"
         }
     },
     render: function () {
