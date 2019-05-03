@@ -2,6 +2,35 @@ var gitlab_variables = {
     menuBtnId: `git-kanban-menu`,
     menuExpanded: false
 }
+
+/**
+ * bind mouse over for menu btn
+ */
+function bindMouseOver() {
+    document.getElementById(gitlab_variables.menuBtnId).onmouseover = function () { mouseOver() };
+    document.getElementById(gitlab_variables.menuBtnId).onmouseout = function () { mouseOut() };
+    function clearHoverMenu() {
+        var hoverMenu = document.querySelector(`.is-over.is-showing-fly-out`)
+        if (hoverMenu) {
+            hoverMenu.className = ""
+            hoverMenu.querySelector(`ul`).style = ""
+        }
+    }
+
+    function mouseOver() {
+        clearHoverMenu()
+        document.getElementById(gitlab_variables.menuBtnId).className = "is-over is-showing-fly-out"
+        document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = "display:block; transform: translate3d(220px, 105px, 0px);"
+        // .setAttribute("style", "display:block; transform: translate3d(220px, 150px, 0px);");
+    }
+
+    function mouseOut() {
+        clearHoverMenu()
+        document.getElementById(gitlab_variables.menuBtnId).className = ""
+        document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = ""
+    }
+}
+
 /**
  * default page setup
  */
@@ -44,37 +73,22 @@ var gitlab = {
         document.getElementById(gitlab_variables.menuBtnId).onclick = this.expandMenu;
 
         if (!gitlab_variables.menuExpanded) {
-            document.getElementById(gitlab_variables.menuBtnId).onmouseover = function () { mouseOver() };
-            document.getElementById(gitlab_variables.menuBtnId).onmouseout = function () { mouseOut() };
-            function clearHoverMenu(){
-                var hoverMenu = document.querySelector(`.is-over.is-showing-fly-out`)
-                if(hoverMenu){
-                    hoverMenu.className = ""
-                    hoverMenu.querySelector(`ul`).style = ""
-                }
-            }
-
-            function mouseOver() {
-                clearHoverMenu()
-                document.getElementById(gitlab_variables.menuBtnId).className = "is-over is-showing-fly-out"
-                document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = "display:block; transform: translate3d(220px, 105px, 0px);"
-                // .setAttribute("style", "display:block; transform: translate3d(220px, 150px, 0px);");
-            }
-
-            function mouseOut() {
-                clearHoverMenu()
-                document.getElementById(gitlab_variables.menuBtnId).className = ""
-                document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = ""
-            }
+            bindMouseOver()
         }
     },
     expandMenu: function (e) {
         e.preventDefault();
         gitlab_variables.menuExpanded = !gitlab_variables.menuExpanded || gitlab_variables.menuExpanded == false;
         if (gitlab_variables.menuExpanded) {
+            // disable mouse overs
+            document.getElementById(gitlab_variables.menuBtnId).onmouseover = null
+            document.getElementById(gitlab_variables.menuBtnId).onmouseout = null
+            // document.getElementById(gitlab_variables.menuBtnId).unbind('onmouseover onmouseout');
+
             document.getElementById(gitlab_variables.menuBtnId).className = "active"
             document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = ""
         } else {
+            bindMouseOver();
             document.getElementById(gitlab_variables.menuBtnId).className = ""
         }
     },
