@@ -65,7 +65,8 @@ var github = {
         if (menuLabels && menuLabels.length) {
             // avoid double render
             for (let i = 0; i < menuLabels.length; i++) {
-                if (menuLabels[i].querySelector(`span[itemprop="name"]`).innerText.indexOf("Kanban") != -1) {
+                var nameProp = menuLabels[i].querySelector(`span[itemprop="name"]`)
+                if (nameProp && nameProp.innerText.indexOf("Kanban") != -1) {
                     return
                 }
             }
