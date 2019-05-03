@@ -66,12 +66,12 @@ var bitbucket = {
         e.preventDefault();
         bitbucket_variables.menuExpanded = !bitbucket_variables.menuExpanded || bitbucket_variables.menuExpanded == false;
         if (bitbucket_variables.menuExpanded) {
-            var activeItem = document.querySelector(`.js-selected-navigation-item.selected`)
+            var activeItem = document.querySelector(`.` + bitbucket_variables.menuBtn.aActiveClass.replace(" ", "."))
             if (activeItem)
-                activeItem.classList.remove('selected');
-            document.getElementById(bitbucket_variables.menuBtnId).querySelector(`a`).className += " selected"
+                activeItem.className = bitbucket_variables.menuBtn.aClass
+            document.getElementById(bitbucket_variables.menuBtnId).className = bitbucket_variables.menuBtn.aActiveClass
         } else {
-            document.getElementById(bitbucket_variables.menuBtnId).querySelector(`a`).classList.remove('selected');
+            document.getElementById(bitbucket_variables.menuBtnId).className = bitbucket_variables.menuBtn.aClass
         }
     },
     render: function () {
