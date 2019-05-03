@@ -35,7 +35,7 @@
             // get issues check url
         }
 
-        if (request["getRepoMeta"])
+        /*if (request["getRepoMeta"])
             STORAGE.get("metaCache", function (res) {
 
                 var repoURL = request["getRepoMeta"],
@@ -72,7 +72,7 @@
 
                 xhttp.open("GET", "https://api.github.com/repos/" + repoURL, true);
                 xhttp.send();
-            });
+            });*/
         return true;
     });
 }());
