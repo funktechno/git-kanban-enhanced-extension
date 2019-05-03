@@ -4,6 +4,11 @@
 * should support weights, multi projects, epics, blockers
 * 2 plugins, one supports custom urls, one has predefined
 
+## published chrome apps
+
+* [Simple](https://chrome.google.com/webstore/detail/git-kanban-enhanced/ehoibkdpdgjcjnnalkbiidajafoimnaa)
+* [Self Hosted](https://chrome.google.com/webstore/detail/ambmbdjjhloinbjadfgfmenihmfmahmk/publish-review)
+
 ## getting started
 
 * https://developer.chrome.com/extensions/getstarted
