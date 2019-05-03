@@ -13,6 +13,8 @@
   "homepage_url": "http://github.com/lastlink",
   "permissions": [
     "storage",
+    "*://github.com/*",
+    "*://bitbucket.org/*",
     "tabs",
     "webNavigation"
   ],
@@ -25,10 +27,11 @@
       "matches": [
         "https://github.com/*",
         "https://gitlab.com/*",
-        "https://bitbucket.com/*"
+        "https://bitbucket.org/*"
       ],
       "js": [
         "src/js/gitlab/index.js",
+        "src/js/bitbucket/index.js",
         "src/js/github/index.js",
         "src/js/gitea/index.js",
         "src/js/injected.js"

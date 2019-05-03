@@ -77,7 +77,7 @@
                     github.render();
                     break;
                 case "bitbucket.org":
-                    bitbucket.render();
+                    console.log(bitbucket.render());
                     break;
                 case "gitlab.com":
                     gitlab.render();

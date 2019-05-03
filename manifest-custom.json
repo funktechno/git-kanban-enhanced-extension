@@ -28,6 +28,7 @@
       ],
       "js": [
         "src/js/gitlab/index.js",
+        "src/js/bitbucket/index.js",
         "src/js/github/index.js",
         "src/js/gitea/index.js",
         "src/js/injected.js"
