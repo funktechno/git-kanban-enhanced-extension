@@ -1,5 +1,6 @@
 @repo=groups/gitlab-org
 
+# project or group namespace/projectname all / separating here must be url encoded such as %2F namespace%2Fprojectname
 # https://docs.gitlab.com/ee/api/issues.html
 ### get issues
 GET https://gitlab.com/api/v4/{{repo}}/issues?scope=all HTTP/1.1
