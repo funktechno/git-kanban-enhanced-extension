@@ -1,6 +1,6 @@
 {
   "name": "Git Kanban Self Hosted",
-  "version": "1.0",
+  "version": "0.0.1",
   "description": "Kanban extensions for self hosted github, gitlab, bitbucket, and gitea",
   "manifest_version": 2,
   "author": "http://github.com/lastlink",
