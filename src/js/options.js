@@ -40,8 +40,18 @@ var currentOptions = null
 
 function deleteOption(e) {
     console.log(e)
-    console.log(e.id)
-
+    console.log(e.srcElement.id)
+    var optionIndex = parseInt(e.srcElement.id.replace("url-"))
+    // remove from local object
+    currentOptions.splice(optionIndex, 1)
+    console.log(currentOptions)
+    // update storage
+    // update li
+    chrome.storage.sync.set({
+        [optionsKey]: currentOptions
+    }, function () {
+        updateLiOptions()
+    });
 }
 
 function updateLiOptions() {
