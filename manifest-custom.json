@@ -1,5 +1,5 @@
 {
-  "name": "Git Kanban Self Hosted",
+  "name": "Git Kanban Enhanced Self Hosted",
   "version": "0.0.1",
   "description": "Kanban extensions for self hosted github, gitlab, bitbucket, and gitea",
   "manifest_version": 2,
