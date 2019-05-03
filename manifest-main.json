@@ -10,7 +10,7 @@
     ],
     "persistent": true
   },
-  "homepage_url": "http://github.com/lastlink",
+  "homepage_url": "https://github.com/funktechno/git-kanban-enhanced-chrome-extension",
   "permissions": [
     "storage",
     "*://github.com/*",
