@@ -1,0 +1,7 @@
+@url = chrome-extension://fdfcbamabnnkbcilpceajidppfmcpjgc/manifest.json
+
+# should use ./manifest.json to retrieve
+### get manifest
+GET {{url}} HTTP/1.1
+
+#

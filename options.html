@@ -7,14 +7,14 @@
 </head>
 
 <body>
-  <div>
+  <div class="custom-options" style="display:none;">
     <h3>Custom Git Platform:</h3>
     <ul>
       <li>git.coolaj86.com : gitea <button>Remove</button> </li>
     </ul>
   </div>
   <p></p>
-  <div>
+  <div class="custom-options" style="display:none;">
     <h3>Add a custom git platform:</h3>
     <label>Url: </label>
     <input id="gitHost" placeholder="github.example.com"></input>
@@ -26,10 +26,11 @@
       <option value="gitlab.com">gitlab.com (Not Yet Supported)</option>
       <option value="gitea.com">gitlea.com gitlab.com</option>
     </select>
+    <button id="save">Add</button>
+
   </div>
 
   <div id="status"></div>
-  <button id="save">Add</button>
 
   <div>
     <h3>Kanban Labels:</h3>

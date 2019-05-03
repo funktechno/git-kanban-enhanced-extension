@@ -16,9 +16,38 @@ function save_options() {
     });
 }
 
+function retrieveManifest() {
+    var data = null;
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    var response = null;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            response = JSON.parse(this.responseText)
+            if (response.name == "Git Kanban Self Hosted") {
+                // unhide urls
+                var myClasses = document.querySelectorAll('.custom-options'),
+                    i = 0,
+                    l = myClasses.length;
+
+                for (i; i < l; i++) {
+                    myClasses[i].style.display = '';
+                }
+            }
+        }
+    });
+
+    xhr.open("GET", "./manifest.json");
+
+    xhr.send(data);
+}
+
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restore_options() {
+    retrieveManifest();
     // Use default value color = 'red' and likesColor = true.
     console.log("restoring options")
     // chrome.storage.sync.get({
