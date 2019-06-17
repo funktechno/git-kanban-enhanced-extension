@@ -1,6 +1,8 @@
 manifest.json
 manifest.js
 
+datetime*
+
 # IDE
 .vscode
 

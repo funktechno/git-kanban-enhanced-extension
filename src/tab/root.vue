@@ -3,7 +3,10 @@
     <div class="custom-options" style="display:none">
       <h3>Custom Git Platform:</h3>
       <ul id="git-hosts">
-        <li>git.coolaj86.com : gitea.io <button>Remove</button> </li>
+        <li v-if="!currentOptions || !currentOptions.length>0">Example - git.coolaj86.com : gitea.io <button>Remove</button> </li>
+        <li v-for="(opt, index) in currentOptions" v-bind:key="opt.url">
+          {{opt.url}} : {{opt.type}} <button v-on:click="deleteOption(index)">Remove</button>
+        </li>
       </ul>
     </div>
     <p></p>
@@ -27,7 +30,7 @@
     <div id="status"></div>
 
     <div>
-      <h3>Kanban Labels: {{test}}</h3>
+      <h3>Kanban Labels:</h3>
       <ul>
         <li>backlog</li>
         <li>analysis</li>
@@ -46,7 +49,6 @@
 
   export default {
     data: () => ({
-      test: 'candy1',
       type: null,
       url: null,
       loading: false,
@@ -90,10 +92,8 @@
             console.log('2')
             console.log(optionsKey)
             chrome.storage.sync.get([optionsKey], function (result) {
-              debugger
               if (result && result[optionsKey] && result[optionsKey].length) {
                 vm.currentOptions = result[optionsKey]
-                vm.updateLiOptions()
               } else {
                 vm.currentOptions = []
               }
@@ -107,8 +107,7 @@
       save_options: function () {
         console.log("saving options")
         var type = this.type,
-          url = this.url,
-          vm = this
+          url = this.url
 
         if (!type || !url) {
           console.warn("missing url or type")
@@ -126,49 +125,18 @@
         chrome.storage.sync.set({
           [optionsKey]: this.currentOptions
         }, function () {
-          // Update status to let user know options were saved.
-          // var urlsHtml = ``
-          // for (let i = 0 i < this.currentOptions.length i++) {
-          //     console.log(this.currentOptions[i])
-          //     // create bullet points
-          //     urlsHtml += `<li>` + this.currentOptions[i].url + ` : ` + this.currentOptions[i].type + ` <button id="url-` + i + `">Remove</button> </li>`
-          // }
-          vm.updateLiOptions()
-          // setTimeout(function () {
-          //     document.getElementById('git-hosts').innerHTML = urlsHtml
-          // }, 750)
         })
-      },
-      updateLiOptions: function () {
-        var urlsHtml = ``,
-          deleteBtns
-        for (let i = 0; i < this.currentOptions.length; i++) {
-          console.log(this.currentOptions[i])
-          // create bullet points
-          urlsHtml += `<li>` + this.currentOptions[i].url + ` : ` + this.currentOptions[i].type + ` <button class="deleteOption" id="url-` + i + `" onclick="deleteOption()">Remove</button> </li>`
-        }
-        document.getElementById('git-hosts').innerHTML = urlsHtml
-        deleteBtns = document.querySelectorAll(`.deleteOption`)
-        if (deleteBtns && deleteBtns.length) {
-          for (let i = 0; i < deleteBtns.length; i++) {
-            deleteBtns[i].onclick = this.deleteOption
-          }
-        }
       },
       deleteOption: function (e) {
         console.log(e)
-        console.log(e.srcElement.id)
-        var optionIndex = parseInt(e.srcElement.id.replace("url-")),
-          vm = this
         // remove from local object
-        this.currentOptions.splice(optionIndex, 1)
+        this.currentOptions.splice(e, 1)
         console.log(this.currentOptions)
         // update storage
         // update li
         chrome.storage.sync.set({
           [optionsKey]: this.currentOptions
         }, function () {
-          vm.updateLiOptions()
         })
       }
     }
