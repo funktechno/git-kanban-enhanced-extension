@@ -69,14 +69,10 @@
         var vm = this
 
         this.loading = true
-        console.log(this.loading)
         // this.updateLiOptions()
         this.$http.get("/manifest.json").then((response) => {
           // this.updateLiOptions()
-          console.log(this.loading)
           this.loading = false
-          console.log(this.loading)
-          console.log(response)
           // response = JSON.parse(this.responseText)
           if (response.body.name.indexOf("Self Hosted") !== -1) {
             // unhide urls
@@ -89,8 +85,6 @@
             }
 
             // restore urls
-            console.log('2')
-            console.log(optionsKey)
             chrome.storage.sync.get([optionsKey], function (result) {
               if (result && result[optionsKey] && result[optionsKey].length) {
                 vm.currentOptions = result[optionsKey]
@@ -120,18 +114,14 @@
 
         this.currentOptions.push({ type, url })
 
-        console.log(this.currentOptions)
-
         chrome.storage.sync.set({
           [optionsKey]: this.currentOptions
         }, function () {
         })
       },
       deleteOption: function (e) {
-        console.log(e)
         // remove from local object
         this.currentOptions.splice(e, 1)
-        console.log(this.currentOptions)
         // update storage
         // update li
         chrome.storage.sync.set({

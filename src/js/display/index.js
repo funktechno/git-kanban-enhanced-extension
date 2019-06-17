@@ -22,7 +22,8 @@ export default function (variables) {
       console.log(currentBoard)
       currentBoard.insertAdjacentHTML('afterend', displayHTML)
 
-      // setup vue
+      // setup vue, maybe should use router to 2share preferences and rerender accordingly
+
       switch (page) {
         case "board":
           this.renderBoard()

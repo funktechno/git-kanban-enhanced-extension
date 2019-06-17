@@ -65,10 +65,10 @@ function getKanbanDetails () {
   } else {
     metaStatus = "waiting"
   }
-  console.log("check storage")
-  console.log(chrome.storage)
+  // console.log("check storage")
+  // console.log(chrome.storage)
   // console.log(manifest)
-  console.log(optionsKey)
+  // console.log(optionsKey)
   // var issueRequest = JSON.stringify({ data, location: window.location })
   // debugger
   // chrome.runtime.sendMessage({ "getStorage": {optionsKey} }, function (result) {
