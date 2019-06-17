@@ -71,13 +71,21 @@ export default {
         </li>`
     preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn)
     document.getElementById(gitlabVariables.menuBtnId).onclick = this.expandMenu
-
+    if (window.location.hash.indexOf('git-kanban?board') !== -1) {
+      this.expandMenu()
+    }
     if (!gitlabVariables.menuExpanded) {
       bindMouseOver()
     }
   },
   expandMenu: function (e) {
-    e.preventDefault()
+    // may not be a button press
+    if (e) {
+      e.preventDefault()
+    }
+    if (!window.location.hash) {
+      window.location.hash = 'git-kanban?board'
+    }
     gitlabVariables.menuExpanded = !gitlabVariables.menuExpanded || gitlabVariables.menuExpanded === false
     if (gitlabVariables.menuExpanded) {
       // disable mouse overs

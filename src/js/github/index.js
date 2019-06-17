@@ -18,7 +18,9 @@ export default {
 
     preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn)
     document.getElementById(githubVariables.menuBtnId).onclick = this.expandMenu
-
+    if (window.location.hash.indexOf('git-kanban?board') !== -1) {
+      this.expandMenu()
+    }
     if (!githubVariables.menuExpanded) {
       // no mouseover
       // document.getElementById(githubVariables.menuBtnId).onmouseover = function () { mouseOver() }
@@ -46,7 +48,13 @@ export default {
     }
   },
   expandMenu: function (e) {
-    e.preventDefault()
+    // may not be a button press
+    if (e) {
+      e.preventDefault()
+    }
+    if (!window.location.hash) {
+      window.location.hash = 'git-kanban?board'
+    }
     githubVariables.menuExpanded = !githubVariables.menuExpanded || githubVariables.menuExpanded === false
     if (githubVariables.menuExpanded) {
       var activeItem = document.querySelector(`.js-selected-navigation-item.selected`)

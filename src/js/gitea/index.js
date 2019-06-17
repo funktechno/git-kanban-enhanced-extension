@@ -16,6 +16,10 @@ export default {
     preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn)
     document.getElementById(giteaVariables.menuBtnId).onclick = this.expandMenu
 
+    if (window.location.hash.indexOf('git-kanban?board') !== -1) {
+      this.expandMenu()
+    }
+
     if (!giteaVariables.menuExpanded) {
       // no mouseover
       // document.getElementById(giteaVariables.menuBtnId).onmouseover = function () { mouseOver() }
@@ -43,8 +47,16 @@ export default {
     }
   },
   expandMenu: function (e) {
-    e.preventDefault()
+    // may not be a button press
+    if (e) {
+      e.preventDefault()
+    }
+
     giteaVariables.menuExpanded = !giteaVariables.menuExpanded || giteaVariables.menuExpanded === false
+    if (!window.location.hash) {
+      window.location.hash = 'git-kanban?board'
+    }
+
     if (giteaVariables.menuExpanded) {
       var activeItem = document.querySelector(`.item.active`)
       if (activeItem) {

@@ -11,7 +11,7 @@ let backEnd = function () {
     chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs) {
       var url = tabs[0].url
       if (url.indexOf("github.com") !== -1 || url.indexOf("bitbucket.org") !== -1) {
-        chrome.tabs.executeScript(null, { file: "src/js/injected.js" })
+        chrome.tabs.executeScript(null, { file: "js/inject.js" })
       }
     })
     // if(chrome.runtime.lastError) {
