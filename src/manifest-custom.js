@@ -29,8 +29,8 @@ module.exports = {
     persistent: false,
     page: 'pages/background.html'
   },
-  devtools_page: 'pages/devtools.html',
-  options_page: 'pages/options.html',
+  // devtools_page: 'pages/devtools.html',
+  // options_page: 'pages/options.html',
   content_scripts: [{
     js: [ 'js/inject.js' ],
     run_at: 'document_end',
