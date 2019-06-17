@@ -9,11 +9,11 @@ module.exports = {
   entry: {
     tab: resolve('./tab'),
     popup: resolve('./popup'),
-    options: resolve('./options'),
-    content: resolve('./content'), 
-    devtools: resolve('./devtools'),
+    // options: resolve('./options'),
+    // content: resolve('./content'), 
+    // devtools: resolve('./devtools'),
     background: resolve('./backend'),
-    panel: resolve('./devtools/panel'),
+    // panel: resolve('./devtools/panel'),
     inject: resolve('./content/inject'),
   },
   output: {
@@ -92,9 +92,9 @@ module.exports = {
   plugins: [
     htmlPage('Git Kanban Options', 'app', ['tab']),
     htmlPage('popup', 'popup', ['popup']),
-    htmlPage('panel', 'panel', ['panel']),
-    htmlPage('devtools', 'devtools', ['devtools']),
-    htmlPage('options', 'options', ['options']),
+    // htmlPage('panel', 'panel', ['panel']),
+    // htmlPage('devtools', 'devtools', ['devtools']),
+    // htmlPage('options', 'options', ['options']),
     htmlPage('background', 'background', ['background']),
     new CopyWebpackPlugin([{ from: path.join(__dirname, '..', 'static') }]),
     new ChromeReloadPlugin({
