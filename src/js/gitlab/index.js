@@ -1,44 +1,44 @@
-var gitlab_variables = {
-    menuBtnId: `git-kanban-menu`,
-    menuExpanded: false
+var gitlabVariables = {
+  menuBtnId: `git-kanban-menu`,
+  menuExpanded: false
 }
 
 /**
  * bind mouse over for menu btn
  */
-function bindMouseOver() {
-    document.getElementById(gitlab_variables.menuBtnId).onmouseover = function () { mouseOver() };
-    document.getElementById(gitlab_variables.menuBtnId).onmouseout = function () { mouseOut() };
-    function clearHoverMenu() {
-        var hoverMenu = document.querySelector(`.is-over.is-showing-fly-out`)
-        if (hoverMenu) {
-            hoverMenu.className = ""
-            hoverMenu.querySelector(`ul`).style = ""
-        }
+function bindMouseOver () {
+  document.getElementById(gitlabVariables.menuBtnId).onmouseover = function () { mouseOver() }
+  document.getElementById(gitlabVariables.menuBtnId).onmouseout = function () { mouseOut() }
+  function clearHoverMenu () {
+    var hoverMenu = document.querySelector(`.is-over.is-showing-fly-out`)
+    if (hoverMenu) {
+      hoverMenu.className = ""
+      hoverMenu.querySelector(`ul`).style = ""
     }
+  }
 
-    function mouseOver() {
-        clearHoverMenu()
-        document.getElementById(gitlab_variables.menuBtnId).className = "is-over is-showing-fly-out"
-        document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = "display:block; transform: translate3d(220px, 105px, 0px);"
-        // .setAttribute("style", "display:block; transform: translate3d(220px, 150px, 0px);");
-    }
+  function mouseOver () {
+    clearHoverMenu()
+    document.getElementById(gitlabVariables.menuBtnId).className = "is-over is-showing-fly-out"
+    document.querySelector(`#` + gitlabVariables.menuBtnId + ` > ul`).style = "display:block; transform: translate3d(220px, 105px, 0px);"
+    // .setAttribute("style", "display:block; transform: translate3d(220px, 150px, 0px);")
+  }
 
-    function mouseOut() {
-        clearHoverMenu()
-        document.getElementById(gitlab_variables.menuBtnId).className = ""
-        document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = ""
-    }
+  function mouseOut () {
+    clearHoverMenu()
+    document.getElementById(gitlabVariables.menuBtnId).className = ""
+    document.querySelector(`#` + gitlabVariables.menuBtnId + ` > ul`).style = ""
+  }
 }
 
 /**
  * default page setup
  */
-var gitlab = {
-    addMenu: function (preMenuBtn) {
-        // is-over is-showing-fly-out
-        // style display:block; transform: translate3d(220px, 150px, 0px);
-        var kanbanBtn = `<li id="` + gitlab_variables.menuBtnId + `" class=""><a class="shortcuts-issues qa-issues-item" href="#git-kanban?board"><div class="nav-icon-container">
+export default {
+  addMenu: function (preMenuBtn) {
+    // is-over is-showing-fly-out
+    // style display:block; transform: translate3d(220px, 150px, 0px);
+    var kanbanBtn = `<li id="` + gitlabVariables.menuBtnId + `" class=""><a class="shortcuts-issues qa-issues-item" href="#git-kanban?board"><div class="nav-icon-container">
         <svg><use xlink:href="https://gitlab.com/assets/icons-b2073af7ca0641787eb4596951b695079519da1937a262a886bb12c2b0fac181.svg#blame"></use></svg>
         </div>
         <span class="nav-item-name">
@@ -69,41 +69,41 @@ var gitlab = {
         </a></li>
         </ul>
         </li>`
-        preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn);
-        document.getElementById(gitlab_variables.menuBtnId).onclick = this.expandMenu;
+    preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn)
+    document.getElementById(gitlabVariables.menuBtnId).onclick = this.expandMenu
 
-        if (!gitlab_variables.menuExpanded) {
-            bindMouseOver()
-        }
-    },
-    expandMenu: function (e) {
-        e.preventDefault();
-        gitlab_variables.menuExpanded = !gitlab_variables.menuExpanded || gitlab_variables.menuExpanded == false;
-        if (gitlab_variables.menuExpanded) {
-            // disable mouse overs
-            document.getElementById(gitlab_variables.menuBtnId).onmouseover = null
-            document.getElementById(gitlab_variables.menuBtnId).onmouseout = null
-            // document.getElementById(gitlab_variables.menuBtnId).unbind('onmouseover onmouseout');
-
-            document.getElementById(gitlab_variables.menuBtnId).className = "active"
-            document.querySelector(`#` + gitlab_variables.menuBtnId + ` > ul`).style = ""
-        } else {
-            bindMouseOver();
-            document.getElementById(gitlab_variables.menuBtnId).className = ""
-        }
-    },
-    render: function () {
-        // check if project or overview
-        console.log("rendering gitlab kanban")
-
-        var menuLabels = document.querySelectorAll(`ul.sidebar-top-level-items > li`)
-        if (menuLabels && menuLabels.length) {
-            if (menuLabels[0].querySelector(`a`).innerText == "Project") {
-                this.addMenu(menuLabels[0])
-            } else if (menuLabels[0].querySelector(`a`).innerText == "Overview") {
-                this.addMenu(menuLabels[0])
-            }
-        }
-        // get issues if either true
+    if (!gitlabVariables.menuExpanded) {
+      bindMouseOver()
     }
+  },
+  expandMenu: function (e) {
+    e.preventDefault()
+    gitlabVariables.menuExpanded = !gitlabVariables.menuExpanded || gitlabVariables.menuExpanded === false
+    if (gitlabVariables.menuExpanded) {
+      // disable mouse overs
+      document.getElementById(gitlabVariables.menuBtnId).onmouseover = null
+      document.getElementById(gitlabVariables.menuBtnId).onmouseout = null
+      // document.getElementById(gitlabVariables.menuBtnId).unbind('onmouseover onmouseout')
+
+      document.getElementById(gitlabVariables.menuBtnId).className = "active"
+      document.querySelector(`#` + gitlabVariables.menuBtnId + ` > ul`).style = ""
+    } else {
+      bindMouseOver()
+      document.getElementById(gitlabVariables.menuBtnId).className = ""
+    }
+  },
+  render: function () {
+    // check if project or overview
+    console.log("rendering gitlab kanban")
+
+    var menuLabels = document.querySelectorAll(`ul.sidebar-top-level-items > li`)
+    if (menuLabels && menuLabels.length) {
+      if (menuLabels[0].querySelector(`a`).innerText === "Project") {
+        this.addMenu(menuLabels[0])
+      } else if (menuLabels[0].querySelector(`a`).innerText === "Overview") {
+        this.addMenu(menuLabels[0])
+      }
+    }
+    // get issues if either true
+  }
 }
