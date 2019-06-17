@@ -71,7 +71,7 @@ export default {
         </li>`
     preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn)
     document.getElementById(gitlabVariables.menuBtnId).onclick = this.expandMenu
-    if (window.location.hash.indexOf('git-kanban?board') !== -1) {
+    if (window.location.hash.indexOf('git-kanban') !== -1) {
       this.expandMenu()
     }
     if (!gitlabVariables.menuExpanded) {

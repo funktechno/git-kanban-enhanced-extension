@@ -18,7 +18,7 @@ export default {
 
     preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn)
     document.getElementById(githubVariables.menuBtnId).onclick = this.expandMenu
-    if (window.location.hash.indexOf('git-kanban?board') !== -1) {
+    if (window.location.hash.indexOf('git-kanban') !== -1) {
       this.expandMenu()
     }
     if (!githubVariables.menuExpanded) {

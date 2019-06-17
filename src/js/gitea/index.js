@@ -1,7 +1,8 @@
-var giteaVariables = {
-  menuBtnId: `git-kanban-menu`,
-  menuExpanded: false
-}
+import { optionsKey } from '../constants'
+import giteaVariables from './giteaVariables'
+import initDisplay from '../display'
+var display = initDisplay(giteaVariables)
+
 /**
  * default page setup
  */
@@ -10,13 +11,13 @@ export default {
     // is-over is-showing-fly-out
     // style display:block; transform: translate3d(220px, 150px, 0px);
     // octicon-project, not in the list eye or inbox might be fine though
-    var kanbanBtn = `<a class="item" id="` + giteaVariables.menuBtnId + `" href="#git-kanban?board">
+    var kanbanBtn = `<a class="item" id="` + giteaVariables.menuBtnId + `" href="#` + optionsKey + `?board">
             <i class="octicon octicon-eye"></i> Kanban 
         </a>`
     preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn)
     document.getElementById(giteaVariables.menuBtnId).onclick = this.expandMenu
 
-    if (window.location.hash.indexOf('git-kanban?board') !== -1) {
+    if (window.location.hash.indexOf(optionsKey) !== -1) {
       this.expandMenu()
     }
 
@@ -54,7 +55,8 @@ export default {
 
     giteaVariables.menuExpanded = !giteaVariables.menuExpanded || giteaVariables.menuExpanded === false
     if (!window.location.hash) {
-      window.location.hash = 'git-kanban?board'
+      window.location.hash = optionsKey + '?board'
+      display.renderDisplay()
     }
 
     if (giteaVariables.menuExpanded) {
@@ -79,6 +81,9 @@ export default {
       if (menuLabels[1].innerText.indexOf("Issues") !== -1) {
         this.addMenu(menuLabels[1])
       }
+    }
+    if (window.location.hash.indexOf(optionsKey) !== -1) {
+      display.renderDisplay()
     }
     // get issues if either true
   }
