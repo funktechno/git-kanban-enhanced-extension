@@ -38,10 +38,40 @@ $ npm run dev # or yarn dev
 
 * need 16, 48, 128 icons
 * gitlab (in-progress)
-    * kanban menu btn visible
+    * menu
+        * [x] kanban menu btn visible
+        * [] menu options
 * github (in-progress)
-    * kanban menu btn visible
+    * menu
+        * [x] kanban menu btn visible
+        * [] menu options
 * bitbucket (in-progress)
-    * kanban menu btn visible (for now, bitbucket css classes are dynamic)
+    * menu
+        * [x] kanban menu btn visible  (for now, bitbucket css classes are dynamic)
+        * [] menu options
+    * kanban
+        * [x] display basic kanban
+        * [] change kanban by dragging
+        * [] match css styling
 * gitea (in-progress)
-    * kanban menu btn visible
+    * menu
+        * [x] kanban menu btn visible
+        * [x] menu options
+    * kanban (board)
+        * [x] display basic kanban
+        * [] change kanban by dragging
+        * [] match css styling
+        * filter
+            * pagination
+            * by milestone
+        * detail left panel
+            * points
+    * burndown
+    * velocity report
+    * settings
+        * [x] label mgt for each repo
+
+* settings
+    * [x] self host custom url mgt
+    * [] general tags/labels for each url
+    * [] export/import settings

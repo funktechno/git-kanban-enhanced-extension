@@ -20,7 +20,7 @@
         <option value="github.com">github.com (Not Yet Supported)</option>
         <option value="bitbucket.org">bitbucket.org (Not Yet Supported)</option>
         <option value="gitlab.com">gitlab.com (Not Yet Supported)</option>
-        <option value="gitea.io">gitlea.com (Not Yet Supported)</option>
+        <option value="gitea.io">gitlea.com (kanban works)</option>
       </select>
       <button id="save" v-on:click="save_options">Add</button>
 
