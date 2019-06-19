@@ -5,6 +5,7 @@ import Vue from 'vue'
 // import VueRouter from 'vue-router'
 import initRouter from './router'
 import VueResource from 'vue-resource'
+import vueKanban from 'vue-kanban'
 
 // import routes from './routes'
 // import { optionsKey } from '../constants'
@@ -33,6 +34,7 @@ export default function (variables) {
 
       // setup vue, maybe should use router to 2share preferences and rerender accordingly
       Vue.use(VueResource)
+      Vue.use(vueKanban)
       // Vue.use(VueRouter)
       Vue.config.devtools = true
       console.log(variables.displayId)

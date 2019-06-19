@@ -1,6 +1,6 @@
 <template>
   <div>Board {{test}}
-    <ul>
+    <!-- <ul>
       <li v-for="(issue, index) in resources" v-bind:key="issue.id">
         {{index}}: {{issue}}
       </li>
@@ -10,7 +10,21 @@
       <li v-for="(issue, index) in milestones" v-bind:key="issue.id">
         {{index}}: {{issue}}
       </li>
-    </ul>
+    </ul> -->
+    <kanban-board :stages="stages" :blocks="resources" @update-block="updateBlock">
+      <div v-for="stage in stages" :slot="stage">
+        <h2>{{ stage }}</h2>
+      </div>
+      <div v-for="block in resources" :slot="block.id">
+        <div>
+          <strong>id:</strong><a :href="block.url"> {{ block.id }}</a>
+        </div>
+        <div>
+          {{ block.title }}
+        </div>
+      </div>
+    </kanban-board>
+
   </div>
 </template>
 
@@ -22,7 +36,15 @@ export default {
     error: null,
     milestones: null,
     labels: null,
-    resources: null
+    resources: null,
+    stages: ['Backlog', 'Analysis', 'In-Progress', 'Testing', 'Done'],
+    blocks: [
+      {
+        id: 1,
+        status: 'Backlog',
+        title: 'Test'
+      }
+    ]
   }),
   computed: {},
   created () {
@@ -32,6 +54,9 @@ export default {
 
   },
   methods: {
+    updateBlock (id, status) {
+      this.blocks.find(b => b.id === Number(id)).status = status
+    },
     fetchData () {
       console.log(this.fetchData.name)
       this.error = this.resources = this.milestones = this.labels = null
@@ -51,7 +76,19 @@ export default {
         // this.message = response.data.message;
         if (response.status === 200) {
           console.log(JSON.parse(JSON.stringify(response.data)))
-          this.resources = response.data
+          var resources = response.data
+
+          for (let i = 0; i < resources.length; i++) {
+            resources[i].status = 'Backlog'
+            resources[i].url = resources[i].url.replace("/api/v1/repos", "")
+            for (let k = 0; k < resources[i].labels.length; k++) {
+              if (this.stages.indexOf(resources[i].labels[k].name) !== -1) {
+                resources[i].status = resources[i].labels[k].name
+                break
+              }
+            }
+          }
+          this.resources = resources
         } else {
           this.errors = "Failed to Load"
         }
@@ -102,3 +139,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  @import '../../../../css/kanban.scss';
+</style> 

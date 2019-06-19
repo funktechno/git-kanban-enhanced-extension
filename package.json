@@ -13,6 +13,7 @@
     "element-ui": "^2.0.1",
     "lodash": "^4.17.4",
     "vue": "^2.5.2",
+    "vue-kanban": "^1.4.0",
     "vue-meta": "^1.2.0",
     "vue-pouch": "^0.0.22",
     "vue-resource": "^1.5.1",
