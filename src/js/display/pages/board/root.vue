@@ -36,7 +36,7 @@ export default {
     error: null,
     milestones: null,
     labels: null,
-    resources: null,
+    resources: [],
     stages: ['Backlog', 'Analysis', 'In-Progress', 'Testing', 'Done'],
     blocks: [
       {
@@ -59,7 +59,8 @@ export default {
     },
     fetchData () {
       console.log(this.fetchData.name)
-      this.error = this.resources = this.milestones = this.labels = null
+      this.error = this.milestones = this.labels = null
+      this.resources = []
       this.loading = true
       var url = window.location.pathname.split("/"),
         user = url[1],
