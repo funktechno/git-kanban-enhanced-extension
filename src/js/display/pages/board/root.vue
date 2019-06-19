@@ -59,12 +59,12 @@ export default {
     chrome.storage.sync.get([optionsKey], function (result) {
       if (result && result[optionsKey] && result[optionsKey].length) {
         var currentOptions = result[optionsKey]
-        var optionIndex = vm.currentOptions.findIndex(x => window.location.host.indexOf(x.url) !== -1)
+        var optionIndex = currentOptions.findIndex(x => x.url.indexOf(window.location.host) !== -1)
         if (vm.optionIndex === -1) {
           vm.error = "error finding option index"
         }
         if (currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[vm.repoName] && currentOptions[optionIndex].repos[vm.repoName].stages && currentOptions[optionIndex].repos[vm.repoName].stages.length > 0) {
-          vm.stages = currentOptions[optionIndex].repos[vm.repoName].stages.length
+          vm.stages = currentOptions[optionIndex].repos[vm.repoName].stages
         }
       } else {
         // should never hit b/c won't be enabled

@@ -45,7 +45,7 @@ export default {
     chrome.storage.sync.get([optionsKey], function (result) {
       if (result && result[optionsKey] && result[optionsKey].length) {
         vm.currentOptions = result[optionsKey]
-        vm.optionIndex = vm.currentOptions.findIndex(x => window.location.host.indexOf(x.url) !== -1)
+        vm.optionIndex = vm.currentOptions.findIndex(x => x.url.indexOf(window.location.host) !== -1)
         if (vm.optionIndex === -1) {
           vm.errors = "error finding option index"
         }
@@ -63,10 +63,10 @@ export default {
       this.currentOptions[this.optionIndex].repos[this.repoName].stages.splice(e, 1)
       // update storage
       // update li
-      // chrome.storage.sync.set({
-      //   [optionsKey]: this.currentOptions
-      // }, function () {
-      // })
+      chrome.storage.sync.set({
+        [optionsKey]: this.currentOptions
+      }, function () {
+      })
     },
     addLabel () {
       if (!this.label) {
@@ -92,10 +92,10 @@ export default {
       this.currentOptions = JSON.parse(JSON.stringify(this.currentOptions))
       console.log(this.currentOptions)
       // save storage memory
-      // chrome.storage.sync.set({
-      //   [optionsKey]: this.currentOptions
-      // }, function () {
-      // })
+      chrome.storage.sync.set({
+        [optionsKey]: this.currentOptions
+      }, function () {
+      })
     }
   }
 }
