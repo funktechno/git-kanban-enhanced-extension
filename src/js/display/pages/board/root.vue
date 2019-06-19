@@ -4,6 +4,12 @@
       <li v-for="(issue, index) in resources" v-bind:key="issue.id">
         {{index}}: {{issue}}
       </li>
+      <li v-for="(issue, index) in labels" v-bind:key="issue.id">
+        {{index}}: {{issue}}
+      </li>
+      <li v-for="(issue, index) in milestones" v-bind:key="issue.id">
+        {{index}}: {{issue}}
+      </li>
     </ul>
   </div>
 </template>
@@ -11,9 +17,11 @@
 <script>
 export default {
   data: () => ({
-    test: "4",
+    test: "5",
     loading: false,
     error: null,
+    milestones: null,
+    labels: null,
     resources: null
   }),
   computed: {},
@@ -26,7 +34,7 @@ export default {
   methods: {
     fetchData () {
       console.log(this.fetchData.name)
-      this.error = this.resources = null
+      this.error = this.resources = this.milestones = this.labels = null
       this.loading = true
       var url = window.location.pathname.split("/"),
         user = url[1],
@@ -48,7 +56,37 @@ export default {
           this.errors = "Failed to Load"
         }
       }).catch((error) => {
-        this.errors = "Failed to Retrieve Latitude and Longitude"
+        this.errors = "Failed to Retrieve issues"
+        console.log(error)
+        this.loading = null
+      })
+      this.$http.get("/api/v1/repos/" + data + "/milestones").then((response) => {
+        this.loading = false
+        console.log(response)
+        // this.message = response.data.message;
+        if (response.status === 200) {
+          console.log(JSON.parse(JSON.stringify(response.data)))
+          this.milestones = response.data
+        } else {
+          this.errors = "Failed to Load"
+        }
+      }).catch((error) => {
+        this.errors = "Failed to Retrieve milestones"
+        console.log(error)
+        this.loading = null
+      })
+      this.$http.get("/api/v1/repos/" + data + "/labels").then((response) => {
+        this.loading = false
+        console.log(response)
+        // this.message = response.data.message;
+        if (response.status === 200) {
+          console.log(JSON.parse(JSON.stringify(response.data)))
+          this.labels = response.data
+        } else {
+          this.errors = "Failed to Load"
+        }
+      }).catch((error) => {
+        this.errors = "Failed to Retrieve labels"
         console.log(error)
         this.loading = null
       })
