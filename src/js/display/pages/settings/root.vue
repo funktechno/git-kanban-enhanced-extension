@@ -71,6 +71,43 @@ export default {
       }, function () {
       })
     },
+    swapArrayElements: function (arr, indexA, indexB) {
+      var temp = arr[indexA]
+      arr[indexA] = arr[indexB]
+      arr[indexB] = temp
+      return arr
+    },
+    moveUp: function (e) {
+      // debugger
+      // remove from local object
+
+      var stages = this.currentOptions[this.optionIndex].repos[this.repoName].stages
+      this.currentOptions[this.optionIndex].repos[this.repoName].stages = this.swapArrayElements(stages, e, e - 1)
+      this.currentOptions = JSON.parse(JSON.stringify(this.currentOptions))
+
+      // this.currentOptions[this.optionIndex].repos[this.repoName].stages.splice(e, 1)
+      // update storage
+      // update li
+      chrome.storage.sync.set({
+        [optionsKey]: this.currentOptions
+      }, function () {
+      })
+    },
+    moveDown: function (e) {
+      // debugger
+      // remove from local object
+      // this.currentOptions[this.optionIndex].repos[this.repoName].stages.splice(e, 1)
+      var stages = this.currentOptions[this.optionIndex].repos[this.repoName].stages
+      this.currentOptions[this.optionIndex].repos[this.repoName].stages = this.swapArrayElements(stages, e, e + 1)
+      this.currentOptions = JSON.parse(JSON.stringify(this.currentOptions))
+
+      // update storage
+      // update li
+      chrome.storage.sync.set({
+        [optionsKey]: this.currentOptions
+      }, function () {
+      })
+    },
     addLabel () {
       if (!this.label) {
         this.errors = "missing label text"
