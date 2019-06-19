@@ -58,6 +58,16 @@ export default {
     })
   },
   methods: {
+    deleteLabel: function (e) {
+      // remove from local object
+      this.currentOptions[this.optionIndex].repos[this.repoName].stages.splice(e, 1)
+      // update storage
+      // update li
+      // chrome.storage.sync.set({
+      //   [optionsKey]: this.currentOptions
+      // }, function () {
+      // })
+    },
     addLabel () {
       if (!this.label) {
         this.errors = "missing label text"
@@ -82,6 +92,10 @@ export default {
       this.currentOptions = JSON.parse(JSON.stringify(this.currentOptions))
       console.log(this.currentOptions)
       // save storage memory
+      // chrome.storage.sync.set({
+      //   [optionsKey]: this.currentOptions
+      // }, function () {
+      // })
     }
   }
 }

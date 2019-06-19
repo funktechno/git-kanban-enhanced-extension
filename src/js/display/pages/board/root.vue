@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import {optionsKey} from '../../../constants'
+
 export default {
   data: () => ({
     test: "5",
@@ -46,8 +48,31 @@ export default {
       }
     ]
   }),
-  computed: {},
+  computed: {
+    repoName () {
+      var url = window.location.pathname.split("/")
+      return url[1] + "/" + url[2]
+    }
+  },
   created () {
+    var vm = this
+    chrome.storage.sync.get([optionsKey], function (result) {
+      if (result && result[optionsKey] && result[optionsKey].length) {
+        var currentOptions = result[optionsKey]
+        var optionIndex = vm.currentOptions.findIndex(x => window.location.host.indexOf(x.url) !== -1)
+        if (vm.optionIndex === -1) {
+          vm.error = "error finding option index"
+        }
+        if (currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[vm.repoName] && currentOptions[optionIndex].repos[vm.repoName].stages && currentOptions[optionIndex].repos[vm.repoName].stages.length > 0) {
+          vm.stages = currentOptions[optionIndex].repos[vm.repoName].stages.length
+        }
+      } else {
+        // should never hit b/c won't be enabled
+        vm.error = "this should never display"
+      }
+      // document.getElementById('color').value = items.favoriteColor;
+      // document.getElementById('like').checked = items.likesColor;
+    })
     this.fetchData()
   },
   mounted () {
