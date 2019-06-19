@@ -7,7 +7,10 @@
       <h3>Kanban Labels:</h3>
       <ul v-if="currentOptions && currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[repoName]">
         <li v-for="(stage, index) in currentOptions[optionIndex].repos[repoName].stages" v-bind:key="index">
-          {{stage}}<button v-on:click="deleteLabel(index)">Remove</button>
+          {{stage}}
+          <button v-if="index!=0" v-on:click="moveUp(index)"><i class="octicon octicon-arrow-up"></i></button>
+          <button v-if="index!=currentOptions[optionIndex].repos[repoName].stages.length-1" v-on:click="moveDown(index)"><i class="octicon octicon-arrow-down"></i></button>
+          <button v-on:click="deleteLabel(index)">Remove</button>
         </li>
       </ul>
     </div>
