@@ -120,8 +120,10 @@
         })
       },
       deleteOption: function (e) {
+        console.log(e)
         // remove from local object
         this.currentOptions.splice(e, 1)
+        console.log(this.currentOptions)
         // update storage
         // update li
         chrome.storage.sync.set({
