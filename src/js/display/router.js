@@ -59,9 +59,31 @@ const Link = {
     name: {
       type: String,
       required: false
+    },
+    activeClass: {
+      type: String,
+      required: false
     }
   },
-  template: `<a @click="navigate" :href="to"><slot></slot></a>`,
+  data  () {
+    return {
+      activeRoute: ''
+    }
+  },
+  created () {
+    // var vm = this
+    if (window.location.hash === this.to) {
+      this.activeRoute = this.activeClass
+    }
+
+    EventBus.$on('navigate', (event) => {
+      this.activeRoute = ''
+      if (window.location.hash === this.to) {
+        this.activeRoute = this.activeClass
+      }
+    })
+  },
+  template: `<a @click="navigate" v-bind:class="activeRoute" :href="to"><slot></slot></a>`,
   methods: {
     navigate (evt) {
       evt.preventDefault()
@@ -139,12 +161,22 @@ export default function (variables) {
       <div class="sideMenu">
         <ul>
           <li>
-            <router-link class="item" to="#/` + optionsKey + `-burndown">
+            <router-link class="item" activeClass="active" to="#/` + optionsKey + `-burndown">
               Burndown
             </router-link>
           </li>
           <li>
-            <router-link class="item" to="#/` + optionsKey + `-settings">
+            <router-link class="item" activeClass="active" to="#/` + optionsKey + `-velocity">
+              Velocity Tracking
+            </router-link>
+          </li>
+          <li>
+            <router-link class="item" activeClass="active" to="#/` + optionsKey + `-report">
+              Release Report
+            </router-link>
+          </li>
+          <li>
+            <router-link class="item" activeClass="active" to="#/` + optionsKey + `-settings">
               Settings
             </router-link>
           </li>
