@@ -1,6 +1,8 @@
 // import VueRouter from 'vue-router'
 import Board from './pages/board/root'
 import Burndown from './pages/burndown/root'
+import Settings from './pages/settings/root'
+
 import { optionsKey } from '../constants'
 const Home = { template: '<div>home</div>' }
 
@@ -11,7 +13,8 @@ const Home = { template: '<div>home</div>' }
 const routes = [
   { path: '#/', component: Home },
   { path: '#/' + optionsKey + '-board', component: Board },
-  { path: '#/' + optionsKey + '-burndown', component: Burndown }
+  { path: '#/' + optionsKey + '-burndown', component: Burndown },
+  { path: '#/' + optionsKey + '-settings', component: Settings }
 ]
 // })
 

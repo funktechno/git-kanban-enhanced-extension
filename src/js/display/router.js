@@ -3,6 +3,8 @@ import routes from './routes'
 import { optionsKey } from '../constants'
 import initDisplay from './index'
 import giteaVariables from '../gitea/giteaVariables'
+import '../../css/main.css'
+// import style here
 
 var display = initDisplay(giteaVariables)
 
@@ -135,9 +137,18 @@ export default function (variables) {
     template: `
     <div class="ui container" id="` + variables.displayId + `">
       <div class="sideMenu">
-        <router-link class="item" to="#/` + optionsKey + `-burndown">
-          Burndown
-        </router-link>
+        <ul>
+          <li>
+            <router-link class="item" to="#/` + optionsKey + `-burndown">
+              Burndown
+            </router-link>
+          </li>
+          <li>
+            <router-link class="item" to="#/` + optionsKey + `-settings">
+              Settings
+            </router-link>
+          </li>
+        </ul>
       </div>
       <router-view class="view"></router-view>
     </div>
