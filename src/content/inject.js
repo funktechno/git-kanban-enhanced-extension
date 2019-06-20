@@ -109,6 +109,7 @@ function getKanbanDetails () {
         gitlab.render()
         break
       case "gitea.io":
+      case "gitea.com":
         gitea.render()
         break
 
