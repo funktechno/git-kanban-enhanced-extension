@@ -1,15 +1,16 @@
 
 module.exports = {
-  name: 'Git Kanban Enhanced Self Hosted',
+  name: 'Git Kanban Enhance',
   version: '0.0.2',
-  description: 'Kanban extensions for self hosted github, gitlab, bitbucket, and gitea',
+  description: 'Kanban extensions for github, gitlab, and bitbucket',
   author: "http://github.com/lastlink",
   manifest_version: 2,
   icons: { '16': 'icons/16.png', '128': 'icons/128.png' },
   homepage_url: "https://github.com/funktechno/git-kanban-enhanced-chrome-extension",
   permissions: [
-    '<all_urls>',
-    '*://*/*',
+    "*://github.com/*",
+    "*://bitbucket.org/*",
+    "*://gitlab.com/*",
     'activeTab',
     'tabs',
     'background',
