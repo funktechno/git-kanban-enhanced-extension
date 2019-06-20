@@ -2,7 +2,7 @@ var bitbucketVariables = {
   menuBtnId: `git-kanban-menu`,
   menuExpanded: false,
   menuBtn: {
-    aClass: "Item-z6qfkt-1 bklwvq",
+    aClass: "Item-z6qfkt-1 btQpif",
     aActiveClass: "Item-z6qfkt-1 btQpif",
     spanOuterClass: "ItemParts__Before-sc-14xek3m-2 kLhAJo ItemParts__BeforeAfterBase-sc-14xek3m-1 hCmnxL",
     spanInnerClass: "sc-bwzfXH bjPjXo"
@@ -97,7 +97,7 @@ export default {
       }
     }
     console.log(menuList)
-    // second part of class is active if different from others Item-z6qfkt-1 bklwvq
+    // second part of class is active if different from others Item-z6qfkt-1 btQpif
     // best thing would be to save to storage and retrieve from there checking and updating if different, b/c won't be able to retrieve active when navigating inside
     // of board skip active for now
     if (menuList) {
