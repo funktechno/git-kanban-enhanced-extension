@@ -7,3 +7,20 @@ span.ext-meta-container {
     margin: 0 0 0 12px;
     font-family: monospace;
 }
+#git-kanban-display .sideMenu {
+  width: 200px;
+}
+
+#git-kanban-display .view {
+  width: 800px;
+}
+
+#git-kanban-display {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#git-kanban-display > div {
+  /* display: flex; */
+  /* background-color: blue; */
+}

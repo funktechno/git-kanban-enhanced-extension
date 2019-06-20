@@ -1,0 +1,20 @@
+## 0.0.2
+
+### fixes
+
+### updates
+* now using vuejs for databinding
+* settings
+    * can export import
+    * can set custom labels for kanban
+        * gitea
+* kanban support
+    * gitea only
+
+## 0.0.1
+
+### fixes
+
+### updates
+* add a menu button
+    * github, gitea, gitlab, bitbucket
