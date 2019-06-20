@@ -12,16 +12,20 @@
       </li>
     </ul> -->
     <kanban-board :stages="stages" :blocks="resources" @update-block="updateBlock">
-      <div v-for="stage in stages" :slot="stage">
-        <h2>{{ stage }}</h2>
-      </div>
-      <div v-for="block in resources" :slot="block.id">
-        <div>
-          <strong>id:</strong><a :href="block.url"> {{ block.id }}</a>
+        <div v-for="stage in stages" :slot="stage" :key="stage">
+          <h2>{{ stage }}</h2> 
         </div>
-        <div>
-          {{ block.title }}
-        </div>
+        <div v-for="block in resources" :slot="block.id" :key="block.id">
+          <div>
+            <strong>id:</strong> {{ block.id }}
+          </div>
+          <div>
+            {{ block.title }}
+          </div>
+          <div v-if="block.closed">
+            Closed!
+          </div>
+          <a :href="block.url">Link</a>
       </div>
     </kanban-board>
 

@@ -24,7 +24,8 @@ module.exports = {
     quotes: ["off", "double"],
     'one-var': ["warn", "always"],
     // needed for debugging
-    'no-unreachable': "off",
+    'no-unreachable': "warn",
+    'no-useless-return': "warn",
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await
