@@ -10,7 +10,6 @@ module.exports = {
   permissions: [
     '<all_urls>',
     '*://*/*',
-    'activeTab',
     'tabs',
     'background',
     'contextMenus',

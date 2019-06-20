@@ -2,7 +2,7 @@
 module.exports = {
   name: 'Git Kanban Enhance',
   version: '0.0.2',
-  description: 'Kanban extensions for github, gitlab, and bitbucket',
+  description: 'Kanban extensions for github, gitlab, gitea, and bitbucket',
   author: "http://github.com/lastlink",
   manifest_version: 2,
   icons: { '16': 'icons/16.png', '128': 'icons/128.png' },
@@ -11,7 +11,7 @@ module.exports = {
     "*://github.com/*",
     "*://bitbucket.org/*",
     "*://gitlab.com/*",
-    'activeTab',
+    "*://gitea.com/*",
     'tabs',
     'background',
     'contextMenus',
@@ -34,6 +34,12 @@ module.exports = {
     js: [ 'js/inject.js' ],
     "exclude_matches": [
       "*://extensions/*"
+    ],
+    "matches": [
+      "https://github.com/*",
+      "https://gitlab.com/*",
+      "https://bitbucket.org/*",
+      "https://gitea.com/*"
     ],
     run_at: 'document_end',
     matches: ['<all_urls>'],

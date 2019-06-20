@@ -1,7 +1,7 @@
 {
   "name": "Git Kanban Enhanced",
   "version": "0.0.1",
-  "description": "Kanban extensions for github, gitlab, and bitbucket",
+  "description": "Kanban extensions for github, gitlab, gitea, and bitbucket",
   "manifest_version": 2,
   "author": "http://github.com/lastlink",
   "background": {
@@ -27,7 +27,8 @@
       "matches": [
         "https://github.com/*",
         "https://gitlab.com/*",
-        "https://bitbucket.org/*"
+        "https://bitbucket.org/*",
+        "https://gitea.org/*"
       ],
       "exclude_matches": [
         "*://extensions/*"
