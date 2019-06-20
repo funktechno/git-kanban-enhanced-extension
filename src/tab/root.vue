@@ -39,6 +39,16 @@
         <li>closed</li>
       </ul>
     </div>
+    <div id="export">
+      <h2>Export/Import</h2>
+      <label></label>
+      <textarea v-model="importJson"></textarea>
+      <br>
+      <button v-on:click="importOptions">Import</button>
+      <button v-on:click="exportOptions">Export</button>
+
+    </div>
+
   </div>
     <!-- div Git Kanban Options
     div {{test}} -->
@@ -52,7 +62,8 @@
       type: null,
       url: null,
       loading: false,
-      currentOptions: null
+      currentOptions: null,
+      importJson: null
     }),
     computed: { },
     created () { },
@@ -98,6 +109,46 @@
           // response = response
         })
       }, // end retrieve manifest
+      importOptions () {
+        var response = null
+        if (!this.importJson) {
+          console.warn("no import json")
+          return
+        }
+        try {
+          response = JSON.parse(this.importJson)
+        } catch (error) {
+          console.warn("invalid json")
+        }
+
+        if (!response) {
+          console.warn("failed to get response")
+          return
+        }
+        console.log(response)
+        // prompt with warning
+        chrome.storage.sync.set({
+          [optionsKey]: response
+        }, function () {
+        })
+        this.currentOptions = response
+      },
+      exportOptions () {
+        console.log(this.exportOptions.name)
+        if (!this.currentOptions) {
+          console.warn("no import json")
+          return
+        }
+        const data = JSON.stringify(this.currentOptions)
+        const blob = new Blob([data], {type: 'text/plain'})
+        const e = document.createEvent('MouseEvents'),
+          a = document.createElement('a')
+        a.download = "git-kanban-export.json"
+        a.href = window.URL.createObjectURL(blob)
+        a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
+        e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+        a.dispatchEvent(e)
+      },
       save_options: function () {
         console.log("saving options")
         var type = this.type,
@@ -137,5 +188,10 @@
 <style lang="scss">
   div {
     color: blue
+  }
+  #export textarea {
+    width: 80%;
+    max-width: 95%;
+    min-height: 75px;
   }
 </style>

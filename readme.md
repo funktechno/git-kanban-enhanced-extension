@@ -73,5 +73,6 @@ $ npm run dev # or yarn dev
 
 * settings
     * [x] self host custom url mgt
+    * [] store oauth token for cud (create, update, delete) requests
     * [] general tags/labels for each url
     * [] export/import settings

@@ -101,8 +101,6 @@ export default {
       return this.$http.post(`/api/v1/repos/${data}/issues/${issueID}/labels`, {
         labels: labelIDs
       })
-      // https://git.coolaj86.com/api/v1/repos/lastlink/testrepo/issues/256/labels/10
-      // https://git.coolaj86.com/api/v1/repos/lastlink/testrepo/issues/256/labels/10
     },
     deleteLabel: async function (issueID, labelID) {
       console.log(this.deleteLabel.name)
@@ -134,6 +132,7 @@ export default {
         block.closed = false
       }
 
+      // TODO: oauth token from users/settings/application appears to be required to make changes
       await this.replaceLabelOfIssue(issueID, block.statusID, stage.id)
       this.updateStageOfBlock(block, stage)
       console.log(block)
