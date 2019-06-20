@@ -19,7 +19,7 @@
     {{labels}}
     <br>
     <label>Label: 
-      <div class="ui label has-emoji" v-if="labelIndex" v-bind:style="{'background-color': '#' + availableLabels[labelIndex].color}" style="color: #000">
+      <div class="ui label has-emoji" v-if="labelIndex != null && labelIndex != -1" v-bind:style="{'background-color': '#' + availableLabels[labelIndex].color}" style="color: #000">
         <i class="octicon octicon-tag"></i> {{availableLabels[labelIndex].name}}
       </div>
     </label> 
@@ -111,6 +111,7 @@ export default {
       return null
     },
     deleteLabel: function (e) {
+      var vm = this
       // remove from local object
       this.currentOptions[this.optionIndex].repos[this.repoName].stages.splice(e, 1)
       // update storage
@@ -118,6 +119,10 @@ export default {
       chrome.storage.sync.set({
         [optionsKey]: this.currentOptions
       }, function () {
+      })
+
+      this.availableLabels = this.labels.filter(function (el) {
+        return vm.currentOptions[vm.optionIndex].repos[vm.repoName].stages.indexOf(el.name) === -1
       })
     },
     swapArrayElements: function (arr, indexA, indexB) {
@@ -158,7 +163,9 @@ export default {
       })
     },
     addLabel () {
-      if (!this.labelIndex) {
+      var vm = this
+
+      if (this.labelIndex === null || this.labelIndex === -1) {
         this.errors = "missing label text"
         return
       }
@@ -185,14 +192,16 @@ export default {
       console.log(this.currentOptions)
       // save storage memory
       chrome.storage.sync.set({
-        [optionsKey]: this.currentOptions
+        [optionsKey]: vm.currentOptions
       }, function () {
       })
 
       // TODO: remove from available
       this.availableLabels = this.labels.filter(function (el) {
-        return this.currentOptions[this.optionIndex].repos[this.repoName].stages.indexOf(el.name) === -1
+        return vm.currentOptions[vm.optionIndex].repos[vm.repoName].stages.indexOf(el.name) === -1
       })
+
+      this.labelIndex = null
     }
   }
 }

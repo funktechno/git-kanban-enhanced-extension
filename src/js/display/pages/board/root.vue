@@ -83,8 +83,71 @@ export default {
 
   },
   methods: {
-    updateBlock (id, status) {
-      this.blocks.find(b => b.id === Number(id)).status = status
+    getBlock (id) {
+      return this.resources.find(({ id: _id }) => _id === id)
+    },
+    getStageByName (name) {
+      return this.labels.find(({ name: _name }) => _name === name)
+    },
+    addLabels: async function (issueID, labelIDs) {
+      console.log(this.addLabels.name)
+      console.log(issueID)
+      console.log(labelIDs)
+      var url = window.location.pathname.split("/"),
+        user = url[1],
+        repo = url[2],
+        data = user + "/" + repo
+      console.log(data)
+      return this.$http.post(`/api/v1/repos/${data}/issues/${issueID}/labels`, {
+        labels: labelIDs
+      })
+      // https://git.coolaj86.com/api/v1/repos/lastlink/testrepo/issues/256/labels/10
+      // https://git.coolaj86.com/api/v1/repos/lastlink/testrepo/issues/256/labels/10
+    },
+    deleteLabel: async function (issueID, labelID) {
+      console.log(this.deleteLabel.name)
+      console.log(issueID)
+      console.log(labelID)
+      var url = window.location.pathname.split("/"),
+        user = url[1],
+        repo = url[2],
+        data = user + "/" + repo
+      console.log(data)
+      return this.$http.delete(`/api/v1/repos/${data}/issues/${issueID}/labels/${labelID}`)
+    },
+    updateBlock: async function (issueID, newStage) {
+      console.log(this.updateBlock.name)
+      console.log(issueID)
+      console.log(newStage)
+      this.$emit("loading", true)
+      const block = this.getBlock(Number.parseInt(issueID, 10))
+      console.log(block)
+      const stage = this.getStageByName(newStage)
+      console.log(stage)
+
+      console.log("end")
+      if (stage.isClosedStage) {
+        // await this.client.closeIssue(issueID as any);
+        block.closed = true
+      } else if (block.closed) {
+        // await this.client.openIssue(issueID as any);
+        block.closed = false
+      }
+
+      await this.replaceLabelOfIssue(issueID, block.statusID, stage.id)
+      this.updateStageOfBlock(block, stage)
+      console.log(block)
+      this.$emit("loading", false)
+      // debugger
+      // this.blocks.find(b => b.id === Number(id)).status = status
+    },
+    replaceLabelOfIssue: async function (issueID, oldLabelID, newLabelID) {
+      await this.deleteLabel(issueID, oldLabelID)
+      await this.addLabels(issueID, [newLabelID])
+    },
+    updateStageOfBlock (block, { name, id }) {
+      block.status = name
+      block.statusID = id
     },
     fetchData () {
       console.log(this.fetchData.name)
@@ -114,6 +177,8 @@ export default {
             for (let k = 0; k < resources[i].labels.length; k++) {
               if (this.stages.indexOf(resources[i].labels[k].name) !== -1) {
                 resources[i].status = resources[i].labels[k].name
+                resources[i].statusID = resources[i].labels[k].id
+
                 break
               }
             }
