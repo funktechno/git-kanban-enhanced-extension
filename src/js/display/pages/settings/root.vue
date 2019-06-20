@@ -1,8 +1,8 @@
 <template>
   <div>settings:
-    <span v-if="currentOptions">{{currentOptions[optionIndex]}}</span>
-    <br>
-    <span v-if="currentOptions && currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[repoName]">{{currentOptions[optionIndex].repos[repoName]}} {{currentOptions[optionIndex].repos[repoName].stages}}</span>
+    <!-- <span v-if="currentOptions">{{currentOptions[optionIndex]}}</span> -->
+    <!-- <br> -->
+    <!-- <span v-if="currentOptions && currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[repoName]">{{currentOptions[optionIndex].repos[repoName]}} {{currentOptions[optionIndex].repos[repoName].stages}}</span> -->
     <div>
       <h3>Kanban Labels:</h3>
       <ul v-if="currentOptions && currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[repoName]">
@@ -16,7 +16,7 @@
         </li>
       </ul>
     </div>
-    {{labels}}
+    <!-- {{labels}} -->
     <br>
     <label>Label: 
       <div class="ui label has-emoji" v-if="labelIndex != null && labelIndex != -1" v-bind:style="{'background-color': '#' + availableLabels[labelIndex].color}" style="color: #000">
@@ -76,10 +76,10 @@ export default {
     })
     this.$http.get("/api/v1/repos/" + data + "/labels").then((response) => {
       this.loading = false
-      console.log(response)
+      // console.log(response)
       // this.message = response.data.message;
       if (response.status === 200) {
-        console.log(JSON.parse(JSON.stringify(response.data)))
+        // console.log(JSON.parse(JSON.stringify(response.data)))
         this.labels = response.data
 
         // TODO: populate this.av from this.labels and this.currentoptions
@@ -189,7 +189,7 @@ export default {
         }
       }
       this.currentOptions = JSON.parse(JSON.stringify(this.currentOptions))
-      console.log(this.currentOptions)
+      // console.log(this.currentOptions)
       // save storage memory
       chrome.storage.sync.set({
         [optionsKey]: vm.currentOptions

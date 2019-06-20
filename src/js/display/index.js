@@ -29,7 +29,7 @@ export default function (variables) {
       var displayHTML = `<div class="ui container" id="` + variables.displayId + `">
           test
         </div>`
-      console.log(currentBoard)
+      // console.log(currentBoard)
       currentBoard.insertAdjacentHTML('afterend', displayHTML)
 
       // setup vue, maybe should use router to 2share preferences and rerender accordingly

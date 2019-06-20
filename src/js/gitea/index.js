@@ -30,7 +30,7 @@ export default {
     //   path += '/'
     // }
     // ` + path + `
-    console.log(optionsKey)
+    // console.log(optionsKey)
     // document.getElementById(giteaVariables.menuBtnId).onclick = this.expandMenu
     // kanbanBtn = `<router-link class="item" to="/` + optionsKey + `-board"><i class="octicon octicon-eye"></i> Kanban2</router-link>`
 
@@ -85,7 +85,7 @@ export default {
     console.log("rendering gitea kanban")
 
     var menuLabels = document.querySelectorAll(`.ui.tabular.stackable.menu.navbar > a`)
-    console.log(menuLabels)
+    // console.log(menuLabels)
     if (menuLabels && menuLabels.length) {
       // only add kanban if issues enabled
       if (menuLabels[1].innerText.indexOf("Issues") !== -1) {

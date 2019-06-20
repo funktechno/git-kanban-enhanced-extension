@@ -4,10 +4,25 @@
       <h3>Custom Git Platform:</h3>
       <ul id="git-hosts">
         <li v-if="!currentOptions || !currentOptions.length>0">Example - git.coolaj86.com : gitea.io <button>Remove</button> </li>
-        <li v-for="(opt, index) in currentOptions" v-bind:key="opt.url">
+        <li v-for="(opt, index) in currentOptions" v-bind:key="opt.url" v-on:click="selectedIndex = index">
+          <strong v-if="index == selectedIndex">Selected - </strong>
           {{opt.url}} : {{opt.type}} <button v-on:click="deleteOption(index)">Remove</button>
         </li>
       </ul>
+      <div v-if="selectedIndex != null">
+        <h3>{{currentOptions[selectedIndex].url}} Details</h3>
+
+        <h3>Labels:</h3>
+
+        <h3>Oauth: <span v-if="currentOptions[selectedIndex].oToken">-Provided-</span></h3>
+
+        <h3>Add Oauth Token:</h3>
+        <label>token: </label>
+        <input v-model="oToken" placeholder="github.example.com">
+        <br>
+        <button id="save" v-on:click="addToken">Add</button>
+        </div>
+      
     </div>
     <p></p>
     <div class="custom-options" style="display:none">
@@ -63,12 +78,14 @@
       url: null,
       loading: false,
       currentOptions: null,
-      importJson: null
+      importJson: null,
+      selectedIndex: null,
+      oToken: null
     }),
     computed: { },
     created () { },
     mounted () {
-      console.log(optionsKey)
+      // console.log(optionsKey)
       // function restoreOptions () {
       // }
       // this.updateLiOptions()
@@ -149,6 +166,21 @@
         e.initEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
         a.dispatchEvent(e)
       },
+      addToken: function () {
+        if (!this.oToken) {
+          console.warn("missing oToken")
+          return
+        }
+
+        this.currentOptions[this.selectedIndex].oToken = this.oToken
+
+        chrome.storage.sync.set({
+          [optionsKey]: this.currentOptions
+        }, function () {
+        })
+
+        this.oToken = null
+      },
       save_options: function () {
         console.log("saving options")
         var type = this.type,
@@ -171,16 +203,21 @@
         })
       },
       deleteOption: function (e) {
-        console.log(e)
+        // console.log(e)
         // remove from local object
         this.currentOptions.splice(e, 1)
-        console.log(this.currentOptions)
+        // console.log(this.currentOptions)
         // update storage
         // update li
         chrome.storage.sync.set({
           [optionsKey]: this.currentOptions
         }, function () {
         })
+        if (e === this.selectedIndex) {
+          this.selectedIndex = null
+        } else {
+          this.selectedIndex--
+        }
       }
     }
   }
