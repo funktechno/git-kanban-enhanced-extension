@@ -2,7 +2,7 @@
   <div>settings:
     <span v-if="currentOptions">{{currentOptions[optionIndex]}}</span>
     <br>
-    <span v-if="currentOptions && currentOptions[optionIndex].repos">{{currentOptions[optionIndex].repos[repoName]}} {{currentOptions[optionIndex].repos[repoName].stages}}</span>
+    <span v-if="currentOptions && currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[repoName]">{{currentOptions[optionIndex].repos[repoName]}} {{currentOptions[optionIndex].repos[repoName].stages}}</span>
     <div>
       <h3>Kanban Labels:</h3>
       <ul v-if="currentOptions && currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[repoName]">
@@ -182,7 +182,7 @@ export default {
         }
         if (!this.currentOptions[this.optionIndex].repos[this.repoName]) {
           this.currentOptions[this.optionIndex].repos[this.repoName] = {
-            stages: [this.label]
+            stages: [this.label.name]
           }
         } else {
           this.currentOptions[this.optionIndex].repos[this.repoName].stages.push(label.name)
