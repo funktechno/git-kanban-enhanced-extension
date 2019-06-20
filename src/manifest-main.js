@@ -42,9 +42,8 @@ module.exports = {
       "https://gitea.com/*"
     ],
     run_at: 'document_end',
-    matches: ['<all_urls>'],
     all_frames: true
   }],
-  content_security_policy: "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  content_security_policy: "script-src 'self' 'unsafe-eval'; object-src 'self'"
   // web_accessible_resources: [ 'js/content.js' ]
 }
