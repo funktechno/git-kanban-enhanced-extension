@@ -1,7 +1,7 @@
 
 module.exports = {
   name: 'Git Kanban Enhance',
-  version: '0.0.3',
+  version: '0.0.4',
   description: 'Kanban extensions for github, gitlab, gitea, and bitbucket',
   author: "http://github.com/lastlink",
   manifest_version: 2,

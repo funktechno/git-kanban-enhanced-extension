@@ -1,11 +1,12 @@
 <template>
   <div>settings:
-    <!-- <span v-if="currentOptions">{{currentOptions[optionIndex]}}</span> -->
+    <!-- <span v-if="currentOptions && optionIndex !== -1">{{currentOptions[optionIndex]}}</span> -->
     <!-- <br> -->
-    <!-- <span v-if="currentOptions && currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[repoName]">{{currentOptions[optionIndex].repos[repoName]}} {{currentOptions[optionIndex].repos[repoName].stages}}</span> -->
+    <!-- {{optionIndex}} -->
+    <!-- <span v-if="currentOptions && optionIndex !== -1 && currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[repoName]">{{currentOptions[optionIndex].repos[repoName]}} {{currentOptions[optionIndex].repos[repoName].stages}}</span> -->
     <div>
       <h3>Kanban Labels:</h3>
-      <ul v-if="currentOptions && currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[repoName]">
+      <ul v-if="currentOptions && optionIndex !== -1 && currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[repoName]">
         <li v-for="(stage, index) in currentOptions[optionIndex].repos[repoName].stages" v-bind:key="index">
           <div class="ui label has-emoji" v-bind:style="labelStyle(stage)" style="color: #000">
             <i class="octicon octicon-tag"></i> {{stage}}
@@ -61,6 +62,8 @@ export default {
       repo = url[2],
       data = user + "/" + repo
     chrome.storage.sync.get([optionsKey], function (result) {
+      // console.log("result is")
+      // console.log(result)
       if (result && result[optionsKey] && result[optionsKey].length) {
         vm.currentOptions = result[optionsKey]
         vm.optionIndex = vm.currentOptions.findIndex(x => x.url.indexOf(window.location.host) !== -1)
@@ -83,7 +86,7 @@ export default {
         this.labels = response.data
 
         // TODO: populate this.av from this.labels and this.currentoptions
-        if (vm.currentOptions && vm.currentOptions[vm.optionIndex].repos && vm.currentOptions[vm.optionIndex].repos[vm.repoName] && vm.currentOptions[vm.optionIndex].repos[vm.repoName].stages && vm.currentOptions[vm.optionIndex].repos[vm.repoName].stages.length > 0) {
+        if (vm.currentOptions && vm.optionIndex !== -1 && vm.currentOptions[vm.optionIndex].repos && vm.currentOptions[vm.optionIndex].repos[vm.repoName] && vm.currentOptions[vm.optionIndex].repos[vm.repoName].stages && vm.currentOptions[vm.optionIndex].repos[vm.repoName].stages.length > 0) {
           vm.availableLabels = this.labels.filter(function (el) {
             return vm.currentOptions[vm.optionIndex].repos[vm.repoName].stages.indexOf(el.name) === -1
           })
@@ -175,18 +178,38 @@ export default {
       // var index = this.currentOptions.findIndex(x => window.location.host.indexOf(x.url) !== -1)
       // console.log("inde:" + index)
       // console.log(this.currentOptions)
+      if (!this.currentOptions) {
+        this.currentOptions = []
+      }
 
-      if (this.optionIndex !== -1) {
+      if (this.optionIndex !== null && this.optionIndex !== -1) {
         if (!this.currentOptions[this.optionIndex].repos) {
           this.currentOptions[this.optionIndex].repos = {}
         }
         if (!this.currentOptions[this.optionIndex].repos[this.repoName]) {
           this.currentOptions[this.optionIndex].repos[this.repoName] = {
-            stages: [this.label.name]
+            stages: [label.name]
           }
         } else {
           this.currentOptions[this.optionIndex].repos[this.repoName].stages.push(label.name)
         }
+      } else {
+        var ignoreList = ["github.com", "bitbucket.org", "gitlab.com", "gitea.com"],
+          host = window.location.host
+
+        if (ignoreList.indexOf(host) !== -1) {
+          this.currentOptions.push({
+            url: host,
+            repos: {
+              [this.repoName]: {
+                stages: [label.name]
+              }
+            }
+          })
+          this.optionIndex = this.currentOptions.findIndex(x => x.url.indexOf(host) !== -1)
+        }
+
+        // TODO init from scratch
       }
       this.currentOptions = JSON.parse(JSON.stringify(this.currentOptions))
       // console.log(this.currentOptions)
@@ -195,7 +218,7 @@ export default {
         [optionsKey]: vm.currentOptions
       }, function () {
       })
-
+      // console.log(this.availableLabels)
       // TODO: remove from available
       this.availableLabels = this.labels.filter(function (el) {
         return vm.currentOptions[vm.optionIndex].repos[vm.repoName].stages.indexOf(el.name) === -1
