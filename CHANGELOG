@@ -1,3 +1,13 @@
+## 0.0.5
+
+### fixes
+* ran `npm run build` 0.0.4 had used a `npm run dev`
+
+## 0.0.4
+
+### fixes
+* support for labels in simple that is empty
+
 ## 0.0.3
 
 ### fixes
