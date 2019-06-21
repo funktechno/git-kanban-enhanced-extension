@@ -1,6 +1,7 @@
 
 module.exports = {
   name: 'Git Kanban Enhanced Self Hosted',
+  short_name: 'GKESH',
   version: '0.0.3',
   description: 'Kanban extensions for self hosted github, gitlab, bitbucket, and gitea',
   author: "http://github.com/lastlink",

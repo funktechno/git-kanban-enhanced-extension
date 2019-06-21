@@ -1,12 +1,13 @@
 <template>
   <div>
-    <div class="custom-options" style="display:none">
-      <h3>Custom Git Platform:</h3>
+    <div v-if="currentOptions && currentOptions.length > 0">
+      <h3>Remote Git Server:</h3>
       <ul id="git-hosts">
         <li v-if="!currentOptions || !currentOptions.length>0">Example - try.gitea.io : gitea.io <button>Remove</button> </li>
         <li v-for="(opt, index) in currentOptions" v-bind:key="opt.url" v-on:click="selectedIndex = index">
           <strong v-if="index == selectedIndex">Selected - </strong>
-          {{opt.url}} : {{opt.type}} <button v-on:click="deleteOption(index)">Remove</button>
+          {{opt.url}} <span v-if="opt.type">: {{opt.type}}</span>
+          <button v-on:click="deleteOption(index)">Remove</button>
         </li>
       </ul>
       <div v-if="selectedIndex != null">
