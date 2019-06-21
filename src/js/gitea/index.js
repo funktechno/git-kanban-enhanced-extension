@@ -85,10 +85,9 @@ export default {
     console.log("rendering gitea kanban")
 
     var menuLabels = document.querySelectorAll(`.ui.tabular.stackable.menu.navbar > a`)
-    // console.log(menuLabels)
     if (menuLabels && menuLabels.length) {
       // only add kanban if issues enabled
-      if (menuLabels[1].innerText.indexOf("Issues") !== -1) {
+      if (menuLabels[1].innerText.indexOf("Issues") !== -1 && !menuLabels[1].target) {
         this.addMenu(menuLabels[1])
       }
     }
