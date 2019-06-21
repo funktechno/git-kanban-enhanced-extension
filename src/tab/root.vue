@@ -94,6 +94,7 @@
     },
     methods: {
       retrieveManifest: function () {
+        // console.log(this.retrieveManifest.name)
         var vm = this
 
         this.loading = true
@@ -111,18 +112,18 @@
             for (i; i < l; i++) {
               myClasses[i].style.display = ''
             }
-
-            // restore urls
-            chrome.storage.sync.get([optionsKey], function (result) {
-              if (result && result[optionsKey] && result[optionsKey].length) {
-                vm.currentOptions = result[optionsKey]
-              } else {
-                vm.currentOptions = []
-              }
-              // document.getElementById('color').value = items.favoriteColor;
-              // document.getElementById('like').checked = items.likesColor;
-            })
           }
+          // restore urls
+          chrome.storage.sync.get([optionsKey], function (result) {
+            // console.log(result)
+            if (result && result[optionsKey] && result[optionsKey].length) {
+              vm.currentOptions = result[optionsKey]
+            } else {
+              vm.currentOptions = []
+            }
+            // document.getElementById('color').value = items.favoriteColor;
+            // document.getElementById('like').checked = items.likesColor;
+          })
           // response = response
         })
       }, // end retrieve manifest
@@ -153,7 +154,7 @@
       exportOptions () {
         console.log(this.exportOptions.name)
         if (!this.currentOptions) {
-          console.warn("no import json")
+          console.warn("no export json")
           return
         }
         const data = JSON.stringify(this.currentOptions)

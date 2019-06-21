@@ -71,6 +71,7 @@ export default {
           vm.oToken = currentOptions[optionIndex].oToken
           if (currentOptions[optionIndex].repos && currentOptions[optionIndex].repos[vm.repoName] && currentOptions[optionIndex].repos[vm.repoName].stages && currentOptions[optionIndex].repos[vm.repoName].stages.length > 0) {
             vm.stages = currentOptions[optionIndex].repos[vm.repoName].stages
+            vm.stages.unshift("Backlog")
           }
         }
       } else {

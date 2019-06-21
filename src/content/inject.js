@@ -85,10 +85,10 @@ function getKanbanDetails () {
     if (result && result[optionsKey] && result[optionsKey].length) {
       currentOptions = result[optionsKey]
     }
+    var ignoreList = ["github.com", "bitbucket.org", "gitlab.com", "gitea.com"],
+      host = window.location.host
 
-    var host = window.location.host
-
-    if (currentOptions && currentOptions.length) {
+    if (ignoreList.indexOf(host) === -1 && currentOptions && currentOptions.length) {
       for (let i = 0; i < currentOptions.length; i++) {
         // if host = option url then set host to type
         if (currentOptions[i].url === host) {
