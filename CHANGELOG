@@ -3,6 +3,8 @@
 ### fixes
 * gitea
   * show kanban only if issues internal
+* simple
+  * show current options to add oauth token
 
 ## 0.0.5
 
