@@ -1,7 +1,7 @@
 
 module.exports = {
   name: 'Git Kanban Enhanced Self Hosted',
-  version: '0.0.2',
+  version: '0.0.3',
   description: 'Kanban extensions for self hosted github, gitlab, bitbucket, and gitea',
   author: "http://github.com/lastlink",
   manifest_version: 2,
@@ -9,8 +9,6 @@ module.exports = {
   homepage_url: "https://github.com/funktechno/git-kanban-enhanced-chrome-extension",
   permissions: [
     '<all_urls>',
-    '*://*/*',
-    'tabs',
     'background',
     'contextMenus',
     'storage',
@@ -23,13 +21,19 @@ module.exports = {
   background: {
     persistent: true,
     "scripts": [
+      'js/manifest.js',
+      'js/vendor.js',
       "js/background.js"
     ]
   },
   // devtools_page: 'pages/devtools.html',
   // options_page: 'pages/options.html',
   content_scripts: [{
-    js: [ 'js/inject.js' ],
+    js: [
+      'js/manifest.js',
+      'js/vendor.js',
+      'js/inject.js'
+    ],
     "exclude_matches": [
       "*://extensions/*"
     ],
@@ -37,6 +41,6 @@ module.exports = {
     matches: ['<all_urls>'],
     all_frames: true
   }],
-  content_security_policy: "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  content_security_policy: "script-src 'self' 'unsafe-eval'; object-src 'self'"
   // web_accessible_resources: [ 'js/content.js' ]
 }

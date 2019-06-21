@@ -10,8 +10,26 @@ let backEnd = function () {
   chrome.webNavigation.onHistoryStateUpdated.addListener(function (details) {
     chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs) {
       var url = tabs[0].url
-      if (url.indexOf("github.com") !== -1 || url.indexOf("bitbucket.org") !== -1) {
-        chrome.tabs.executeScript(null, { file: "js/inject.js" })
+      if (url && (url.indexOf("github.com") !== -1 || url.indexOf("bitbucket.org") !== -1)) {
+        // must inject manifest and vendor before running inject
+        chrome.tabs.executeScript(null, {
+          file: 'js/manifest.js',
+          runAt: 'document_end'},
+        function (result) {
+          console.log("done loading file manifest" + JSON.stringify(result))
+        })
+        chrome.tabs.executeScript(null, {
+          file: 'js/vendor.js',
+          runAt: 'document_end'},
+        function (result) {
+          console.log("done loading file vendor" + JSON.stringify(result))
+        })
+        chrome.tabs.executeScript(null, {
+          file: 'js/inject.js',
+          runAt: 'document_end'},
+        function (result) {
+          console.log("done loading file inject:" + JSON.stringify(result))
+        })
       }
     })
     // if(chrome.runtime.lastError) {

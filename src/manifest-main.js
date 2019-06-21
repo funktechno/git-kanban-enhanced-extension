@@ -1,7 +1,7 @@
 
 module.exports = {
   name: 'Git Kanban Enhance',
-  version: '0.0.2',
+  version: '0.0.3',
   description: 'Kanban extensions for github, gitlab, gitea, and bitbucket',
   author: "http://github.com/lastlink",
   manifest_version: 2,
@@ -12,7 +12,6 @@ module.exports = {
     "*://bitbucket.org/*",
     "*://gitlab.com/*",
     "*://gitea.com/*",
-    'tabs',
     'background',
     'contextMenus',
     'storage',
@@ -25,13 +24,19 @@ module.exports = {
   background: {
     persistent: true,
     "scripts": [
+      'js/manifest.js',
+      'js/vendor.js',
       "js/background.js"
     ]
   },
   // devtools_page: 'pages/devtools.html',
   // options_page: 'pages/options.html',
   content_scripts: [{
-    js: [ 'js/inject.js' ],
+    js: [
+      'js/manifest.js',
+      'js/vendor.js',
+      'js/inject.js'
+    ],
     "exclude_matches": [
       "*://extensions/*"
     ],
