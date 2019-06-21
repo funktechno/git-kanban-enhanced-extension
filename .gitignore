@@ -16,3 +16,5 @@ yarn.lock
 # Backpack build
 build
 *.zip
+
+.DS_Store
