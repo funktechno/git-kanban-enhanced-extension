@@ -11,7 +11,7 @@
   "dependencies": {
     "axios": "^0.17.0",
     "element-ui": "^2.0.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "vue": "^2.5.2",
     "vue-kanban": "^1.4.0",
     "vue-meta": "^1.2.0",
