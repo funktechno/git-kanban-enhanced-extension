@@ -1,12 +1,14 @@
-import Vue from 'vue'
-import root from './root.vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import Vue from 'vue';
+import root from './root.vue';
+import store from '../store';
 
-Vue.config.productionTip = false
-Vue.use(ElementUI)
+global.browser = require('webextension-polyfill');
+Vue.prototype.$browser = global.browser;
+
 /* eslint-disable no-new */
 new Vue({
-  el: '#root',
-  render: h => h(root)
-})
+  el: '#app',
+  store,
+
+  render: h => h(App),
+});
