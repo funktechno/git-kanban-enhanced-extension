@@ -9,7 +9,7 @@
   "homepage_url": "https://github.com/funktechno/git-kanban-enhanced-extension",
   "applications": {
     "gecko": {
-      "id": "git-kanban-enhanced-extension@funktechno.com"
+      "id": "git-kanban-enhanced@funktechno.com"
     }
   },
   "permissions": ["*://github.com/*", "*://bitbucket.org/*", "*://gitlab.com/*", "*://gitea.com/*", "contextMenus", "storage", "webNavigation"],
