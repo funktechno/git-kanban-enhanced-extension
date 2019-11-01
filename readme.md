@@ -1,12 +1,12 @@
-# git-kanban (in progress)
+# git-kanban-extensions (in progress)
 
 - Kanban extensions for github, gitlab, and bitbucket
-- should support weights, multi projects, epics, blockers
-- 2 plugins, one supports custom urls, one has predefined
+- Goal to support weights, multi projects, epics, blockers
+- 2 plugins for each browser, one supports custom urls, one has predefined
 - initialized using [YuraDev/vue-chrome-extension-template](https://github.com/YuraDev/vue-chrome-extension-template)
-- refactored based off of [Kocal/vue-web-extension](https://github.com/Kocal/vue-web-extension)
+  - refactored based off of [Kocal/vue-web-extension](https://github.com/Kocal/vue-web-extension)
 
-## published chrome apps
+## published browser extensions
 
 - Chrome
   - [Simple](https://chrome.google.com/webstore/detail/git-kanban-enhanced/ehoibkdpdgjcjnnalkbiidajafoimnaa)
@@ -18,7 +18,7 @@
 ## getting started (development)
 
 - [chrome extensions getting started](https://developer.chrome.com/extensions/getstarted)
-- copy **manifest-custom.json** to **manifest.json**
+- copy **src/manifest-custom.json** to **src/manifest.json**
 - startup
 
 ```bash
@@ -40,7 +40,7 @@ npm run watch:dev # or yarn dev
     - click manage your extensions gear > **install addon from file**
   - debug
     - Navigate to [about:debugging](about:debugging#/runtime/this-firefox) in firefox
-    - click **load temporary add-on** and select the manifest.json file in build
+    - click **load temporary add-on** and select the manifest.json file in **dist**
 
 ## release (on-premise)
 
@@ -94,7 +94,7 @@ npm run watch:dev # or yarn dev
     - [x] menu options
   - kanban (board)
     - [x] display basic kanban
-    - [] change kanban by dragging
+    - [x] change kanban by dragging
     - [] match css styling
     - filter
       - pagination
@@ -108,6 +108,6 @@ npm run watch:dev # or yarn dev
 
 - settings
   - [x] self host custom url mgt
-  - [] store oauth token for cud (create, update, delete) requests
+  - [x] store oauth token for crud (create, update, delete) requests
   - [] general tags/labels for each url
-  - [] export/import settings
+  - [x] export/import settings
