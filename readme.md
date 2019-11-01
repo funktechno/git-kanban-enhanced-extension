@@ -11,9 +11,9 @@
 - Chrome
   - [Simple](https://chrome.google.com/webstore/detail/git-kanban-enhanced/ehoibkdpdgjcjnnalkbiidajafoimnaa)
   - [Self Hosted](https://chrome.google.com/webstore/detail/ambmbdjjhloinbjadfgfmenihmfmahmk)
-- Firefox (pending)
-  - [Simple](https://addons.mozilla.org/en-US/developers/addon/git-kanban-enhanced)
-  - [Self Hosted](https://addons.mozilla.org/en-US/developers/addon/git-kanban-enhanced-selfhosted)
+- Firefox
+  - [Simple](https://addons.mozilla.org/en-US/firefox/addon/git-kanban-enhanced/)
+  - [Self Hosted](https://addons.mozilla.org/en-US/firefox/addon/git-kanban-enhanced-selfhosted/)
 
 ## getting started (development)
 
