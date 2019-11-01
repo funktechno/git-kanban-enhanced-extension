@@ -8,6 +8,28 @@ let backEnd = function() {
   // var isMetaReady = false
   var STORAGE = chrome.storage.sync;
 
+  function checkExtensionType() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.addEventListener('readystatechange', function() {
+      if (this.readyState === this.DONE) {
+        var response = JSON.parse(this.responseText);
+        STORAGE.set(
+          {
+            [optionsKey + '_type']: response,
+          },
+          function() {}
+        );
+      }
+    });
+
+    xhr.open('GET', '/manifest.json');
+
+    xhr.send();
+  }
+
+  checkExtensionType();
+
   chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
     browser.tabs.query({ active: true, lastFocusedWindow: true }).then(function(tabs) {
       var url = tabs[0].url;
