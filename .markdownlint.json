@@ -1,0 +1,6 @@
+{
+  "default": true,
+  "MD024": false,
+  "MD007": { "indent": 2 },
+  "MD013": false
+}

@@ -1,18 +1,15 @@
 {
-  "presets": [
-    ["env", {
-      "modules": false,
-      "targets": {
-        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-      }
-    }],
-    "stage-2"
+  "plugins": [
+    "@babel/plugin-proposal-optional-chaining"
   ],
-  "plugins": ["transform-runtime"],
-  "env": {
-    "test": {
-      "presets": ["env", "stage-2"],
-      "plugins": ["istanbul"]
-    }
-  }
+  "presets": [
+    ["@babel/preset-env", {
+      "useBuiltIns": "usage",
+      "corejs": 3,
+      "targets": {
+        // https://jamie.build/last-2-versions
+        "browsers": ["> 0.25%", "not ie 11", "not op_mini all"]
+      }
+    }]
+  ]
 }

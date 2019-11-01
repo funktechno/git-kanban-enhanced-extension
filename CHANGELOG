@@ -1,6 +1,31 @@
+# CHANGELOG
+
+## 0.0.7
+
+### updates
+
+* major refactor based off of [Kocal/vue-web-extension](https://github.com/Kocal/vue-web-extension)
+  * upgraded to webpack 4
+  * extension dist size cut down more than 90%!!
+  * polyfill used to make chrome api's work with firefox
+  * autoformatting using prettier on save
+  * vue `<style></style>` tag not supported in **content_scripts** with new webpack config. Css can be directly injected into `<template></template>` using `<v-script scoped></v-script>` global component
+  * manifest updated
+    * copy process updated
+    * removed uneeded chrome *background* permission
+  * new npm scripts in `package.json` see **README**
+    * better build and zip process
+      * now using **dist** folder instead of **build** for development
+    * different debug watch scripts
+* issue api calls no longer using root `/`, but injecting the host using `window.location.origin` to be firefox compatible
+* project rename b/c now supporting firefox
+* deployed to firefox store pending approval
+* no changes to chrome extension core functionality in this update
+
 ## 0.0.6
 
 ### fixes
+
 * gitea
   * show kanban only if issues internal
 * simple
@@ -9,16 +34,19 @@
 ## 0.0.5
 
 ### fixes
+
 * ran `npm run build` 0.0.4 had used a `npm run dev`
 
 ## 0.0.4
 
 ### fixes
+
 * support for labels in simple that is empty
 
 ## 0.0.3
 
 ### fixes
+
 * fix github render bug
 * remove many uneeded permissions
 
@@ -27,18 +55,20 @@
 ### fixes
 
 ### updates
+
 * now using vuejs for databinding
 * settings
-    * can export import
-    * can set custom labels for kanban
-        * gitea
+  * can export import
+  * can set custom labels for kanban
+    * gitea
 * kanban support
-    * gitea only
+  * gitea only
 
 ## 0.0.1
 
 ### fixes
 
 ### updates
+
 * add a menu button
-    * github, gitea, gitlab, bitbucket
+  * github, gitea, gitlab, bitbucket

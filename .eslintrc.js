@@ -1,36 +1,31 @@
 // https://eslint.org/docs/user-guide/configuring
+// File taken from https://github.com/vuejs-templates/webpack/blob/1.3.1/template/.eslintrc.js, thanks.
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
   parserOptions: {
-    sourceType: 'module'
-  },
-  globals: {
-     "chrome": true
-    // chrome: true
+    parser: 'babel-eslint',
   },
   env: {
     browser: true,
+    webextensions: true,
   },
-  // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-  extends: 'standard',
-  // required to lint *.vue files
-  plugins: [
-    'html'
+  extends: [
+    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
+    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
+    'plugin:vue/essential',
+    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
+    'standard',
+    // https://prettier.io/docs/en/index.html
+    'plugin:prettier/recommended',
   ],
+  // required to lint *.vue files
+  plugins: ['vue'],
   // add your custom rules here
-  'rules': {
-    quotes: ["off", "double"],
-    'one-var': ["warn", "always"],
-    // needed for debugging
-    'no-unreachable': "warn",
-    'no-useless-return': "warn",
-    // allow paren-less arrow functions
-    'arrow-parens': 0,
+  rules: {
     // allow async-await
-    'generator-star-spacing': 0,
+    'generator-star-spacing': 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
-  }
-}
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+  },
+};

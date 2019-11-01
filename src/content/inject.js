@@ -4,17 +4,17 @@
 // script.setAttribute('src', content)
 // document.body.appendChild(script)
 
-"use strict"
-import gitea from "../js/gitea"
-import github from "../js/github"
-import bitbucket from "../js/bitbucket"
-import gitlab from "../js/gitlab"
-import {optionsKey} from '../js/constants'
+'use strict';
+import gitea from '../js/gitea';
+import github from '../js/github';
+import bitbucket from '../js/bitbucket';
+import gitlab from '../js/gitlab';
+import { optionsKey } from '../js/constants';
 // import manifest from '../manifest'
 
-console.log('content-script!')
+console.log('content-script!');
 // let repoMetaHtml = ""
-let metaStatus = "wait"
+let metaStatus = 'wait';
 
 /* Fetch meta for the page ASAP and get it ready for it to be available when window loads.
  * Callback is optional, it'll passed when window loads, before meta is ready.
@@ -52,18 +52,18 @@ let metaStatus = "wait"
 } */
 // const optionsKey = "git-kanban"
 
-var currentOptions
+var currentOptions;
 
-function getKanbanDetails () {
-  var url = window.location.pathname.split("/"),
+function getKanbanDetails() {
+  var url = window.location.pathname.split('/'),
     // user = url[1],
-    repo = url[2]
-    // data = user + "/" + repo
-  if (!repo || metaStatus === "waiting") {
-    metaStatus = "na"
-    return
+    repo = url[2];
+  // data = user + "/" + repo
+  if (!repo || metaStatus === 'waiting') {
+    metaStatus = 'na';
+    return;
   } else {
-    metaStatus = "waiting"
+    metaStatus = 'waiting';
   }
   // console.log("check storage")
   // console.log(chrome.storage)
@@ -81,48 +81,56 @@ function getKanbanDetails () {
   //     callback()
   //   }
   // })
-  chrome.storage.sync.get([optionsKey], function (result) {
+  chrome.storage.sync.get([optionsKey], function(result) {
     if (result && result[optionsKey] && result[optionsKey].length) {
-      currentOptions = result[optionsKey]
+      currentOptions = result[optionsKey];
     }
-    var ignoreList = ["github.com", "bitbucket.org", "gitlab.com", "gitea.com"],
-      host = window.location.host
+    var ignoreList = ['github.com', 'bitbucket.org', 'gitlab.com', 'gitea.com'],
+      host = window.location.host;
 
-    if (ignoreList.indexOf(host) === -1 && currentOptions && currentOptions.length) {
-      for (let i = 0; i < currentOptions.length; i++) {
-        // if host = option url then set host to type
-        if (currentOptions[i].url === host) {
-          host = currentOptions[i].type
+    chrome.storage.sync.get([optionsKey + '_type'], function(type_result) {
+      if (type_result && type_result[optionsKey + '_type'] && type_result[optionsKey + '_type'].name.indexOf('Self Hosted') !== -1) {
+        ignoreList = [];
+        host = null;
+      }
+
+      if (ignoreList.indexOf(host) === -1 && currentOptions && currentOptions.length) {
+        console.log(currentOptions);
+        console.log(window.location.host);
+        for (let i = 0; i < currentOptions.length; i++) {
+          // if host = option url then set host to type
+          if (currentOptions[i].url === window.location.host) {
+            host = currentOptions[i].type;
+          }
         }
       }
-    }
 
-    // add kanban on left if in a group or repo view
-    switch (host) {
-      case "github.com":
-        github.render()
-        break
-      case "bitbucket.org":
-        console.log(bitbucket.render())
-        break
-      case "gitlab.com":
-        gitlab.render()
-        break
-      case "gitea.io":
-      case "gitea.com":
-        gitea.render()
-        break
+      // add kanban on left if in a group or repo view
+      switch (host) {
+        case 'github.com':
+          github.render();
+          break;
+        case 'bitbucket.org':
+          console.log(bitbucket.render());
+          break;
+        case 'gitlab.com':
+          gitlab.render();
+          break;
+        case 'gitea.io':
+        case 'gitea.com':
+          gitea.render();
+          break;
 
-      default:
-
-        console.log(host + ":custom url is not added in the options page")
-        // get project type from options
-        break
-    }
+        default:
+          console.log(host + ':custom url is not added in the options page');
+          // get project type from options
+          break;
+      }
+    });
 
     // document.getElementById('color').value = items.favoriteColor
     // document.getElementById('like').checked = items.likesColor
-  })
+  });
 
   // chrome.runtime.sendMessage({"getIssues" : issueRequest}, function (htmlResponse) {
   //     console.log(data)
@@ -142,22 +150,22 @@ function getKanbanDetails () {
 // }
 
 /* Inject the html into page safely */
-const inject = function () {
-  if (metaStatus === "na") {
-    return
+const inject = function() {
+  if (metaStatus === 'na') {
+    return;
   }
   /* If meta is still not ready, try fetching it again, this time pass the callback to care of the rest */
-  if (metaStatus === "wait") {
+  if (metaStatus === 'wait') {
     // getRepoMetaHtml(insertMetaInPage)
-    getKanbanDetails()
+    getKanbanDetails();
   } else {
     // insertMetaInPage()
   }
-}
+};
 
-window.onload = function () {
-  inject()
-}
+window.onload = function() {
+  inject();
+};
 
-getKanbanDetails()
+getKanbanDetails();
 // getRepoMetaHtml()
