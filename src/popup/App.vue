@@ -13,7 +13,7 @@ export default {
   mounted() {},
   methods: {
     tab() {
-      chrome.tabs.create({ url: 'pages/app.html' });
+      chrome.tabs.create({ url: '/tab/tab.html' });
     },
   },
 };

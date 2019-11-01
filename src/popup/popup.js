@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import root from './root.vue';
+import App from './App.vue';
 import store from '../store';
 
 global.browser = require('webextension-polyfill');

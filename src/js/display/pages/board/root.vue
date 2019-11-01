@@ -144,7 +144,7 @@ export default {
         },
       });
     },
-    pdateBlock: async function(issueID, newStage) {
+    updateBlock: async function(issueID, newStage) {
       console.log(this.updateBlock.name);
       // console.log(issueID)
       // console.log(newStage)
