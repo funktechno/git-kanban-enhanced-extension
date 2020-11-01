@@ -41,10 +41,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import { optionsKey } from '../../../constants';
 
-export default {
+export default Vue.extend({
   data: () => ({
     test: '4',
     labelIndex: null,
@@ -251,5 +252,5 @@ export default {
       this.labelIndex = null;
     },
   },
-};
+});
 </script>

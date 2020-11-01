@@ -2,14 +2,15 @@
   <div>burndown</div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+export default Vue.extend({
   data: () => ({
-    test: "4"
+    test: '4',
   }),
   computed: {},
-  created () {},
-  mounted () {},
-  methods: {}
-}
+  created() {},
+  mounted() {},
+  methods: {},
+});
 </script>

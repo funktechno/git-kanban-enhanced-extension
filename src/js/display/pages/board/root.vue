@@ -33,11 +33,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import { optionsKey } from '../../../constants';
 import styleKanban from '../../../../css/kanban.css.js';
 
-export default {
+export default Vue.extend({
   data: () => ({
     test: '5',
     styleKanban: styleKanban,
@@ -285,5 +286,5 @@ export default {
       // })
     },
   },
-};
+});
 </script>

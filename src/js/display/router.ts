@@ -1,97 +1,95 @@
-import Vue from 'vue'
-import routes from './routes'
-import { optionsKey } from '../constants'
-import initDisplay from './index'
-import giteaVariables from '../gitea/giteaVariables'
-import '../../css/main.css'
+import Vue from 'vue';
+import routes from './routes';
+import { optionsKey } from '../constants';
+import initDisplay from './index';
+import giteaVariables from '../gitea/giteaVariables';
+import '../../css/main.css';
 // import style here
 
-var display = initDisplay(giteaVariables)
+var display = initDisplay(giteaVariables);
 
-const EventBus = new Vue()
+const EventBus = new Vue();
 
 window.addEventListener('popstate', () => {
-  EventBus.$emit('navigate')
-})
+  EventBus.$emit('navigate');
+});
 
 const View = {
   name: 'router-view',
   template: `<component :is="currentView"></component>`,
-  data  () {
+  data() {
     return {
-      currentView: {}
-    }
+      currentView: {},
+    };
   },
-  created () {
+  created() {
     if (this.getRouteObject() === undefined) {
       this.currentView = {
         template: `
           <h3 class="subtitle has-text-white">
             Not Found :(. Bad kanban url!
           </h3>
-        `
-      }
+        `,
+      };
     } else {
-      this.currentView = this.getRouteObject().component
+      this.currentView = this.getRouteObject().component;
     }
 
     // Event listener for link navigation
-    EventBus.$on('navigate', (event) => {
-      this.currentView = this.getRouteObject().component
-    })
+    EventBus.$on('navigate', event => {
+      this.currentView = this.getRouteObject().component;
+    });
   },
   methods: {
-    getRouteObject () {
-      return routes.find(
-        route => route.path === window.location.hash
-      )
-    }
-  }
-}
+    getRouteObject() {
+      return routes.find(route => route.path === window.location.hash);
+    },
+  },
+};
 
 const Link = {
   name: 'router-link',
   props: {
     to: {
       type: String,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      required: false
+      required: false,
     },
     activeClass: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
-  data  () {
+  data() {
     return {
-      activeRoute: ''
-    }
+      activeRoute: '',
+    };
   },
-  created () {
+  created() {
     // var vm = this
     if (window.location.hash === this.to) {
-      this.activeRoute = this.activeClass
+      this.activeRoute = this.activeClass;
     }
 
-    EventBus.$on('navigate', (event) => {
-      this.activeRoute = ''
+    EventBus.$on('navigate', event => {
+      this.activeRoute = '';
       if (window.location.hash === this.to) {
-        this.activeRoute = this.activeClass
+        this.activeRoute = this.activeClass;
       }
-    })
+    });
   },
   template: `<a @click="navigate" v-bind:class="activeRoute" :href="to"><slot></slot></a>`,
   methods: {
-    navigate (evt) {
-      evt.preventDefault()
-      window.history.pushState(null, null, this.to)
-      EventBus.$emit('navigate')
-    }
-  }
-}
+    navigate(evt) {
+      evt.preventDefault();
+      window.history.pushState(null, null, this.to);
+      EventBus.$emit('navigate');
+    },
+  },
+};
 
 export const singleMenu = {
   name: 'singleMenu',
@@ -102,25 +100,25 @@ export const singleMenu = {
   `,
   data: () => ({
     optionsKey,
-    menuExpanded: false
+    menuExpanded: false,
   }),
   computed: {
-    menuLink: function () {
-      return "#/" + this.optionsKey + "-board"
-    }
+    menuLink: function() {
+      return '#/' + this.optionsKey + '-board';
+    },
   },
-  created () {},
-  mounted () {
+  created() {},
+  mounted() {
     if (window.location.hash.indexOf(optionsKey) !== -1) {
-      this.expandMenu()
+      this.expandMenu();
     }
   },
   methods: {
-    expandMenu: function (e) {
-      console.log(this.expandMenu.name)
+    expandMenu: function(e) {
+      console.log(this.expandMenu.name);
       // may not be a button press
       if (e) {
-        e.preventDefault()
+        e.preventDefault();
       }
 
       if (!window.location.hash) {
@@ -131,52 +129,63 @@ export const singleMenu = {
         // !this.menuExpanded || this.menuExpanded === false
 
         if (!this.menuExpanded) {
-          this.menuExpanded = true
-          var activeItem = document.querySelector(`.item.active`)
+          this.menuExpanded = true;
+          var activeItem = document.querySelector(`.item.active`);
           if (activeItem) {
-            activeItem.className = "item"
+            activeItem.className = 'item';
           }
           // render
-          display.renderDisplay()
+          display.renderDisplay();
           // document.getElementById(giteaVariables.menuBtnId).className = "active item"
           // document.querySelector(`#` + giteaVariables.menuBtnId + ` > ul`).style = ""
         } else {
           //   // document.getElementById(giteaVariables.menuBtnId).className = "item"
         }
       }
-    }
+    },
   },
   // render: h => h(menu),
   components: {
     'router-view': View,
-    'router-link': Link
-  }
-}
+    'router-link': Link,
+  },
+};
 
-export default function (variables) {
+export default function(variables) {
   return {
     name: 'router',
-    template: `
-    <div class="ui container" id="` + variables.displayId + `">
+    template:
+      `
+    <div class="ui container" id="` +
+      variables.displayId +
+      `">
       <div class="sideMenu">
         <ul>
           <li>
-            <router-link class="item" activeClass="active" to="#/` + optionsKey + `-burndown">
+            <router-link class="item" activeClass="active" to="#/` +
+      optionsKey +
+      `-burndown">
               Burndown
             </router-link>
           </li>
           <li>
-            <router-link class="item" activeClass="active" to="#/` + optionsKey + `-velocity">
+            <router-link class="item" activeClass="active" to="#/` +
+      optionsKey +
+      `-velocity">
               Velocity Tracking
             </router-link>
           </li>
           <li>
-            <router-link class="item" activeClass="active" to="#/` + optionsKey + `-report">
+            <router-link class="item" activeClass="active" to="#/` +
+      optionsKey +
+      `-report">
               Release Report
             </router-link>
           </li>
           <li>
-            <router-link class="item" activeClass="active" to="#/` + optionsKey + `-settings">
+            <router-link class="item" activeClass="active" to="#/` +
+      optionsKey +
+      `-settings">
               Settings
             </router-link>
           </li>
@@ -187,7 +196,7 @@ export default function (variables) {
     `,
     components: {
       'router-view': View,
-      'router-link': Link
-    }
-  }
+      'router-link': Link,
+    },
+  };
 }

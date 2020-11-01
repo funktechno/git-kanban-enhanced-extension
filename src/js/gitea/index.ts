@@ -5,6 +5,7 @@ import Vue from 'vue';
 // import VueRouter from 'vue-router'
 // import menu from './menu'
 import { singleMenu } from '../display/router';
+import { browser } from 'webextension-polyfill-ts';
 
 // import router from '../display/routes'
 
@@ -14,7 +15,7 @@ import { singleMenu } from '../display/router';
  * default page setup
  */
 export default {
-  addMenu: function(preMenuBtn) {
+  addMenu: function(preMenuBtn: HTMLElement) {
     console.log(this.addMenu.name);
     // is-over is-showing-fly-out
     // style display:block; transform: translate3d(220px, 150px, 0px);
@@ -50,13 +51,14 @@ export default {
         return createElement('style', this.$slots.default);
       },
     });
-    Vue.prototype.$browser = global.browser;
+    // global.browser = browser;
+    Vue.prototype.$browser = browser;
 
     /* eslint-disable no-new */
     new Vue({
       el: '#' + giteaVariables.menuBtnId,
       // router,
-      base: __dirname,
+      // base: __dirname,
       // template: kanbanBtn
       render: h => h(singleMenu),
     });
@@ -96,8 +98,8 @@ export default {
     var menuLabels = document.querySelectorAll(`.ui.tabular.stackable.menu.navbar > a`);
     if (menuLabels && menuLabels.length) {
       // only add kanban if issues enabled
-      if (menuLabels[1].innerText.indexOf('Issues') !== -1 && !menuLabels[1].target) {
-        this.addMenu(menuLabels[1]);
+      if (menuLabels[1] && (menuLabels[1] as HTMLElement).innerText.indexOf('Issues') !== -1 && !(menuLabels[1] as any).target) {
+        this.addMenu(menuLabels[1] as HTMLElement);
       }
     }
     // if (window.location.hash.indexOf(optionsKey) !== -1) {

@@ -1,4 +1,4 @@
-export const optionsKey = "git-kanban"
+export const optionsKey = 'git-kanban';
 
 // module.exports = {
 //   optionsKey

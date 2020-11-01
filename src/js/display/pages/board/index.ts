@@ -1,12 +1,13 @@
 // import { optionsKey } from '../constants'
 import Vue from 'vue';
 import root from './root.vue';
+import { VariablesI } from '../../../../types';
 // import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css'
 
 // setup vue page here
 
-export default function(variables) {
+export default function(variables: VariablesI) {
   return {
     renderBoard: function() {
       console.log('renderingBoard');
