@@ -1,7 +1,6 @@
 {
   "name": "Git Kanban Enhanced",
   "short_name": "GKE",
-  "version": "0.0.7",
   "description": "Kanban extensions for github, gitlab, gitea, and bitbucket",
   "author": "http://github.com/lastlink",
   "manifest_version": 2,
@@ -23,7 +22,7 @@
   },
   "content_scripts": [
     {
-      "js": ["js/inject.js"],
+      "js": ["js/chunk-vendors.js", "js/inject.js"],
       "exclude_matches": ["*://extensions/*"],
       "matches": ["https://github.com/*", "https://gitlab.com/*", "https://bitbucket.org/*", "https://gitea.com/*"],
       "run_at": "document_end",

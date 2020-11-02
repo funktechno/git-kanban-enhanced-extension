@@ -22,8 +22,9 @@
 - startup
 
 ```bash
-npm install # or yarn
-npm run watch:dev # or yarn dev
+yarn install # or yarn
+npm run build:manifest -- --custom
+npm run watch # or yarn dev
 ```
 
 - chrome

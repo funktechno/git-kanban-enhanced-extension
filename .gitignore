@@ -9,14 +9,25 @@ manifest.js
 datetime*
 
 # IDE
-.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# local env files
+.env.local
+.env.*.local
 
 # dependencies
 node_modules
 
 # logs
-npm-debug.log
-yarn.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # Backpack build
 build
@@ -24,3 +35,4 @@ build
 
 .DS_Store
 *.txt
+junit.xml

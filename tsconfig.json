@@ -5,25 +5,14 @@
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
-    // "noImplicitThis": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "allowJs": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": [
-      "webpack-env",
-      "jest",
-      "dateformat",
-      "vuedraggable",
-      "chrome",
-      "node"
-      // "webpack",
-      // "webpack-env"
-    ],
+    "types": ["webpack-env", "jest", "chrome", "node", "web-ext-types"],
     "paths": {
       "@/*": ["src/*"]
     },

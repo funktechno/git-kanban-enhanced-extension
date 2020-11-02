@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 const fs = require('fs');
 const path = require('path');
@@ -8,7 +9,7 @@ const DEST_DIR = path.join(__dirname, '../dist');
 const DEST_ZIP_DIR = path.join(__dirname, '../dist-zip');
 
 const extractExtensionData = () => {
-  const extPackageJson = require('../src/manifest.json');
+  const extPackageJson = require('../dist/manifest.json');
 
   return {
     name: extPackageJson.name,
