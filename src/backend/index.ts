@@ -1,24 +1,28 @@
-import { optionsKey } from '../js/constants';
+import { optionsKey } from '@/utils/constants';
+// import { globalNode } from '@/types';
+
 global.browser = require('webextension-polyfill');
 
 console.log('background !');
-let backEnd = function() {
+const backEnd = function() {
   'use strict';
   /* Multiple requests from same page will be served from this variable instead of pinging Github's API */
   // var isMetaReady = false
-  var STORAGE = chrome.storage.sync;
+  const STORAGE = chrome.storage.sync;
 
   function checkExtensionType() {
-    var xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
 
     xhr.addEventListener('readystatechange', function() {
       if (this.readyState === this.DONE) {
-        var response = JSON.parse(this.responseText);
+        const response = JSON.parse(this.responseText);
         STORAGE.set(
           {
             [optionsKey + '_type']: response,
           },
-          function() {}
+          function() {
+            //
+          }
         );
       }
     });
@@ -31,8 +35,8 @@ let backEnd = function() {
   checkExtensionType();
 
   chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
-    browser.tabs.query({ active: true, lastFocusedWindow: true }).then(function(tabs) {
-      var url = tabs[0].url;
+    browser.tabs.query({ active: true, lastFocusedWindow: true }).then(function(tabs: browser.tabs.Tab[]) {
+      const url = tabs[0].url;
       if (url && (url.indexOf('github.com') !== -1 || url.indexOf('bitbucket.org') !== -1)) {
         // must inject manifest and vendor before running inject
         // chrome.tabs.executeScript(null, {
@@ -48,7 +52,6 @@ let backEnd = function() {
         //   console.log("done loading file vendor" + JSON.stringify(result))
         // })
         chrome.tabs.executeScript(
-          null,
           {
             file: 'js/inject.js',
             runAt: 'document_end',
@@ -83,36 +86,36 @@ let backEnd = function() {
   console.log('adding listener');
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     console.log(request);
-    var storageRequest = null;
+    let storageRequest = null;
     // debugger
     if (request['getStorage']) {
       console.log('retrieving storage');
       storageRequest = JSON.parse(request['getStorage']);
       console.log(storageRequest);
-      storageRequest += '';
+      // storageRequest += '';
       return;
-      STORAGE.get([optionsKey], function(result) {
-        if (result && result[optionsKey] && result[optionsKey].length) {
-          sendResponse(result);
-        } else {
-          sendResponse(null);
-        }
-      });
+      // STORAGE.get([optionsKey], function(result) {
+      //   if (result && result[optionsKey] && result[optionsKey].length) {
+      //     sendResponse(result);
+      //   } else {
+      //     sendResponse(null);
+      //   }
+      // });
     }
     if (request['setStorage']) {
       console.log('retrieving storage');
       storageRequest = JSON.parse(request['setStorage']);
       console.log(storageRequest);
       return;
-      STORAGE.sync.set(
-        {
-          [optionsKey]: this.currentOptions,
-        },
-        function() {}
-      );
+      // STORAGE.sync.set(
+      //   {
+      //     [optionsKey]: this.currentOptions,
+      //   },
+      //   function() {}
+      // );
     }
     if (request['getIssues']) {
-      var issueRequest = JSON.parse(request['getIssues']);
+      const issueRequest = JSON.parse(request['getIssues']);
       console.log(issueRequest);
       if (issueRequest.location.host === 'github.com') {
         console.log('get github issues');
