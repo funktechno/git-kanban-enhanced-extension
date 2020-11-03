@@ -1,22 +1,23 @@
-var bitbucketVariables = {
+const bitbucketVariables = {
   menuBtnId: `git-kanban-menu`,
   menuExpanded: false,
   menuBtn: {
-    aClass: 'Item-z6qfkt-1 btQpif',
-    aActiveClass: 'Item-z6qfkt-1 btQpif',
-    spanOuterClass: 'ItemParts__Before-sc-14xek3m-2 kLhAJo ItemParts__BeforeAfterBase-sc-14xek3m-1 hCmnxL',
-    spanInnerClass: 'sc-bwzfXH bjPjXo',
-  },
+    aClass: "Item-z6qfkt-1 btQpif",
+    aActiveClass: "Item-z6qfkt-1 btQpif",
+    spanOuterClass:
+      "ItemParts__Before-sc-14xek3m-2 kLhAJo ItemParts__BeforeAfterBase-sc-14xek3m-1 hCmnxL",
+    spanInnerClass: "sc-bwzfXH bjPjXo"
+  }
 };
 /**
  * default page setup
  */
 export default {
-  addMenu: function(preMenuBtn) {
+  addMenu: function(preMenuBtn: HTMLElement) {
     // is-over is-showing-fly-out
     // style display:block; transform: translate3d(220px, 150px, 0px);
     // add selected to class
-    var kanbanBtn =
+    const kanbanBtn =
       `<a id="` +
       bitbucketVariables.menuBtnId +
       `" class="` +
@@ -39,9 +40,11 @@ export default {
     //   <meta itemprop="position" content="1">
     // </a>  </span>`
 
-    preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn);
-    document.getElementById(bitbucketVariables.menuBtnId).onclick = this.expandMenu;
-    if (window.location.hash.indexOf('git-kanban') !== -1) {
+    preMenuBtn.insertAdjacentHTML("afterend", kanbanBtn);
+    (document.getElementById(
+      bitbucketVariables.menuBtnId
+    ) as HTMLButtonElement).onclick = this.expandMenu;
+    if (window.location.hash.indexOf("git-kanban") !== -1) {
       this.expandMenu();
     }
     if (!bitbucketVariables.menuExpanded) {
@@ -68,34 +71,43 @@ export default {
       // }
     }
   },
-  expandMenu: function(e) {
+  expandMenu: function(e: MouseEvent | null = null) {
     // may not be a button press
     if (e) {
       e.preventDefault();
     }
     if (!window.location.hash) {
-      window.location.hash = 'git-kanban?board';
+      window.location.hash = "git-kanban?board";
     }
-    bitbucketVariables.menuExpanded = !bitbucketVariables.menuExpanded || bitbucketVariables.menuExpanded === false;
+    bitbucketVariables.menuExpanded = !bitbucketVariables.menuExpanded;
     if (bitbucketVariables.menuExpanded) {
-      var activeItem = document.querySelector(`.` + bitbucketVariables.menuBtn.aActiveClass.replace(' ', '.'));
+      const activeItem = document.querySelector(
+        `.` + bitbucketVariables.menuBtn.aActiveClass.replace(" ", ".")
+      );
       if (activeItem) {
         activeItem.className = bitbucketVariables.menuBtn.aClass;
       }
-      document.getElementById(bitbucketVariables.menuBtnId).className = bitbucketVariables.menuBtn.aActiveClass;
+      (document.getElementById(
+        bitbucketVariables.menuBtnId
+      ) as HTMLButtonElement).className =
+        bitbucketVariables.menuBtn.aActiveClass;
     } else {
-      document.getElementById(bitbucketVariables.menuBtnId).className = bitbucketVariables.menuBtn.aClass;
+      (document.getElementById(
+        bitbucketVariables.menuBtnId
+      ) as HTMLButtonElement).className = bitbucketVariables.menuBtn.aClass;
     }
   },
   render: function() {
     // check if project or overview
-    console.log('rendering bitbucket kanban');
+    console.log("rendering bitbucket kanban");
     // bitbucket uses dynamic generated css classes, will have to iterate to find
-    var allElements = document.getElementsByTagName('div'),
-      menuList = null,
-      menuLabels = null;
+    const allElements = document.getElementsByTagName("div");
+    let menuList: HTMLElement | null = null,
+      menuLabels: NodeListOf<HTMLAnchorElement> | null = null;
     for (let i = 0; i < allElements.length; i++) {
-      if (allElements[i].className.indexOf('ScrollHintScrollContainer') !== -1) {
+      if (
+        allElements[i].className.indexOf("ScrollHintScrollContainer") !== -1
+      ) {
         menuList = allElements[i];
       }
     }
@@ -108,13 +120,16 @@ export default {
       if (menuLabels && menuLabels.length) {
         // don't double render
         for (let i = 0; i < menuLabels.length; i++) {
-          if (menuLabels[i].innerText.indexOf('Kanban') !== -1) {
+          if (menuLabels[i].innerText.indexOf("Kanban") !== -1) {
             return false;
           }
         }
         for (let i = 0; i < menuLabels.length; i++) {
-          if (menuLabels[i].innerText.indexOf('Issues') !== -1) {
-            this.addMenu(menuLabels[i]);
+          if (
+            menuLabels[1] &&
+            menuLabels[i].innerText.indexOf("Issues") !== -1
+          ) {
+            this.addMenu(menuLabels[i] as HTMLElement);
             return true;
           }
         }
@@ -125,5 +140,5 @@ export default {
       }
     }
     // get issues if either true
-  },
+  }
 };

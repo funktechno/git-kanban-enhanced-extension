@@ -1,6 +1,6 @@
-var githubVariables = {
+const githubVariables = {
   menuBtnId: `git-kanban-menu`,
-  menuExpanded: false,
+  menuExpanded: false
 };
 /**
  * default page setup
@@ -10,7 +10,7 @@ export default {
     // is-over is-showing-fly-out
     // style display:block; transform: translate3d(220px, 150px, 0px);
     // add selected to class
-    var kanbanBtn =
+    const kanbanBtn =
       `<span id="` +
       githubVariables.menuBtnId +
       `" itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
@@ -19,9 +19,11 @@ export default {
           <meta itemprop="position" content="1">
         </a>  </span>`;
 
-    preMenuBtn.insertAdjacentHTML('afterend', kanbanBtn);
-    (document.getElementById(githubVariables.menuBtnId) as HTMLButtonElement).onclick = this.expandMenu;
-    if (window.location.hash.indexOf('git-kanban') !== -1) {
+    preMenuBtn.insertAdjacentHTML("afterend", kanbanBtn);
+    (document.getElementById(
+      githubVariables.menuBtnId
+    ) as HTMLButtonElement).onclick = this.expandMenu;
+    if (window.location.hash.indexOf("git-kanban") !== -1) {
       this.expandMenu();
     }
     if (!githubVariables.menuExpanded) {
@@ -54,38 +56,58 @@ export default {
       e.preventDefault();
     }
     if (!window.location.hash) {
-      window.location.hash = 'git-kanban?board';
+      window.location.hash = "git-kanban?board";
     }
     githubVariables.menuExpanded = !githubVariables.menuExpanded;
     if (githubVariables.menuExpanded) {
-      var activeItem = document.querySelector(`.js-selected-navigation-item.selected`);
+      const activeItem = document.querySelector(
+        `.js-selected-navigation-item.selected`
+      );
       if (activeItem) {
-        activeItem.classList.remove('selected');
+        activeItem.classList.remove("selected");
       }
-      ((document.getElementById(githubVariables.menuBtnId) as HTMLButtonElement).querySelector(`a`) as HTMLAnchorElement).className += ' selected';
+      ((document.getElementById(
+        githubVariables.menuBtnId
+      ) as HTMLButtonElement).querySelector(
+        `a`
+      ) as HTMLAnchorElement).className += " selected";
     } else {
-      ((document.getElementById(githubVariables.menuBtnId) as HTMLButtonElement).querySelector(`a`) as HTMLAnchorElement).classList.remove('selected');
+      ((document.getElementById(
+        githubVariables.menuBtnId
+      ) as HTMLButtonElement).querySelector(
+        `a`
+      ) as HTMLAnchorElement).classList.remove("selected");
     }
   },
   render: function() {
     // check if project or overview
-    console.log('rendering github kanban');
+    console.log("rendering github kanban");
 
-    var menuLabels = document.querySelectorAll(`nav.js-sidenav-container-pjax > span`),
-      nameProp = null;
+    const menuLabels = document.querySelectorAll(
+      `nav.js-sidenav-container-pjax > span`
+    );
+    let nameProp = null;
     if (menuLabels && menuLabels.length) {
       // avoid double render
       for (let i = 0; i < menuLabels.length; i++) {
         nameProp = menuLabels[i].querySelector(`span[itemprop="name"]`);
-        if (nameProp && (nameProp as HTMLElement).innerText.indexOf('Kanban') !== -1) {
+        if (
+          nameProp &&
+          (nameProp as HTMLElement).innerText.indexOf("Kanban") !== -1
+        ) {
           return;
         }
       }
       // only add kanban if issues enabled
-      if (menuLabels[1] && ((menuLabels[1] as HTMLElement).querySelector(`span[itemprop="name"]`) as HTMLElement).innerText.indexOf('Issues') !== -1) {
+      if (
+        menuLabels[1] &&
+        ((menuLabels[1] as HTMLElement).querySelector(
+          `span[itemprop="name"]`
+        ) as HTMLElement).innerText.indexOf("Issues") !== -1
+      ) {
         this.addMenu(menuLabels[1] as HTMLElement);
       }
     }
     // get issues if either true
-  },
+  }
 };

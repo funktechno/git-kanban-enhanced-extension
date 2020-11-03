@@ -1,71 +1,76 @@
-import Vue from 'vue';
-import routes from './routes';
-import { optionsKey } from '../constants';
-import initDisplay from './index';
-import giteaVariables from '../gitea/giteaVariables';
-import '../../css/main.css';
+import Vue from "vue";
+import routes from "./routes";
+import { optionsKey } from "@/utils/constants";
+import initDisplay from "./index";
+import giteaVariables from "../gitea/giteaVariables";
+import "@/css/main.css";
+import { VariablesI } from "@/types";
+
 // import style here
 
-var display = initDisplay(giteaVariables);
+const display = initDisplay(giteaVariables);
 
 const EventBus = new Vue();
 
-window.addEventListener('popstate', () => {
-  EventBus.$emit('navigate');
+window.addEventListener("popstate", () => {
+  EventBus.$emit("navigate");
 });
 
-const View = {
-  name: 'router-view',
+const View = Vue.extend({
+  name: "router-view",
   template: `<component :is="currentView"></component>`,
   data() {
     return {
-      currentView: {},
+      currentView: {}
     };
   },
   created() {
-    if (this.getRouteObject() === undefined) {
+    const routeObject = this.getRouteObject();
+    if (routeObject === undefined) {
       this.currentView = {
         template: `
           <h3 class="subtitle has-text-white">
             Not Found :(. Bad kanban url!
           </h3>
-        `,
+        `
       };
     } else {
-      this.currentView = this.getRouteObject().component;
+      this.currentView = routeObject.component;
     }
 
     // Event listener for link navigation
-    EventBus.$on('navigate', event => {
-      this.currentView = this.getRouteObject().component;
+    EventBus.$on("navigate", () => {
+      console.log(event);
+      const eventRouteObject = this.getRouteObject();
+      if (eventRouteObject) this.currentView = eventRouteObject.component;
     });
   },
   methods: {
     getRouteObject() {
       return routes.find(route => route.path === window.location.hash);
-    },
-  },
-};
+    }
+  }
+});
 
-const Link = {
-  name: 'router-link',
+const Link = Vue.extend({
+  name: "router-link",
   props: {
     to: {
       type: String,
-      required: true,
+      required: true
     },
     name: {
       type: String,
-      required: false,
+      required: false
     },
     activeClass: {
       type: String,
-      required: false,
-    },
+      required: false
+    }
   },
   data() {
     return {
-      activeRoute: '',
+      activeRoute: ""
     };
   },
   created() {
@@ -74,8 +79,8 @@ const Link = {
       this.activeRoute = this.activeClass;
     }
 
-    EventBus.$on('navigate', event => {
-      this.activeRoute = '';
+    EventBus.$on("navigate", () => {
+      this.activeRoute = "";
       if (window.location.hash === this.to) {
         this.activeRoute = this.activeClass;
       }
@@ -83,16 +88,16 @@ const Link = {
   },
   template: `<a @click="navigate" v-bind:class="activeRoute" :href="to"><slot></slot></a>`,
   methods: {
-    navigate(evt) {
+    navigate(evt: MouseEvent) {
       evt.preventDefault();
-      window.history.pushState(null, null, this.to);
-      EventBus.$emit('navigate');
-    },
-  },
-};
+      window.history.pushState(null, "", this.to);
+      EventBus.$emit("navigate");
+    }
+  }
+});
 
-export const singleMenu = {
-  name: 'singleMenu',
+export const singleMenu = Vue.extend({
+  name: "singleMenu",
   template: `
       <router-link class="item" v-bind:class="{ active: menuExpanded }" :to="menuLink" @click.native="expandMenu">
         <i class="octicon octicon-eye"></i> Kanban
@@ -100,21 +105,21 @@ export const singleMenu = {
   `,
   data: () => ({
     optionsKey,
-    menuExpanded: false,
+    menuExpanded: false
   }),
   computed: {
     menuLink: function() {
-      return '#/' + this.optionsKey + '-board';
-    },
+      return "#/" + this.optionsKey + "-board";
+    }
   },
-  created() {},
+  // created() {},
   mounted() {
     if (window.location.hash.indexOf(optionsKey) !== -1) {
       this.expandMenu();
     }
   },
   methods: {
-    expandMenu: function(e) {
+    expandMenu: function(e: MouseEvent | null = null) {
       console.log(this.expandMenu.name);
       // may not be a button press
       if (e) {
@@ -130,9 +135,9 @@ export const singleMenu = {
 
         if (!this.menuExpanded) {
           this.menuExpanded = true;
-          var activeItem = document.querySelector(`.item.active`);
+          const activeItem = document.querySelector(`.item.active`);
           if (activeItem) {
-            activeItem.className = 'item';
+            activeItem.className = "item";
           }
           // render
           display.renderDisplay();
@@ -142,18 +147,18 @@ export const singleMenu = {
           //   // document.getElementById(giteaVariables.menuBtnId).className = "item"
         }
       }
-    },
+    }
   },
   // render: h => h(menu),
   components: {
-    'router-view': View,
-    'router-link': Link,
-  },
-};
+    "router-view": View,
+    "router-link": Link
+  }
+});
 
-export default function(variables) {
+export default function(variables: VariablesI) {
   return {
-    name: 'router',
+    name: "router",
     template:
       `
     <div class="ui container" id="` +
@@ -195,8 +200,8 @@ export default function(variables) {
     </div>
     `,
     components: {
-      'router-view': View,
-      'router-link': Link,
-    },
+      "router-view": View,
+      "router-link": Link
+    }
   };
 }

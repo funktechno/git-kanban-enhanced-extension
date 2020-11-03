@@ -1,7 +1,7 @@
-// import { optionsKey } from '../constants'
-import Vue from 'vue';
-import root from './root.vue';
-import { VariablesI } from '../../../../types';
+// import { optionsKey } from '@/utils/constants'
+import Vue from "vue";
+import root from "./root.vue";
+import { VariablesI } from "../../../../types";
 // import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css'
 
@@ -10,17 +10,17 @@ import { VariablesI } from '../../../../types';
 export default function(variables: VariablesI) {
   return {
     renderBoard: function() {
-      console.log('renderingBoard');
+      console.log("renderingBoard");
       Vue.config.productionTip = false;
       // Vue.use(ElementUI)
       /* eslint-disable no-new */
       new Vue({
-        el: '#' + variables.displayId,
-        render: h => h(root),
+        el: "#" + variables.displayId,
+        render: h => h(root)
       });
       // hide current board
       // var currentBoard = document.querySelector(variables.repositoryDisplay).style.display="none"
       // create a new board
-    },
+    }
   };
 }

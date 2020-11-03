@@ -53,8 +53,11 @@
     "lint-staged": "^9.5.0",
     "prettier": "^1.19.1",
     "typescript": "~3.9.3",
+    "vue-kanban": "^1.8.0",
     "vue-template-compiler": "^2.6.11",
     "web-ext-types": "^3.2.1",
+    "webextension-polyfill": "^0.6.0",
+    "webextension-polyfill-ts": "^0.21.0",
     "yargs": "^16.1.0"
   },
   "gitHooks": {

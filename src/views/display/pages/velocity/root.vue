@@ -6,10 +6,10 @@
 export default {
   data: () => ({
     test: "4"
-  }),
-  computed: {},
-  created () {},
-  mounted () {},
-  methods: {}
-}
+  })
+  // computed: {},
+  // created() {},
+  // mounted() {},
+  // methods: {},
+};
 </script>
