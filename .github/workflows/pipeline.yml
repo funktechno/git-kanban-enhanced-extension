@@ -1,11 +1,11 @@
 name: Vue Build Pipeline
 
 on:
-  [pull_request, push]
-  # pull_request:
-  # push:
-  #   branches:
-  #   - master # Push events on master branch
+  # [pull_request, push]
+  pull_request:
+  push:
+    branches:
+    - master # Push events on master branch
 
 # use https://marketplace.visualstudio.com/items?itemName=me-dutour-mathieu.vscode-github-actions to validate yml in vscode
 # env:
