@@ -1,6 +1,7 @@
 <template>
   <div>
-    Board
+    <h2>Board</h2>
+    
     <v-style scoped>
       {{ styleKanban }}
     </v-style>
