@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: junit
-        path: junit
+        path: junit.xml
     - run: npm run test:coverage
     - name: upload code coverage
       uses: actions/upload-artifact@v1
