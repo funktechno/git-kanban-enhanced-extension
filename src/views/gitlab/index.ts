@@ -1,6 +1,6 @@
 const gitlabVariables = {
   menuBtnId: `git-kanban-menu`,
-  menuExpanded: false
+  menuExpanded: false,
 };
 
 /**
@@ -40,12 +40,12 @@ function bindMouseOver() {
   }
   (document.getElementById(
     gitlabVariables.menuBtnId
-  ) as HTMLButtonElement).onmouseover = function() {
+  ) as HTMLButtonElement).onmouseover = function () {
     mouseOver();
   };
   (document.getElementById(
     gitlabVariables.menuBtnId
-  ) as HTMLButtonElement).onmouseout = function() {
+  ) as HTMLButtonElement).onmouseout = function () {
     mouseOut();
   };
 }
@@ -54,7 +54,7 @@ function bindMouseOver() {
  * default page setup
  */
 export default {
-  addMenu: function(preMenuBtn: HTMLAnchorElement) {
+  addMenu: function (preMenuBtn: HTMLAnchorElement) {
     // is-over is-showing-fly-out
     // style display:block; transform: translate3d(220px, 150px, 0px);
     const kanbanBtn =
@@ -102,7 +102,7 @@ export default {
       bindMouseOver();
     }
   },
-  expandMenu: function(e: MouseEvent | null = null) {
+  expandMenu: function (e: MouseEvent | null = null) {
     // may not be a button press
     if (e) {
       e.preventDefault();
@@ -134,7 +134,7 @@ export default {
       ) as HTMLButtonElement).className = "";
     }
   },
-  render: function() {
+  render: function () {
     // check if project or overview
     console.log("rendering gitlab kanban");
 
@@ -153,5 +153,5 @@ export default {
       }
     }
     // get issues if either true
-  }
+  },
 };

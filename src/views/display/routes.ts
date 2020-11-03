@@ -18,7 +18,7 @@ const routes = [
   { path: "#/" + optionsKey + "-burndown", component: Burndown },
   { path: "#/" + optionsKey + "-settings", component: Settings },
   { path: "#/" + optionsKey + "-report", component: report },
-  { path: "#/" + optionsKey + "-velocity", component: velocity }
+  { path: "#/" + optionsKey + "-velocity", component: velocity },
 ];
 // })
 

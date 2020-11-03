@@ -10,7 +10,7 @@ export interface Global extends NodeJS.Global {
 }
 
 export const globalNode: Global = {
-  ...global
+  ...global,
 };
 
 export interface VariablesI {

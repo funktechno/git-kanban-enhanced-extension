@@ -28,9 +28,7 @@
         <div>
           {{ block.title }}
         </div>
-        <div v-if="block.closed">
-          Closed!
-        </div>
+        <div v-if="block.closed">Closed!</div>
         <a :href="block.url">Link</a>
       </div>
     </kanban-board>
@@ -69,19 +67,19 @@ export default Vue.extend({
       {
         id: 1,
         status: "Backlog",
-        title: "Test"
-      }
-    ]
+        title: "Test",
+      },
+    ],
   }),
   computed: {
     repoName() {
       const url = window.location.pathname.split("/");
       return url[1] + "/" + url[2];
-    }
+    },
   },
   created() {
     const vm = this;
-    chrome.storage.sync.get([optionsKey], function(result) {
+    chrome.storage.sync.get([optionsKey], function (result) {
       if (result && result[optionsKey] && result[optionsKey].length) {
         const currentOptions = result[optionsKey];
         const optionIndex = currentOptions.findIndex(
@@ -120,7 +118,7 @@ export default Vue.extend({
         ? this.labels.find(({ name: _name }) => _name === name)
         : null;
     },
-    addLabels: async function(issueID: string, labelIDs: string[]) {
+    addLabels: async function (issueID: string, labelIDs: string[]) {
       // console.log(this.addLabels.name)
       // console.log(issueID)
       // console.log(labelIDs)
@@ -135,18 +133,18 @@ export default Vue.extend({
         window.location.origin +
           `/api/v1/repos/${data}/issues/${issueID}/labels`,
         {
-          labels: labelIDs
+          labels: labelIDs,
         },
         {
           // cache: 'no-cache',
           headers: {
             Authorization: `token ${oToken}`,
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
     },
-    deleteLabel: async function(issueID: string, labelID: string) {
+    deleteLabel: async function (issueID: string, labelID: string) {
       // console.log(this.deleteLabel.name)
       // console.log(issueID)
       // console.log(labelID)
@@ -165,12 +163,12 @@ export default Vue.extend({
           cache: "no-cache",
           headers: {
             Authorization: `token ${oToken}`,
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
       );
     },
-    updateBlock: async function(issueID: string, newStage: string) {
+    updateBlock: async function (issueID: string, newStage: string) {
       console.log(this.updateBlock.name);
       // console.log(issueID)
       // console.log(newStage)
@@ -201,23 +199,23 @@ export default Vue.extend({
         // this.blocks.find(b => b.id === Number(id)).status = status
       }
     },
-    replaceLabelOfIssue: async function(
+    replaceLabelOfIssue: async function (
       issueID: string,
       oldLabelID: string,
       newLabelID: string
     ) {
       await this.deleteLabel(issueID, oldLabelID)
-        .then(function(response) {
+        .then(function (response) {
           // console.log(response)
         })
-        .catch(function(errors) {
+        .catch(function (errors) {
           // console.log(errors)
         });
       await this.addLabels(issueID, [newLabelID])
-        .then(function(response) {
+        .then(function (response) {
           // console.log(response)
         })
-        .catch(function(errors) {
+        .catch(function (errors) {
           // console.log(errors)
         });
     },
@@ -242,7 +240,7 @@ export default Vue.extend({
       this.$http
         .get(window.location.origin + "/api/v1/repos/" + data + "/issues")
         .then(
-          response => {
+          (response) => {
             this.loading = false;
             // console.log(response)
             // this.message = response.data.message;
@@ -279,7 +277,7 @@ export default Vue.extend({
       this.$http
         .get(window.location.origin + "/api/v1/repos/" + data + "/milestones")
         .then(
-          response => {
+          (response) => {
             this.loading = false;
             // console.log(response)
             // this.message = response.data.message;
@@ -299,7 +297,7 @@ export default Vue.extend({
       this.$http
         .get(window.location.origin + "/api/v1/repos/" + data + "/labels")
         .then(
-          response => {
+          (response) => {
             this.loading = false;
             // console.log(response)
             // this.message = response.data.message;
@@ -324,7 +322,7 @@ export default Vue.extend({
       //     this.post = post
       //   }
       // })
-    }
-  }
+    },
+  },
 });
 </script>

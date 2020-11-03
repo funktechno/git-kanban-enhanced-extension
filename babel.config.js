@@ -7,8 +7,8 @@ module.exports = {
   presets: ["@vue/cli-plugin-babel/preset"],
   env: {
     test: {
-      plugins: ["require-context-hook"]
-    }
+      plugins: ["require-context-hook"],
+    },
   },
-  plugins: removeConsolePlugin
+  plugins: removeConsolePlugin,
 };

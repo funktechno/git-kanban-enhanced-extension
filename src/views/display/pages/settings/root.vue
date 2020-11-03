@@ -10,9 +10,9 @@
       <ul
         v-if="
           currentOptions &&
-            optionIndex !== -1 &&
-            currentOptions[optionIndex].repos &&
-            currentOptions[optionIndex].repos[repoName]
+          optionIndex !== -1 &&
+          currentOptions[optionIndex].repos &&
+          currentOptions[optionIndex].repos[repoName]
         "
       >
         <li
@@ -33,7 +33,7 @@
           <button
             v-if="
               index !=
-                currentOptions[optionIndex].repos[repoName].stages.length - 1
+              currentOptions[optionIndex].repos[repoName].stages.length - 1
             "
             v-on:click="moveDown(index)"
           >
@@ -51,7 +51,7 @@
         class="ui label has-emoji"
         v-if="labelIndex != null && labelIndex != -1"
         v-bind:style="{
-          'background-color': '#' + availableLabels[labelIndex].color
+          'background-color': '#' + availableLabels[labelIndex].color,
         }"
         style="color: #000"
       >
@@ -64,10 +64,9 @@
         v-for="(l, index) in availableLabels"
         v-bind:key="l.id"
         :value="index"
-        ><span v-bind:style="{ color: '#' + l.color }">{{
-          l.name
-        }}</span></option
       >
+        <span v-bind:style="{ color: '#' + l.color }">{{ l.name }}</span>
+      </option>
     </select>
     <br />
     <button id="save" v-on:click="addLabel">Add Label</button>
@@ -90,13 +89,13 @@ export default Vue.extend({
     errors: (null as unknown) as any,
     availableLabels: null as null | any[],
     optionIndex: (null as unknown) as null | number,
-    currentOptions: (null as unknown) as null | any[]
+    currentOptions: (null as unknown) as null | any[],
   }),
   computed: {
     repoName() {
       const url = window.location.pathname.split("/");
       return url[1] + "/" + url[2];
-    }
+    },
   },
   // created() {},
   mounted() {
@@ -105,7 +104,7 @@ export default Vue.extend({
       user = url[1],
       repo = url[2],
       data = user + "/" + repo;
-    chrome.storage.sync.get([optionsKey], function(result) {
+    chrome.storage.sync.get([optionsKey], function (result) {
       // console.log("result is")
       // console.log(result)
       if (result && result[optionsKey] && result[optionsKey].length) {
@@ -113,7 +112,7 @@ export default Vue.extend({
         const currentOptions = vm.currentOptions;
         if (currentOptions) {
           vm.optionIndex = currentOptions.findIndex(
-            x => x.url.indexOf(window.location.host) !== -1
+            (x) => x.url.indexOf(window.location.host) !== -1
           );
           if (vm.optionIndex === -1) {
             vm.errors = "error finding option index";
@@ -129,7 +128,7 @@ export default Vue.extend({
     this.$http
       .get(window.location.origin + "/api/v1/repos/" + data + "/labels")
       .then(
-        response => {
+        (response) => {
           this.loading = false;
           // console.log(response)
           // this.message = response.data.message;
@@ -150,7 +149,7 @@ export default Vue.extend({
               currentOptions[optionIndex].repos[vm.repoName].stages &&
               currentOptions[optionIndex].repos[vm.repoName].stages.length > 0
             ) {
-              vm.availableLabels = this.labels.filter(function(el) {
+              vm.availableLabels = this.labels.filter(function (el) {
                 return (
                   currentOptions[optionIndex].repos[vm.repoName].stages.indexOf(
                     el.name
@@ -174,7 +173,7 @@ export default Vue.extend({
   methods: {
     labelStyle(labelName: string) {
       if (this.labels) {
-        const lIndex = this.labels.findIndex(x => x.name === labelName);
+        const lIndex = this.labels.findIndex((x) => x.name === labelName);
         if (lIndex !== -1) {
           return { "background-color": "#" + this.labels[lIndex].color };
         }
@@ -182,7 +181,7 @@ export default Vue.extend({
 
       return null;
     },
-    deleteLabel: function(e: number) {
+    deleteLabel: function (e: number) {
       const vm = this;
       const currentOptions = vm.currentOptions;
       const optionIndex = vm.optionIndex;
@@ -201,14 +200,14 @@ export default Vue.extend({
         // update li
         chrome.storage.sync.set(
           {
-            [optionsKey]: this.currentOptions
+            [optionsKey]: this.currentOptions,
           },
-          function() {
+          function () {
             //
           }
         );
         if (this.labels)
-          this.availableLabels = this.labels.filter(function(el) {
+          this.availableLabels = this.labels.filter(function (el) {
             return (
               currentOptions[optionIndex].repos[vm.repoName].stages.indexOf(
                 el.name
@@ -217,13 +216,13 @@ export default Vue.extend({
           });
       }
     },
-    swapArrayElements: function(arr: any[], indexA: number, indexB: number) {
+    swapArrayElements: function (arr: any[], indexA: number, indexB: number) {
       const temp = arr[indexA];
       arr[indexA] = arr[indexB];
       arr[indexB] = temp;
       return arr;
     },
-    moveUp: function(e: number) {
+    moveUp: function (e: number) {
       // debugger
       // remove from local object
       const vm = this;
@@ -249,15 +248,15 @@ export default Vue.extend({
         // update li
         chrome.storage.sync.set(
           {
-            [optionsKey]: this.currentOptions
+            [optionsKey]: this.currentOptions,
           },
-          function() {
+          function () {
             //
           }
         );
       }
     },
-    moveDown: function(e: number) {
+    moveDown: function (e: number) {
       // debugger
       // remove from local object
       // this.currentOptions[this.optionIndex].repos[this.repoName].stages.splice(e, 1)
@@ -282,9 +281,9 @@ export default Vue.extend({
         // update li
         chrome.storage.sync.set(
           {
-            [optionsKey]: this.currentOptions
+            [optionsKey]: this.currentOptions,
           },
-          function() {
+          function () {
             //
           }
         );
@@ -317,7 +316,7 @@ export default Vue.extend({
         }
         if (!this.currentOptions[this.optionIndex].repos[this.repoName]) {
           this.currentOptions[this.optionIndex].repos[this.repoName] = {
-            stages: [label.name]
+            stages: [label.name],
           };
         } else {
           this.currentOptions[this.optionIndex].repos[
@@ -329,7 +328,7 @@ export default Vue.extend({
             "github.com",
             "bitbucket.org",
             "gitlab.com",
-            "gitea.com"
+            "gitea.com",
           ],
           host = window.location.host;
 
@@ -338,12 +337,12 @@ export default Vue.extend({
             url: host,
             repos: {
               [this.repoName]: {
-                stages: [label.name]
-              }
-            }
+                stages: [label.name],
+              },
+            },
           });
           this.optionIndex = this.currentOptions.findIndex(
-            x => x.url.indexOf(host) !== -1
+            (x) => x.url.indexOf(host) !== -1
           );
         }
 
@@ -354,9 +353,9 @@ export default Vue.extend({
       // save storage memory
       chrome.storage.sync.set(
         {
-          [optionsKey]: vm.currentOptions
+          [optionsKey]: vm.currentOptions,
         },
-        function() {
+        function () {
           //
         }
       );
@@ -374,7 +373,7 @@ export default Vue.extend({
         currentOptions[optionIndex].repos[vm.repoName].stages &&
         currentOptions[optionIndex].repos[vm.repoName].stages.length > 0
       ) {
-        this.availableLabels = this.labels.filter(function(el) {
+        this.availableLabels = this.labels.filter(function (el) {
           return (
             currentOptions[optionIndex].repos[vm.repoName].stages.indexOf(
               el.name
@@ -384,7 +383,7 @@ export default Vue.extend({
       }
 
       this.labelIndex = null;
-    }
-  }
+    },
+  },
 });
 </script>

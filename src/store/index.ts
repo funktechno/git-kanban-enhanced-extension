@@ -9,9 +9,9 @@ import * as actions from "./actions";
 
 export default new Vuex.Store({
   state: {
-    foo: "bar"
+    foo: "bar",
   },
   getters,
   mutations,
-  actions
+  actions,
 });

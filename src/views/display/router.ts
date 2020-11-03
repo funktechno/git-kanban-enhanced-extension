@@ -21,7 +21,7 @@ const View = Vue.extend({
   template: `<component :is="currentView"></component>`,
   data() {
     return {
-      currentView: {}
+      currentView: {},
     };
   },
   created() {
@@ -32,7 +32,7 @@ const View = Vue.extend({
           <h3 class="subtitle has-text-white">
             Not Found :(. Bad kanban url!
           </h3>
-        `
+        `,
       };
     } else {
       this.currentView = routeObject.component;
@@ -47,9 +47,9 @@ const View = Vue.extend({
   },
   methods: {
     getRouteObject() {
-      return routes.find(route => route.path === window.location.hash);
-    }
-  }
+      return routes.find((route) => route.path === window.location.hash);
+    },
+  },
 });
 
 const Link = Vue.extend({
@@ -57,20 +57,20 @@ const Link = Vue.extend({
   props: {
     to: {
       type: String,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      required: false
+      required: false,
     },
     activeClass: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
   data() {
     return {
-      activeRoute: ""
+      activeRoute: "",
     };
   },
   created() {
@@ -92,8 +92,8 @@ const Link = Vue.extend({
       evt.preventDefault();
       window.history.pushState(null, "", this.to);
       EventBus.$emit("navigate");
-    }
-  }
+    },
+  },
 });
 
 export const singleMenu = Vue.extend({
@@ -105,12 +105,12 @@ export const singleMenu = Vue.extend({
   `,
   data: () => ({
     optionsKey,
-    menuExpanded: false
+    menuExpanded: false,
   }),
   computed: {
-    menuLink: function() {
+    menuLink: function () {
       return "#/" + this.optionsKey + "-board";
-    }
+    },
   },
   // created() {},
   mounted() {
@@ -119,7 +119,7 @@ export const singleMenu = Vue.extend({
     }
   },
   methods: {
-    expandMenu: function(e: MouseEvent | null = null) {
+    expandMenu: function (e: MouseEvent | null = null) {
       console.log(this.expandMenu.name);
       // may not be a button press
       if (e) {
@@ -147,16 +147,16 @@ export const singleMenu = Vue.extend({
           //   // document.getElementById(giteaVariables.menuBtnId).className = "item"
         }
       }
-    }
+    },
   },
   // render: h => h(menu),
   components: {
     "router-view": View,
-    "router-link": Link
-  }
+    "router-link": Link,
+  },
 });
 
-export default function(variables: VariablesI) {
+export default function (variables: VariablesI) {
   return {
     name: "router",
     template:
@@ -201,7 +201,7 @@ export default function(variables: VariablesI) {
     `,
     components: {
       "router-view": View,
-      "router-link": Link
-    }
+      "router-link": Link,
+    },
   };
 }

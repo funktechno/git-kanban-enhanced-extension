@@ -15,7 +15,7 @@ import { browser } from "webextension-polyfill-ts";
  * default page setup
  */
 export default {
-  addMenu: function(preMenuBtn: HTMLElement) {
+  addMenu: function (preMenuBtn: HTMLElement) {
     console.log(this.addMenu.name);
     // is-over is-showing-fly-out
     // style display:block; transform: translate3d(220px, 150px, 0px);
@@ -47,9 +47,9 @@ export default {
     // Vue.use(VueRouter)
     Vue.config.devtools = true;
     Vue.component("v-style", {
-      render: function(createElement) {
+      render: function (createElement) {
         return createElement("style", this.$slots.default);
-      }
+      },
     });
     // global.browser = browser;
     Vue.prototype.$browser = browser;
@@ -60,7 +60,7 @@ export default {
       // router,
       // base: __dirname,
       // template: kanbanBtn
-      render: h => h(singleMenu)
+      render: (h) => h(singleMenu),
     });
 
     // if (window.location.hash.indexOf(optionsKey) !== -1) {
@@ -91,7 +91,7 @@ export default {
       // }
     }
   },
-  render: function() {
+  render: function () {
     // check if project or overview
     console.log("rendering gitea kanban");
 
@@ -112,5 +112,5 @@ export default {
     //   display.renderDisplay()
     // }
     // get issues if either true
-  }
+  },
 };

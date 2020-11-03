@@ -4,7 +4,7 @@ import { optionsKey } from "@/utils/constants";
 global.browser = require("webextension-polyfill");
 
 console.log("background !");
-const backEnd = function() {
+const backEnd = function () {
   "use strict";
   /* Multiple requests from same page will be served from this variable instead of pinging Github's API */
   // var isMetaReady = false
@@ -13,14 +13,14 @@ const backEnd = function() {
   function checkExtensionType() {
     const xhr = new XMLHttpRequest();
 
-    xhr.addEventListener("readystatechange", function() {
+    xhr.addEventListener("readystatechange", function () {
       if (this.readyState === this.DONE) {
         const response = JSON.parse(this.responseText);
         STORAGE.set(
           {
-            [optionsKey + "_type"]: response
+            [optionsKey + "_type"]: response,
           },
-          function() {
+          function () {
             //
           }
         );
@@ -34,10 +34,10 @@ const backEnd = function() {
 
   checkExtensionType();
 
-  chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
+  chrome.webNavigation.onHistoryStateUpdated.addListener(function (details) {
     browser.tabs
       .query({ active: true, lastFocusedWindow: true })
-      .then(function(tabs: browser.tabs.Tab[]) {
+      .then(function (tabs: browser.tabs.Tab[]) {
         const url = tabs[0].url;
         if (
           url &&
@@ -60,9 +60,9 @@ const backEnd = function() {
           chrome.tabs.executeScript(
             {
               file: "js/inject.js",
-              runAt: "document_end"
+              runAt: "document_end",
             },
-            function(result) {
+            function (result) {
               console.log("done loading file inject:" + JSON.stringify(result));
             }
           );
@@ -90,7 +90,11 @@ const backEnd = function() {
     return responseHtml
   } */
   console.log("adding listener");
-  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  chrome.runtime.onMessage.addListener(function (
+    request,
+    sender,
+    sendResponse
+  ) {
     console.log(request);
     let storageRequest = null;
     // debugger

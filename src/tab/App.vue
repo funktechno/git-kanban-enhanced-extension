@@ -34,7 +34,7 @@
       </div>
     </div>
     <p></p>
-    <div class="custom-options" style="display:none">
+    <div class="custom-options" style="display: none">
       <h3>Add a custom git platform:</h3>
       <label>Url Host: </label>
       <input id="gitHost" v-model="url" placeholder="github.example.com" />
@@ -88,7 +88,7 @@ export default Vue.extend({
     currentOptions: (null as unknown) as any[],
     importJson: (null as unknown) as string,
     selectedIndex: (null as unknown) as number | null,
-    oToken: (null as unknown) as string | null
+    oToken: (null as unknown) as string | null,
   }),
   // computed: {},
   // created() {},
@@ -101,7 +101,7 @@ export default Vue.extend({
     // restoreOptions()
   },
   methods: {
-    retrieveManifest: function() {
+    retrieveManifest: function () {
       // console.log(this.retrieveManifest.name)
       const vm = this;
 
@@ -122,7 +122,7 @@ export default Vue.extend({
           }
         }
         // restore urls
-        chrome.storage.sync.get([optionsKey], function(result) {
+        chrome.storage.sync.get([optionsKey], function (result) {
           // console.log(result)
           if (result && result[optionsKey] && result[optionsKey].length) {
             vm.currentOptions = result[optionsKey];
@@ -155,9 +155,9 @@ export default Vue.extend({
       // prompt with warning
       chrome.storage.sync.set(
         {
-          [optionsKey]: response
+          [optionsKey]: response,
         },
-        function() {
+        function () {
           //
         }
       );
@@ -179,7 +179,7 @@ export default Vue.extend({
       e.initEvent("click", true, false);
       a.dispatchEvent(e);
     },
-    addToken: function() {
+    addToken: function () {
       if (!this.oToken) {
         console.warn("missing oToken");
         return;
@@ -189,9 +189,9 @@ export default Vue.extend({
 
         chrome.storage.sync.set(
           {
-            [optionsKey]: this.currentOptions
+            [optionsKey]: this.currentOptions,
           },
-          function() {
+          function () {
             //
           }
         );
@@ -199,7 +199,7 @@ export default Vue.extend({
         this.oToken = null;
       }
     },
-    saveOptions: function() {
+    saveOptions: function () {
       console.log("saving options");
       const type = this.type,
         url = this.url;
@@ -217,14 +217,14 @@ export default Vue.extend({
 
       chrome.storage.sync.set(
         {
-          [optionsKey]: this.currentOptions
+          [optionsKey]: this.currentOptions,
         },
-        function() {
+        function () {
           //
         }
       );
     },
-    deleteOption: function(e: number) {
+    deleteOption: function (e: number) {
       // console.log(e)
       // remove from local object
       this.currentOptions.splice(e, 1);
@@ -233,9 +233,9 @@ export default Vue.extend({
       // update li
       chrome.storage.sync.set(
         {
-          [optionsKey]: this.currentOptions
+          [optionsKey]: this.currentOptions,
         },
-        function() {
+        function () {
           //
         }
       );
@@ -244,8 +244,8 @@ export default Vue.extend({
       } else if (this.selectedIndex) {
         this.selectedIndex--;
       }
-    }
-  }
+    },
+  },
 });
 </script>
 

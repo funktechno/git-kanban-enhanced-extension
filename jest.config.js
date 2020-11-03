@@ -8,10 +8,10 @@ module.exports = {
   collectCoverageFrom: ["src/**/*.{ts,js,vue}", "!**/node_modules/**"],
   transform: {
     // ...
-    "vee-validate/dist/rules": "babel-jest"
+    "vee-validate/dist/rules": "babel-jest",
   },
   transformIgnorePatterns: [
     //  '/node_modules/(?!@babel)',
-    "<rootDir>/node_modules/(?!vee-validate/dist/rules)"
-  ]
+    "<rootDir>/node_modules/(?!vee-validate/dist/rules)",
+  ],
 };

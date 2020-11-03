@@ -1,12 +1,12 @@
 const githubVariables = {
   menuBtnId: `git-kanban-menu`,
-  menuExpanded: false
+  menuExpanded: false,
 };
 /**
  * default page setup
  */
 export default {
-  addMenu: function(preMenuBtn: HTMLElement) {
+  addMenu: function (preMenuBtn: HTMLElement) {
     // is-over is-showing-fly-out
     // style display:block; transform: translate3d(220px, 150px, 0px);
     // add selected to class
@@ -50,7 +50,7 @@ export default {
       // }
     }
   },
-  expandMenu: function(e: MouseEvent | null = null) {
+  expandMenu: function (e: MouseEvent | null = null) {
     // may not be a button press
     if (e) {
       e.preventDefault();
@@ -79,7 +79,7 @@ export default {
       ) as HTMLAnchorElement).classList.remove("selected");
     }
   },
-  render: function() {
+  render: function () {
     // check if project or overview
     console.log("rendering github kanban");
 
@@ -109,5 +109,5 @@ export default {
       }
     }
     // get issues if either true
-  }
+  },
 };

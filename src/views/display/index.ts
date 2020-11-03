@@ -13,7 +13,7 @@ import { VariablesI } from "@/types";
 
 // setup vue page here
 
-export default function(variables: VariablesI) {
+export default function (variables: VariablesI) {
   return {
     // renderBoard: initBoard(variables).renderBoard,
     // renderBoard: function () {
@@ -22,7 +22,7 @@ export default function(variables: VariablesI) {
     //   // var currentBoard = document.querySelector(variables.repositoryDisplay).style.display="none"
     //   // create a new board
     // },
-    renderDisplay: function() {
+    renderDisplay: function () {
       console.log(this.renderDisplay.name);
       // var page = window.location.hash.replace("#" + optionsKey + "?", "")
       const currentBoard = document.querySelector(variables.repositoryDisplay);
@@ -49,7 +49,7 @@ export default function(variables: VariablesI) {
       /* eslint-disable no-new */
       new Vue({
         el: "#" + variables.displayId,
-        render: h => h(router)
+        render: (h) => h(router),
         // router,
         // template: `
         // <div class="ui container" id="` + variables.displayId + `">
@@ -72,6 +72,6 @@ export default function(variables: VariablesI) {
       //     //
       //     break
       // }
-    }
+    },
   };
 }

@@ -19,13 +19,13 @@ const pages = {
     // filename: 'index.html',
     // when using title option,
     // template title tag needs to be <title><%= htmlWebpackPlugin.options.title %></title>
-    title: "Title"
+    title: "Title",
     // chunks to include on this page, by default includes
     // extracted common chunks and vendor chunks.
     // chunks: ['chunk-vendors', 'chunk-common', 'index']
   },
   background: {
-    entry: "src/backend/index.ts"
+    entry: "src/backend/index.ts",
 
     // filename: 'background.html',
   },
@@ -39,7 +39,7 @@ const pages = {
     filename: "popup/popup.html",
     // when using title option,
     // template title tag needs to be <title><%= htmlWebpackPlugin.options.title %></title>
-    title: "Title"
+    title: "Title",
     // chunks to include on this page, by default includes
     // extracted common chunks and vendor chunks.
     // chunks: ['chunk-vendors', 'chunk-common', 'index']
@@ -53,11 +53,11 @@ const pages = {
     filename: "tab/tab.html",
     // when using title option,
     // template title tag needs to be <title><%= htmlWebpackPlugin.options.title %></title>
-    title: "git-kanban-enhanced-extension - Options"
+    title: "git-kanban-enhanced-extension - Options",
     // chunks to include on this page, by default includes
     // extracted common chunks and vendor chunks.
     // chunks: ['chunk-vendors', 'chunk-common', 'index']
-  }
+  },
 };
 
 // function transformHtml(content) {
@@ -69,7 +69,7 @@ const pages = {
 // vue.config.js
 module.exports = {
   pages: pages,
-  configureWebpack: config => {
+  configureWebpack: (config) => {
     config.mode =
       process.env.NODE_ENV === "cProduction"
         ? "production"
@@ -101,13 +101,13 @@ module.exports = {
 
     // get a reference to the existing ForkTsCheckerWebpackPlugin
     const existingForkTsChecker = config.plugins.filter(
-      p => p instanceof ForkTsCheckerWebpackPlugin
+      (p) => p instanceof ForkTsCheckerWebpackPlugin
     )[0];
 
     // remove the existing ForkTsCheckerWebpackPlugin
     // so that we can replace it with our modified version
     config.plugins = config.plugins.filter(
-      p => !(p instanceof ForkTsCheckerWebpackPlugin)
+      (p) => !(p instanceof ForkTsCheckerWebpackPlugin)
     );
 
     // copy the options from the original ForkTsCheckerWebpackPlugin
@@ -130,7 +130,7 @@ module.exports = {
         {
           from: "src/manifest.json",
           to: "manifest.json",
-          transform: content => {
+          transform: (content) => {
             const jsonContent = JSON.parse(content);
             // jsonContent.version = version;
 
@@ -140,9 +140,9 @@ module.exports = {
             }
 
             return JSON.stringify(jsonContent, null, 2);
-          }
-        }
-      ])
+          },
+        },
+      ]),
     ];
     config.plugins = config.plugins.concat(plugins);
   },
@@ -165,9 +165,9 @@ module.exports = {
   // publicPath: '/app/',
   runtimeCompiler: true,
   productionSourceMap: false,
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     const excluded = ["tab/tab", "popup/popup"];
-    Object.keys(pages).forEach(page => {
+    Object.keys(pages).forEach((page) => {
       console.log(page);
       if (excluded.indexOf(page) == -1) {
         config.plugins.delete(`html-${page}`);
@@ -179,7 +179,7 @@ module.exports = {
     // config.plugins.delete(`preload`);
     // config.plugins.delete(`prefetch`);
     // config.optimization.delete('splitChunks');
-  }
+  },
   // configureWebpack: {
   //   devtool: 'source-map'
   // }

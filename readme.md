@@ -1,10 +1,14 @@
+![Vue Build Pipeline](https://github.com/funktechno/git-kanban-enhanced-extension/workflows/Vue%20Build%20Pipeline/badge.svg)
+
 # git-kanban-extensions (in progress)
 
-- Kanban extensions for github, gitlab, and bitbucket
+- see [wiki](https://github.com/funktechno/git-kanban-enhanced-extension/wiki) for user instructions. CONTRIBUTIONS are welcome. WORK IN PROGRESS.
+- Kanban extensions for github, gitlab, bitbucket, gitea.
 - Goal to support weights, multi projects, epics, blockers
 - 2 plugins for each browser, one supports custom urls, one has predefined
-- initialized using [YuraDev/vue-chrome-extension-template](https://github.com/YuraDev/vue-chrome-extension-template)
-  - refactored based off of [Kocal/vue-web-extension](https://github.com/Kocal/vue-web-extension)
+- initialized using vue cli `npm install -g @vue/cli`
+  - `vue create webextension` see **vue.config.js** for recommened build settings
+
 
 ## published browser extensions
 
@@ -18,7 +22,6 @@
 ## getting started (development)
 
 - [chrome extensions getting started](https://developer.chrome.com/extensions/getstarted)
-- copy **src/manifest-custom.json** to **src/manifest.json**
 - startup
 
 ```bash
@@ -28,7 +31,7 @@ nvm install
 nvm install (Get-Content .nvmrc)
 # install dependencies
 yarn install # or yarn
-# setup browser manifest
+# setup browser manifest, optional flags --firefox --custom
 npm run build:manifest -- --custom
 # run dev auto build
 npm run watch # or yarn dev
@@ -37,7 +40,7 @@ npm run watch # or yarn dev
 - chrome
   - recommend opening a separate chrome user just for extension development to avoid conflicts with your current extension list
     - click on profile top right, then **manage people**, then add a person such as **chromedev**
-  - open [settings](chrome://extensions/)
+  - open **settings** chrome://extensions/
     - check **developer mode** top right
     - click **load unpacked** then select the ** dist** folder in this project
 - firefox
@@ -65,12 +68,6 @@ npm run watch # or yarn dev
 
 - install `https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint`
 - add `"eslint.autoFixOnSave": true` to settings.json
-
-## node version support
-
-- `nvm install 8.16.0` use a node version less than 9
-  - `nvm use 8.16.0`
-- `npm rebuild node-sass` rebuild sass using 8
 
 ## content locations
 
