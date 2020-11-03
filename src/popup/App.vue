@@ -15,8 +15,8 @@ export default Vue.extend({
   methods: {
     tab() {
       chrome.tabs.create({ url: "/tab/tab.html" });
-    }
-  }
+    },
+  },
 });
 </script>
 <style lang="css">

@@ -5,8 +5,8 @@
 <script>
 export default {
   data: () => ({
-    test: "4"
-  })
+    test: "4",
+  }),
   // computed: {},
   // created() {},
   // mounted() {},

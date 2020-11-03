@@ -37,14 +37,14 @@ function getKanbanDetails() {
   //     callback()
   //   }
   // })
-  chrome.storage.sync.get([optionsKey], function(result) {
+  chrome.storage.sync.get([optionsKey], function (result) {
     if (result && result[optionsKey] && result[optionsKey].length) {
       currentOptions = result[optionsKey];
     }
     let ignoreList = ["github.com", "bitbucket.org", "gitlab.com", "gitea.com"],
       host: string | null = window.location.host;
 
-    chrome.storage.sync.get([optionsKey + "_type"], function(typeResult) {
+    chrome.storage.sync.get([optionsKey + "_type"], function (typeResult) {
       if (
         typeResult &&
         typeResult[optionsKey + "_type"] &&
@@ -115,7 +115,7 @@ function getKanbanDetails() {
 // }
 
 /* Inject the html into page safely */
-const inject = function() {
+const inject = function () {
   if (metaStatus === "na") {
     return;
   }
@@ -128,7 +128,7 @@ const inject = function() {
   }
 };
 
-window.onload = function() {
+window.onload = function () {
   inject();
 };
 

@@ -7,20 +7,20 @@ import { VariablesI } from "../../../../types";
 
 // setup vue page here
 
-export default function(variables: VariablesI) {
+export default function (variables: VariablesI) {
   return {
-    renderBoard: function() {
+    renderBoard: function () {
       console.log("renderingBoard");
       Vue.config.productionTip = false;
       // Vue.use(ElementUI)
       /* eslint-disable no-new */
       new Vue({
         el: "#" + variables.displayId,
-        render: h => h(root)
+        render: (h) => h(root),
       });
       // hide current board
       // var currentBoard = document.querySelector(variables.repositoryDisplay).style.display="none"
       // create a new board
-    }
+    },
   };
 }

@@ -6,14 +6,14 @@ const bitbucketVariables = {
     aActiveClass: "Item-z6qfkt-1 btQpif",
     spanOuterClass:
       "ItemParts__Before-sc-14xek3m-2 kLhAJo ItemParts__BeforeAfterBase-sc-14xek3m-1 hCmnxL",
-    spanInnerClass: "sc-bwzfXH bjPjXo"
-  }
+    spanInnerClass: "sc-bwzfXH bjPjXo",
+  },
 };
 /**
  * default page setup
  */
 export default {
-  addMenu: function(preMenuBtn: HTMLElement) {
+  addMenu: function (preMenuBtn: HTMLElement) {
     // is-over is-showing-fly-out
     // style display:block; transform: translate3d(220px, 150px, 0px);
     // add selected to class
@@ -71,7 +71,7 @@ export default {
       // }
     }
   },
-  expandMenu: function(e: MouseEvent | null = null) {
+  expandMenu: function (e: MouseEvent | null = null) {
     // may not be a button press
     if (e) {
       e.preventDefault();
@@ -97,7 +97,7 @@ export default {
       ) as HTMLButtonElement).className = bitbucketVariables.menuBtn.aClass;
     }
   },
-  render: function() {
+  render: function () {
     // check if project or overview
     console.log("rendering bitbucket kanban");
     // bitbucket uses dynamic generated css classes, will have to iterate to find
@@ -140,5 +140,5 @@ export default {
       }
     }
     // get issues if either true
-  }
+  },
 };
