@@ -1,5 +1,29 @@
 # CHANGELOG
 
+## 0.0.8
+
+### updates
+
+* ported over to vue cli and typescript
+  * should be easier to upgrade to vue 3
+  * using vue cli for builds rather than webpack, configuration setup and build working successfully
+     * minus vue-kanban that has been removed and will be replaced w/ vue-draggable
+* unit test initialized
+  * also visual studio code debugger works w/ unit tests
+* easier manifest management
+  * only 1 version from package json
+  * separate manifest for mozilla firefox and chrome, now 4 builds
+* setup github action pipeline to validate pull requests
+  * runs build, **unit tests**, and uploads build artifacts
+* builds size now 215kb instead of 187kb
+  * may be smaller w/ vue 3 syntax
+  
+### fixes
+
+* any that were included as part of typescript implementation
+
+# CHANGELOG
+
 ## 0.0.7
 
 ### updates

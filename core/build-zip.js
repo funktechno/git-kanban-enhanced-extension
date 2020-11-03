@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 const fs = require('fs');
 const path = require('path');
@@ -8,11 +9,12 @@ const DEST_DIR = path.join(__dirname, '../dist');
 const DEST_ZIP_DIR = path.join(__dirname, '../dist-zip');
 
 const extractExtensionData = () => {
-  const extPackageJson = require('../src/manifest.json');
+  const extPackageJson = require('../dist/manifest.json');
 
   return {
     name: extPackageJson.name,
     version: extPackageJson.version,
+    applications: extPackageJson.applications
   };
 };
 
@@ -40,8 +42,9 @@ const buildZip = (src, dist, zipFilename) => {
 };
 
 const main = () => {
-  const { name, version } = extractExtensionData();
-  const zipFilename = `${name}-v${version}.zip`;
+  const { name, version, applications } = extractExtensionData();
+  const browserType = applications ? '-moz' : '';
+  const zipFilename = `${name}-v${version}${browserType}.zip`;
 
   makeDestZipDirIfNotExists();
 
