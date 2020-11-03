@@ -1,7 +1,7 @@
 // import { optionsKey } from '@/utils/constants'
 import Vue from "vue";
 import root from "./root.vue";
-import { VariablesI } from "../../../../types";
+import { VariablesI } from "@/types";
 // import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css'
 

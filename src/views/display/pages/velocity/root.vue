@@ -1,5 +1,5 @@
 <template>
-  <div>Velocity Tracking</div>
+  <div><h2>Velocity Tracking</h2></div>
 </template>
 
 <script>

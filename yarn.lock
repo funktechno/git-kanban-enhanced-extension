@@ -1160,6 +1160,14 @@
     "@types/connect" "*"
     "@types/node" "*"
 
+"@types/chrome@^0.0.114":
+  version "0.0.114"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.114.tgz#8ceb33fa261f4b9e307fa7344ba8182d8d410d4e"
+  integrity sha512-i7qRr74IrxHtbnrZSKUuP5Uvd5EOKwlwJq/yp7+yTPihOXnPhNQO4Z5bqb1XTnrjdbUKEJicaVVbhcgtRijmLA==
+  dependencies:
+    "@types/filesystem" "*"
+    "@types/har-format" "*"
+
 "@types/chrome@^0.0.126":
   version "0.0.126"
   resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.126.tgz#f9f3436712f0c7c12ea9798abc9b95575ad7b23a"
@@ -6371,6 +6379,13 @@ jest-changed-files@^24.9.0:
     execa "^1.0.0"
     throat "^4.0.0"
 
+jest-chrome@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/jest-chrome/-/jest-chrome-0.7.0.tgz#4a2105370f916abf20cf5f389d0818698c28b05a"
+  integrity sha512-afOzmTh3Nzr1FDKU/nsfIi/OmyScl6Pd6+jdqaBoRNwdGdYnMEWgZKW73KesdcywnLBEHRCKO4ftY+VTbqgPww==
+  dependencies:
+    "@types/chrome" "^0.0.114"
+
 jest-cli@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-24.9.0.tgz#ad2de62d07472d419c6abc301fc432b98b10d2af"
@@ -6746,6 +6761,11 @@ jest-watcher@^24.3.0, jest-watcher@^24.9.0:
     chalk "^2.0.1"
     jest-util "^24.9.0"
     string-length "^2.0.0"
+
+jest-webextension-mock@^3.7.3:
+  version "3.7.3"
+  resolved "https://registry.yarnpkg.com/jest-webextension-mock/-/jest-webextension-mock-3.7.3.tgz#b338822ebe55f73d750284bee1297c29df163447"
+  integrity sha512-AAmu0hOlD1sU6rsZXRuC1CHVdA7mMoHNB/Xy6Q6NpHL/4wz2XZNAtTjGa64fxEKBTi4CvHo851a+kWnhE8VQYA==
 
 jest-worker@^24.6.0, jest-worker@^24.9.0:
   version "24.9.0"

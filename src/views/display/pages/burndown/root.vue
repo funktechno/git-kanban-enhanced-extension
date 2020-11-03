@@ -1,5 +1,5 @@
 <template>
-  <div>burndown</div>
+  <div><h2>Burndown</h2></div>
 </template>
 
 <script lang="ts">
