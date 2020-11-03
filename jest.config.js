@@ -14,4 +14,6 @@ module.exports = {
     //  '/node_modules/(?!@babel)',
     "<rootDir>/node_modules/(?!vee-validate/dist/rules)",
   ],
+  // Add this line to your Jest config
+  setupFilesAfterEnv: ["./jest.setup.js"],
 };
