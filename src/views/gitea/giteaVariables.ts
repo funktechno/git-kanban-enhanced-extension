@@ -1,4 +1,4 @@
-import { optionsKey } from "../constants";
+import { optionsKey } from "@/utils/constants";
 
 export default {
   menuBtnId: optionsKey + `-menu`,
