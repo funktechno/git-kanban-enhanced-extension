@@ -20,10 +20,12 @@ jobs:
       with:
         access_token: ${{ github.token }}
     - uses: actions/checkout@v1
-    - run: nvmrc=$(cat .nvmrc)
+    - name: Read .nvmrc
+      run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+      id: nvm
     - uses: actions/setup-node@v1
       with:
-        node-version: $nvmrc
+        node-version: "${{ steps.nvm.outputs.NVMRC }}"
     - run: yarn install
     - run: npm run build:manifest
     - run: npm run test:unit
@@ -36,6 +38,7 @@ jobs:
       if: always()
       with:
         access-token: ${{ secrets.GITHUB_TOKEN }}
+        path: junit.xml
     - run: npm run test:coverage
     - name: upload code coverage
       uses: actions/upload-artifact@v1
