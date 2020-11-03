@@ -1,0 +1,53 @@
+name: Vue Build Pipeline
+
+on:
+  [pull_request, push]
+  # pull_request:
+  # push:
+  #   branches:
+  #   - master # Push events on master branch
+
+# use https://marketplace.visualstudio.com/items?itemName=me-dutour-mathieu.vscode-github-actions to validate yml in vscode
+# env:
+
+jobs:
+
+  build-dacpac-dotnet:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@master
+    - run: yarn install
+    - run: npm run build:manifest
+    - run: npm run test:unit
+    - name: upload junit
+      uses: actions/upload-artifact@v1
+      with:
+        name: junit
+        path: junit
+    - run: npm run test:coverage
+    - name: upload code coverage
+      uses: actions/upload-artifact@v1
+      with:
+        name: Report-CodeCoverage
+        path: coverage
+    - run: npm run build
+    - name: build zips
+      run: |
+          npm run build-zip
+          npm run build:manifest -- --custom
+          npm run build-zip
+          npm run build:manifest -- --firefox
+          npm run build-zip
+          npm run build:manifest -- --custom --firefox
+          npm run build-zip
+    - name: upload extension build zips
+      uses: actions/upload-artifact@v1
+      with:
+        name: Packaged Zips
+        path: dist-zip

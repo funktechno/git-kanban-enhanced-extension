@@ -14,6 +14,7 @@ const extractExtensionData = () => {
   return {
     name: extPackageJson.name,
     version: extPackageJson.version,
+    applications: extPackageJson.applications
   };
 };
 
@@ -41,8 +42,9 @@ const buildZip = (src, dist, zipFilename) => {
 };
 
 const main = () => {
-  const { name, version } = extractExtensionData();
-  const zipFilename = `${name}-v${version}.zip`;
+  const { name, version, applications } = extractExtensionData();
+  const browserType = applications ? '-moz' : '';
+  const zipFilename = `${name}-v${version}${browserType}.zip`;
 
   makeDestZipDirIfNotExists();
 
