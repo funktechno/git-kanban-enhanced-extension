@@ -1,6 +1,7 @@
 <template>
   <div>
-    settings:
+    <h2>settings:</h2>
+    
     <!-- <span v-if="currentOptions && optionIndex !== -1">{{currentOptions[optionIndex]}}</span> -->
     <!-- <br> -->
     <!-- {{optionIndex}} -->
