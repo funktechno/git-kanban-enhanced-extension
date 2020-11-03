@@ -22,8 +22,16 @@
 - startup
 
 ```bash
-npm install # or yarn
-npm run watch:dev # or yarn dev
+# install node version
+nvm install
+# https://github.com/coreybutler/nvm-windows in powershell
+nvm install (Get-Content .nvmrc)
+# install dependencies
+yarn install # or yarn
+# setup browser manifest
+npm run build:manifest -- --custom
+# run dev auto build
+npm run watch # or yarn dev
 ```
 
 - chrome

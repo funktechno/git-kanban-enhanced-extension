@@ -1,0 +1,62 @@
+name: Vue Build Pipeline
+
+on:
+  # [pull_request, push]
+  pull_request:
+  push:
+    branches:
+    - master # Push events on master branch
+
+# use https://marketplace.visualstudio.com/items?itemName=me-dutour-mathieu.vscode-github-actions to validate yml in vscode
+# env:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Cancel Previous Runs
+      uses: styfle/cancel-workflow-action@0.6.0
+      with:
+        access_token: ${{ github.token }}
+    - uses: actions/checkout@v1
+    - name: Read .nvmrc
+      run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+      id: nvm
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "${{ steps.nvm.outputs.NVMRC }}"
+    - run: yarn install
+    - run: npm run build:manifest
+    - run: npm run test:unit
+    - name: upload junit
+      uses: actions/upload-artifact@v1
+      with:
+        name: junit
+        path: junit.xml
+    - uses: ashley-taylor/junit-report-annotations-action@1.3
+      if: always()
+      with:
+        access-token: ${{ secrets.GITHUB_TOKEN }}
+        path: junit.xml
+    - run: npm run test:coverage
+    - name: upload code coverage
+      uses: actions/upload-artifact@v1
+      with:
+        name: Report-CodeCoverage
+        path: coverage
+    - run: npm run build
+    - name: build zips
+      run: |
+          npm run build-zip
+          npm run build:manifest -- --custom
+          npm run build-zip
+          npm run build:manifest -- --firefox
+          npm run build-zip
+          npm run build:manifest -- --custom --firefox
+          npm run build-zip
+    - name: upload extension build zips
+      uses: actions/upload-artifact@v1
+      with:
+        name: Packaged Zips
+        path: dist-zip

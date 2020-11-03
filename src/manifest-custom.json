@@ -1,7 +1,6 @@
 {
   "name": "Git Kanban Enhanced Self Hosted",
   "short_name": "GKESH",
-  "version": "0.0.7",
   "description": "Kanban extensions for self hosted github, gitlab, bitbucket, and gitea",
   "author": "http://github.com/lastlink",
   "manifest_version": 2,
@@ -23,7 +22,7 @@
   },
   "content_scripts": [
     {
-      "js": ["js/inject.js"],
+      "js": ["js/chunk-vendors.js", "js/inject.js"],
       "exclude_matches": ["*://extensions/*"],
       "run_at": "document_end",
       "matches": ["<all_urls>"],

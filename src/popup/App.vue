@@ -6,17 +6,17 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import Vue from "vue";
 export default Vue.extend({
   data: () => ({}),
-  computed: {},
-  created() {},
-  mounted() {},
+  // computed: {},
+  // created() {},
+  // mounted() {},
   methods: {
     tab() {
-      chrome.tabs.create({ url: '/tab/tab.html' });
-    },
-  },
+      chrome.tabs.create({ url: "/tab/tab.html" });
+    }
+  }
 });
 </script>
 <style lang="css">
