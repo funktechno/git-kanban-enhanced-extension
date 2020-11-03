@@ -26,7 +26,8 @@
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.2",
-    "vue-resource": "^1.5.1"
+    "vue-resource": "^1.5.1",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.126",
@@ -44,6 +45,7 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^5.0.2",
     "@vue/test-utils": "^1.0.3",
+    "archiver": "^5.0.2",
     "babel-plugin-require-context-hook": "^1.0.0",
     "copy-webpack-plugin": "^4.5.3",
     "eslint": "^6.7.2",
