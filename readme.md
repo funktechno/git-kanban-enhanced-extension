@@ -13,11 +13,11 @@
 ## published browser extensions
 
 - Chrome
-  - [Simple](https://chrome.google.com/webstore/detail/git-kanban-enhanced/ehoibkdpdgjcjnnalkbiidajafoimnaa)
-  - [Self Hosted](https://chrome.google.com/webstore/detail/ambmbdjjhloinbjadfgfmenihmfmahmk)
+  - Simple [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ehoibkdpdgjcjnnalkbiidajafoimnaa.svg)](https://chrome.google.com/webstore/detail/github-date-of-creation/ehoibkdpdgjcjnnalkbiidajafoimnaa)
+  - Self Hosted [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ambmbdjjhloinbjadfgfmenihmfmahmk.svg)](https://chrome.google.com/webstore/detail/github-date-of-creation/ambmbdjjhloinbjadfgfmenihmfmahmk)
 - Firefox
-  - [Simple](https://addons.mozilla.org/en-US/firefox/addon/git-kanban-enhanced/)
-  - [Self Hosted](https://addons.mozilla.org/en-US/firefox/addon/git-kanban-enhanced-selfhosted/)
+  - Simple [![Mozilla Add-on](https://img.shields.io/amo/v/git-kanban-enhanced)](https://addons.mozilla.org/en-US/firefox/addon/git-kanban-enhanced/)
+  - Self Hosted  [![Mozilla Add-on](https://img.shields.io/amo/v/git-kanban-enhanced-selfhosted)](https://addons.mozilla.org/en-US/firefox/addon/git-kanban-enhanced-selfhosted/)
 
 ## getting started (development)
 
