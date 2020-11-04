@@ -12,10 +12,8 @@
 
 ## published browser extensions
 
-- Chrome
   - [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ehoibkdpdgjcjnnalkbiidajafoimnaa.svg?label=chrome%20web%20store%3A%20Simple)](https://chrome.google.com/webstore/detail/github-date-of-creation/ehoibkdpdgjcjnnalkbiidajafoimnaa)
   - [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ambmbdjjhloinbjadfgfmenihmfmahmk.svg?label=chrome%20web%20store%3A%20Self%20Hosted)](https://chrome.google.com/webstore/detail/github-date-of-creation/ambmbdjjhloinbjadfgfmenihmfmahmk)
-- Firefox
   - [![Mozilla Add-on](https://img.shields.io/amo/v/git-kanban-enhanced?label=mozilla%20add-on%3A%20Simple)](https://addons.mozilla.org/en-US/firefox/addon/git-kanban-enhanced/)
   - [![Mozilla Add-on](https://img.shields.io/amo/v/git-kanban-enhanced-selfhosted?label=mozilla%20add-on%3A%20Self%20Hosted)](https://addons.mozilla.org/en-US/firefox/addon/git-kanban-enhanced-selfhosted/)
 
