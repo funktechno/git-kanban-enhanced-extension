@@ -2,6 +2,7 @@
 
 # git-kanban-extensions (in progress)
 
+- NOTE: this product isn't finished and is missing core functionality.
 - see [wiki](https://github.com/funktechno/git-kanban-enhanced-extension/wiki) for user instructions. CONTRIBUTIONS are welcome. WORK IN PROGRESS.
 - Kanban extensions for github, gitlab, bitbucket, gitea.
 - Goal to support weights, multi projects, epics, blockers
