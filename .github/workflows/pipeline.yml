@@ -30,7 +30,7 @@ jobs:
     - run: npm run build:manifest
     - run: npm run test:unit
     - name: upload junit
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: junit
         path: junit.xml
